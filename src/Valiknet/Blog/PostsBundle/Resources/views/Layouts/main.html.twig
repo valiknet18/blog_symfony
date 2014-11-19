@@ -9,18 +9,15 @@
     <body>
         <div id="webber">
             <header>
+                <div id="logo">
+                    Home Blog
+                </div>
                 {% include "ValiknetBlogPostsBundle:Layouts:header.html.twig" %}
             </header>
 
             <div id="content">
-                <div>
-                    {% block content %}
-                    {% endblock %}
-                </div>
-
-                <div id="popular_tags">
-
-                </div>
+                {% block content %}
+                {% endblock %}
             </div>
 
             <footer>
