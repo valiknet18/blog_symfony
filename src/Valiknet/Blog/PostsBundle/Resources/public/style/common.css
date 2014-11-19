@@ -32,12 +32,29 @@
 #webber #content #posts_list{
     float: left;
     width: 65%;
+    border-right: 1px dashed #000000;
+    margin-right: 20px;
 }
 
 #webber #content #posts_list > div{
     margin: 20px 0px;
+
+}
+
+#webber #content #posts_list > div .title{
+    text-align: center;
+}
+
+#webber #content #top_tags_list{
+    margin-left: 20px;
+}
+
+#webber #content #top_tags_list ul li{
+    list-style: none;
+    margin-left: 20px;
 }
 
 #webber footer{
     clear: both;
+    text-align: center;
 }

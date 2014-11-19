@@ -6,9 +6,13 @@
 
 {% block content %}
     <div id="posts_list">
+        <div>
+            <a href="">Створити новий запис</a>
+        </div>
+
         {% for post in posts %}
             <div>
-                <div>{{ post.title }}</div>
+                <div class="title">{{ post.title }}</div>
                 <div>{{ post.text|slice(0,150) }}</div>
                 <div>{{ post.author }}</div>
                 <div>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</div>
@@ -28,7 +32,7 @@
         {% endfor %}
     </div>
 
-    <div>
+    <div id="top_tags_list">
         <span>10 найпопулярніших тегів</span>
         <ul>
             {% for tag in tags %}

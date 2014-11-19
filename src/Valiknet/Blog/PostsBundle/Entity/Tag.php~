@@ -24,9 +24,9 @@ class Tag {
 
     /**
      * @Gedmo\Slug(fields={"hash_tag"})
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, name="hashSlug")
      */
-    protected $slug_hash;
+    protected $hashSlug;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="tag")

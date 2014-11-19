@@ -24,9 +24,9 @@ class Tag {
 
     /**
      * @Gedmo\Slug(fields={"hash_tag"})
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, name="hashSlug")
      */
-    protected $slug_hash;
+    protected $hashSlug;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="tag")
@@ -157,5 +157,28 @@ class Tag {
     public function getSlugHash()
     {
         return $this->slug_hash;
+    }
+
+    /**
+     * Set hashSlug
+     *
+     * @param string $hashSlug
+     * @return Tag
+     */
+    public function setHashSlug($hashSlug)
+    {
+        $this->hashSlug = $hashSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get hashSlug
+     *
+     * @return string 
+     */
+    public function getHashSlug()
+    {
+        return $this->hashSlug;
     }
 }
