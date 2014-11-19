@@ -1,0 +1,30 @@
+{% extends "ValiknetBlogPostsBundle:Layouts:main.html.twig" %}
+
+{% block title %}
+    Головна сторінка
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <div>
+            <div>{{ post.title }}</div>
+            <div>{{ post.text|slice(0,150) }}</div>
+            <div>{{ post.author }}</div>
+            <div>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</div>
+            {% if(post.tag) %}
+                <div>Теги:
+                    {% for category in post.tag %}
+                        <a href="">#{{ category.hashTag }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    {% else %}
+        <div>
+            <h3>На даний момент в блогі немає ні одного запису</h3>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

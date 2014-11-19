@@ -11,15 +11,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 class PostController extends Controller{
 
     /**
-     * @Route("/")
+     * @Route("/", name="blog_home")
      * @Method({"GET"})
-     * @Template()
+     * @Template("ValiknetBlogPostsBundle:Post:index.html.twig")
      */
     public function indexAction()
     {
-//        $em = $this->getDoctrine()->getRepository('');
-        return new Response(
-            "<h3>You are in index</h3>"
+        $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findAll();
+
+        return array(
+            "posts" => $posts
         );
     }
 
@@ -27,7 +28,7 @@ class PostController extends Controller{
      * @Route("/post/add")
      * @Method({"POST"})
      */
-    public function createPost()
+    public function createPostAction()
     {
 
         return new Response(

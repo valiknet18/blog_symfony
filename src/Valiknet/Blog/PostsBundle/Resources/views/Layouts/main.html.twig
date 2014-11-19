@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} | Home Blog</title>
+
+        <link href="{{ asset('bundles/valiknetblogposts/style/common.css') }}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="webber">
+            <header>
+                {% include "ValiknetBlogPostsBundle:Layouts:header.html.twig" %}
+            </header>
+
+            <div id="content">
+                <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+                <div id="popular_tags">
+
+                </div>
+            </div>
+
+            <footer>
+                ©Valik Grinevich
+            </footer>
+        </div>
+    </body>
+</html>

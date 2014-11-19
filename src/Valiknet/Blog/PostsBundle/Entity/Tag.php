@@ -1,6 +1,7 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,9 +18,15 @@ class Tag {
     protected $id;
 
     /**
-     * @@RM\Column(type="varchar", length="100")
+     * @ORM\Column(type="string", length=100, name="hashTag")
      */
     protected $hash_tag;
+
+    /**
+     * @Gedmo\Slug(fields={"hash_tag"})
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $slug_hash;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="tag")
@@ -58,5 +65,97 @@ class Tag {
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param \string $tag
+     * @return Tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \varchar 
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Tag
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set hash_tag
+     *
+     * @param string $hashTag
+     * @return Tag
+     */
+    public function setHashTag($hashTag)
+    {
+        $this->hash_tag = $hashTag;
+
+        return $this;
+    }
+
+    /**
+     * Get hash_tag
+     *
+     * @return string 
+     */
+    public function getHashTag()
+    {
+        return $this->hash_tag;
+    }
+
+    /**
+     * Set slug_hash
+     *
+     * @param string $slugHash
+     * @return Tag
+     */
+    public function setSlugHash($slugHash)
+    {
+        $this->slug_hash = $slugHash;
+
+        return $this;
+    }
+
+    /**
+     * Get slug_hash
+     *
+     * @return string 
+     */
+    public function getSlugHash()
+    {
+        return $this->slug_hash;
     }
 }

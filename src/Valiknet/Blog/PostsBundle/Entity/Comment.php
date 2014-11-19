@@ -1,6 +1,7 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,9 +28,10 @@ class Comment {
     protected $text;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    protected $create_at;
+    protected $created_at;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comment")
@@ -94,29 +96,6 @@ class Comment {
     }
 
     /**
-     * Set create_at
-     *
-     * @param \DateTime $createAt
-     * @return Comment
-     */
-    public function setCreateAt($createAt)
-    {
-        $this->create_at = $createAt;
-
-        return $this;
-    }
-
-    /**
-     * Get create_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
      * Set post
      *
      * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
@@ -137,5 +116,28 @@ class Comment {
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Comment
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 }

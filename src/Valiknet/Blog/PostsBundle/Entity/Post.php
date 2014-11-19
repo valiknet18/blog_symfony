@@ -2,10 +2,12 @@
 namespace Valiknet\Blog\PostsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="post")
+ * @Gedmo\SoftDeleteable(fieldName="deleted_at", timeAware=false)
  */
 class Post {
 
@@ -19,7 +21,7 @@ class Post {
     /**
      * @ORM\Column(type="string", length=150)
      */
-    protected $name;
+    protected $title;
 
     /**
      * @ORM\Column(type="text")
@@ -27,14 +29,32 @@ class Post {
     protected $text;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=200)
      */
-    protected $create_at;
+    protected $author;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", name="createdAt")
      */
-    protected $update_at;
+    protected $created_at;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true, name="updatedAt")
+     */
+    protected $updated_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, name="deletedAt")
+     */
+    protected $deleted_at;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=128, unique=true, name="slug")
+     */
+    protected $slug_post;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
@@ -45,6 +65,7 @@ class Post {
      * @ORM\OneToMany(targetEntity="Tag", mappedBy="post")
      */
     protected $tag;
+
     /**
      * Constructor
      */
@@ -111,52 +132,6 @@ class Post {
     }
 
     /**
-     * Set create_at
-     *
-     * @param \DateTime $createAt
-     * @return Post
-     */
-    public function setCreateAt($createAt)
-    {
-        $this->create_at = $createAt;
-
-        return $this;
-    }
-
-    /**
-     * Get create_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * Set update_at
-     *
-     * @param \DateTime $updateAt
-     * @return Post
-     */
-    public function setUpdateAt($updateAt)
-    {
-        $this->update_at = $updateAt;
-
-        return $this;
-    }
-
-    /**
-     * Get update_at
-     *
-     * @return \DateTime 
-     */
-    public function getUpdateAt()
-    {
-        return $this->update_at;
-    }
-
-    /**
      * Add comment
      *
      * @param \Valiknet\Blog\PostsBundle\Entity\Comment $comment
@@ -220,5 +195,166 @@ class Post {
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     * @return Post
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Post
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Post
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return Post
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set deleted_at
+     *
+     * @param \DateTime $deletedAt
+     * @return Post
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deleted_at = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted_at
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedAt()
+    {
+        return $this->deleted_at;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Post
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug_post
+     *
+     * @param string $slugPost
+     * @return Post
+     */
+    public function setSlugPost($slugPost)
+    {
+        $this->slug_post = $slugPost;
+
+        return $this;
+    }
+
+    /**
+     * Get slug_post
+     *
+     * @return string 
+     */
+    public function getSlugPost()
+    {
+        return $this->slug_post;
     }
 }
