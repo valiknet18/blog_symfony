@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ path("post_add_post") }}" method="POST">
+    <form role="form" method="POST">
         <fieldset>
             <legend>Створення статі</legend>
             <div>
@@ -26,7 +26,11 @@
 
             <div>
                 <label for="tags">Теги:</label>
-                <input type="text" name="tags" id="tags"/>
+                <select name="tags[]" multiple>
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}">{{ tag.hashTag }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div>

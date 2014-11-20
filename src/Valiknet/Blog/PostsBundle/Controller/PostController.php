@@ -1,12 +1,14 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Valiknet\Blog\PostsBundle\Entity\Post;
 
 
 class PostController extends Controller
@@ -19,7 +21,7 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findAll();
+        $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
 
         $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
                                     ->createQueryBuilder('t')
@@ -46,23 +48,41 @@ class PostController extends Controller
 
     /**
      * @Route("/post/add", name="post_add_get")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Template("ValiknetBlogPostsBundle:Post:add.html.twig")
      */
-    public function addPostAction()
+    public function addPostAction(Request $request)
     {
+        if($request->isMethod('POST')){
+            $em = $this->getDoctrine()->getManager();
+
+            $post = new Post();
+
+            $rq = $request->request;
+
+            $post->setTitle($rq->get('title'))
+                 ->setText($rq->get('text'))
+                 ->setAuthor($rq->get('author'));
+
+            $tags = $rq->get('tags');
+
+            for($i = 0; $i < COUNT($tags); $i++){
+                $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
+
+                $tag->addPost($post);
+                $post->addTag($tag);
+            }
+
+
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirect($this->get('router')->generate('blog_home'));
+        }
+
         return array(
-
+            "tags" => $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->findAll()
         );
-    }
-
-    /**
-     * @Route("/post/add", name="post_add_post")
-     * @Method({"POST"})
-     */
-    public function createPostAction()
-    {
-        $this->redirect("blog_name");
     }
 
     /**
@@ -70,7 +90,7 @@ class PostController extends Controller
      * @Method({"GET"})
      * @Template("ValiknetBlogPostsBundle:Post:view.html.twig")
      */
-    public function viewPostACtion($slug)
+    public function viewPostAction($slug)
     {
         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
 
