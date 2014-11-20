@@ -19,8 +19,6 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
         $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findAll();
 
         $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
@@ -29,6 +27,7 @@ class PostController extends Controller
                                     ->setMaxResults(10)
                                     ->getQuery()
                                     ->getResult();
+
 
         uksort($tags, function($a, $b){
            if(COUNT($a['post']) > $b['post']){
@@ -64,6 +63,20 @@ class PostController extends Controller
     public function createPostAction()
     {
         $this->redirect("blog_name");
+    }
+
+    /**
+     * @Route("/post/view/{slug}", name="view_post")
+     * @Method({"GET"})
+     * @Template("ValiknetBlogPostsBundle:Post:view.html.twig")
+     */
+    public function viewPostACtion($slug)
+    {
+        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
+
+        return array(
+            "post" => $post
+        );
     }
 }
 
