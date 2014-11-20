@@ -29,32 +29,16 @@ class Tag {
     protected $hashSlug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="tag")
+     * @ORM\ManyToMany(targetEntity="Post", inversedBy="tag")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $post;
-
     /**
-     * Set post
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
-     * @return Tag
+     * Constructor
      */
-    public function setPost(\Valiknet\Blog\PostsBundle\Entity\Post $post = null)
+    public function __construct()
     {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \Valiknet\Blog\PostsBundle\Entity\Post 
-     */
-    public function getPost()
-    {
-        return $this->post;
+        $this->post = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -65,52 +49,6 @@ class Tag {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set tag
-     *
-     * @param \string $tag
-     * @return Tag
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return \varchar 
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Tag
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -137,29 +75,6 @@ class Tag {
     }
 
     /**
-     * Set slug_hash
-     *
-     * @param string $slugHash
-     * @return Tag
-     */
-    public function setSlugHash($slugHash)
-    {
-        $this->slug_hash = $slugHash;
-
-        return $this;
-    }
-
-    /**
-     * Get slug_hash
-     *
-     * @return string 
-     */
-    public function getSlugHash()
-    {
-        return $this->slug_hash;
-    }
-
-    /**
      * Set hashSlug
      *
      * @param string $hashSlug
@@ -180,5 +95,38 @@ class Tag {
     public function getHashSlug()
     {
         return $this->hashSlug;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
+     * @return Tag
+     */
+    public function addPost(\Valiknet\Blog\PostsBundle\Entity\Post $post)
+    {
+        $this->post[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
+     */
+    public function removePost(\Valiknet\Blog\PostsBundle\Entity\Post $post)
+    {
+        $this->post->removeElement($post);
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 }

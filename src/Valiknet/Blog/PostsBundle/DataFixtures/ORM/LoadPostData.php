@@ -16,16 +16,22 @@ class LoadPostData implements FixtureInterface
         $post->setAuthor('Гриневич В. О');
         $post->setCreatedAt(new \DateTime());
 
-        $manager->persist($post);
+
 
         $tag1 = new Tag();
         $tag1->setHashTag("programming");
-        $tag1->setPost($post);
+        $tag1->addPost($post);
+
 
         $tag2 = new Tag();
         $tag2->setHashTag("firstPost");
-        $tag2->setPost($post);
+        $tag2->addPost($post);
 
+        $post->addTag($tag1);
+        $post->addTag($tag2);
+
+
+        $manager->persist($post);
         $manager->persist($tag1);
         $manager->persist($tag2);
 
@@ -36,16 +42,16 @@ class LoadPostData implements FixtureInterface
         $post->setAuthor('Гриневич В. О');
         $post->setCreatedAt(new \DateTime());
 
-        $manager->persist($post);
-
-        $tag1 = new Tag();
-        $tag1->setHashTag("programming");
-        $tag1->setPost($post);
 
         $tag2 = new Tag();
         $tag2->setHashTag("socialnetworks");
-        $tag2->setPost($post);
+        $tag2->addPost($post);
 
+        $tag1->addPost($post);
+        $post->addTag($tag1);
+        $post->addTag($tag2);
+
+        $manager->persist($post);
         $manager->persist($tag1);
         $manager->persist($tag2);
 

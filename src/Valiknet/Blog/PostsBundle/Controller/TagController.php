@@ -15,14 +15,15 @@ class TagController extends Controller{
     /**
      * @Route("/{slug}", name="tag_page")
      * @Method({"GET"})
+     * @Template("ValiknetBlogPostsBundle:Tag:index.html.twig")
      */
     public function getTagPage($slug)
     {
         $em = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag');
         $tag = $em->findByHashSlug($slug);
 
-        return new Response(
-            "<h3>Tag Page</h3>"
+        return array(
+            "tag" => $tag
         );
     }
 } 

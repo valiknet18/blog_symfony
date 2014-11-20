@@ -62,10 +62,10 @@ class Post {
     protected $comment;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="post")
+     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post")
+     * @ORM\JoinTable(name="posts_tag")
      */
     protected $tag;
-
     /**
      * Constructor
      */
@@ -86,26 +86,26 @@ class Post {
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return Post
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
@@ -132,72 +132,6 @@ class Post {
     }
 
     /**
-     * Add comment
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Comment $comment
-     * @return Post
-     */
-    public function addComment(\Valiknet\Blog\PostsBundle\Entity\Comment $comment)
-    {
-        $this->comment[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Comment $comment
-     */
-    public function removeComment(\Valiknet\Blog\PostsBundle\Entity\Comment $comment)
-    {
-        $this->comment->removeElement($comment);
-    }
-
-    /**
-     * Get comment
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Tag $tag
-     * @return Post
-     */
-    public function addTag(\Valiknet\Blog\PostsBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Tag $tag
-     */
-    public function removeTag(\Valiknet\Blog\PostsBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
      * Set author
      *
      * @param string $author
@@ -218,29 +152,6 @@ class Post {
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Post
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -313,29 +224,6 @@ class Post {
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Post
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Set slug_post
      *
      * @param string $slugPost
@@ -356,5 +244,71 @@ class Post {
     public function getSlugPost()
     {
         return $this->slug_post;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Comment $comment
+     * @return Post
+     */
+    public function addComment(\Valiknet\Blog\PostsBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Valiknet\Blog\PostsBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Tag $tag
+     * @return Post
+     */
+    public function addTag(\Valiknet\Blog\PostsBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Valiknet\Blog\PostsBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Valiknet\Blog\PostsBundle\Entity\Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 }

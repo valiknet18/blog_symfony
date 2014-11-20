@@ -21,10 +21,23 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sql = "SELECT t.id, t.hash_tag, COUNT(t.hash_tag) as countTag FROM ValiknetBlogPostsBundle:Tag AS t GROUP BY t.hash_tag ORDER BY countTag DESC";
-        $tags = $em->createQuery($sql)->setMaxResults(10)->getResult();
-
         $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findAll();
+
+        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
+                                    ->createQueryBuilder('t')
+                                    ->groupBy('t.hash_tag')
+                                    ->setMaxResults(10)
+                                    ->getQuery()
+                                    ->getResult();
+
+        uksort($tags, function($a, $b){
+           if(COUNT($a['post']) > $b['post']){
+               return $a;
+           }
+           else{
+               return $b;
+           }
+        });
 
         return array(
             "posts" => $posts,
@@ -33,15 +46,24 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/add")
+     * @Route("/post/add", name="post_add_get")
+     * @Method({"GET"})
+     * @Template("ValiknetBlogPostsBundle:Post:add.html.twig")
+     */
+    public function addPostAction()
+    {
+        return array(
+
+        );
+    }
+
+    /**
+     * @Route("/post/add", name="post_add_post")
      * @Method({"POST"})
      */
     public function createPostAction()
     {
-
-        return new Response(
-            "<h3>You are in add post</h3>"
-        );
+        $this->redirect("blog_name");
     }
 }
 
