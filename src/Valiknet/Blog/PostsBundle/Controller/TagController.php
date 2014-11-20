@@ -2,10 +2,12 @@
 namespace Valiknet\Blog\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
+use Valiknet\Blog\PostsBundle\Entity\Tag;
 
 /**
  * @Route("/tag")
@@ -13,17 +15,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 class TagController extends Controller{
 
     /**
-     * @Route("/{slug}", name="tag_page")
+     * @Route("/view/{slug}", name="tag_page")
      * @Method({"GET"})
      * @Template("ValiknetBlogPostsBundle:Tag:index.html.twig")
      */
-    public function getTagPage($slug)
+    public function getTagPageAction($slug)
     {
         $em = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag');
         $tag = $em->findByHashSlug($slug);
 
         return array(
             "tag" => $tag
+        );
+    }
+
+    /**
+     * @Route("/add", name="tag_add_page")
+     * @Method({"POST", "GET"})
+     * @Template("ValiknetBlogPostsBundle:Tag:add.html.twig")
+     */
+    public function getAddPageAction(Request $request)
+    {
+        if($request->isMethod('POST')){
+            $tag = new Tag();
+            $tag->setHashTag($request->request->get('tag_name'));
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($tag);
+            $em->flush();
+
+            return $this->redirect($this->get('router')->generate('blog_home'));
+        }
+
+        return array(
+
         );
     }
 } 
