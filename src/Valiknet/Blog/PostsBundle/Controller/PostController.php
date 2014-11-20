@@ -31,13 +31,14 @@ class PostController extends Controller
                                     ->getResult();
 
 
-        uksort($tags, function($a, $b){
-           if(COUNT($a['post']) > $b['post']){
-               return $a;
-           }
-           else{
-               return $b;
-           }
+
+
+        usort($tags, function($a, $b){
+            if(COUNT($a->getPost()) == COUNT($b->getPost())){
+                return 0;
+            }
+
+            return (COUNT($a->getPost()) > COUNT($b->getPost()))? -1: 1;
         });
 
         return array(
