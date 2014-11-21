@@ -59,4 +59,18 @@ class CommentController extends Controller
             404
         );
     }
+
+    /**
+     * @Route("/last", name="comment_last")
+     * @Method({"GET"})
+     * @Template("ValiknetBlogPostsBundle:Comment:last.html.twig")
+     */
+    public function getLastCommentsAction()
+    {
+        $comments = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Comment')->findBy([], ['id' => 'DESC'], 20);
+
+        return array(
+            "comments" => $comments
+        );
+    }
 } 
