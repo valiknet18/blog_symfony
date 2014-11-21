@@ -100,17 +100,37 @@ class PostController extends Controller
 
     /**
      * @Route("/post/edit/{slug}", name="edit_post")
-     * @Method({"GET", "PUT"})
+     * @Method({"GET", "POST"})
      * @Template("ValiknetBlogPostsBundle:Post:edit.html.twig")
      */
      public function editPostAction($slug, Request $request)
      {
-//         if($request->isMethod('PUT')){
-//             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
-//
-//         }
+         if($request->isMethod('POST')){
+             $em = $this->getDoctrine()->getManager();
 
-         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
+             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
+
+//             foreach($post->getTag() as $key=>$value){
+//                $post->removeTag($value);
+//             }
+
+             $post->setTitle($request->request->get('title'));
+             $post->setText($request->request->get('text'));
+             $post->setAuthor($request->request->get('author'));
+
+//             $tags = $request->request->get('tags');
+//             for($i = 0; $i < COUNT($tags); $i++){
+//                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
+//                 $tag->addPost($post);
+//                 $post->addTag($tag);
+//             }
+
+             $em->flush();
+
+             return $this->redirect($this->get('router')->generate('blog_home'));
+         }
+
+         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
          $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->findAll();
 
          return array(
