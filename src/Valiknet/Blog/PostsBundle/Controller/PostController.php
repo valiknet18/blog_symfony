@@ -63,7 +63,7 @@ class PostController extends Controller
                  ->setText($request->request->get('text'))
                  ->setAuthor($request->request->get('author'));
 
-            $tags = $rq->get('tags');
+            $tags = $request->request->get('tags');
 
             for($i = 0; $i < COUNT($tags); $i++){
                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
@@ -110,7 +110,7 @@ class PostController extends Controller
 //
 //         }
 
-         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
+         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
          $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->findAll();
 
          return array(
@@ -118,5 +118,26 @@ class PostController extends Controller
              "tags" => $tags
          );
      }
+
+    /**
+     * @Route("/post/delete/{id}", name="delete_post")
+     * @Method({"DELETE"})
+     */
+    public function deletePostAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id);
+
+        $em->remove($post);
+        $em->flush();
+
+        return new Response(
+            json_encode(
+                array(
+                    "code" => 200
+                )
+            )
+        );
+    }
 }
 

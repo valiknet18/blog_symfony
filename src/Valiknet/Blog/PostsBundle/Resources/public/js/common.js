@@ -35,3 +35,22 @@ $(document).on('submit', '#comment_add', function(e){
         $('#category_list').html(html);
     });
 });
+
+
+$(document).on('click', '#delete_post', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url: $(this).attr('href'),
+        type: 'DELETE'
+    }).done(function(data){
+        data = JSON.parse(data);
+
+        switch (data.code){
+            case 200: {
+                document.location.href = "/app_dev.php/";
+            }
+                break;
+        }
+    });
+});

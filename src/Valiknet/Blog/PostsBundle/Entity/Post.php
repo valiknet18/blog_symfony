@@ -58,12 +58,12 @@ class Post
     protected $slugPost;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", orphanRemoval=true)
      */
     protected $comment;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post")
+     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post", orphanRemoval=true)
      * @ORM\JoinTable(name="posts_tag")
      */
     protected $tag;

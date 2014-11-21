@@ -9,7 +9,7 @@
         <div>
             {#{{ dump(post) }}#}
             <a href="{{ path('edit_post', {'slug':post.getSlugPost }) }}">Редагувати</a>
-            <a href="">Видалити</a>
+            <a href="{{ path('delete_post', {'id':post.id}) }}" id="delete_post">Видалити</a>
         </div>
         <div class="title">{{ post.title }}</div>
         <div>{{ post.text }}</div>
