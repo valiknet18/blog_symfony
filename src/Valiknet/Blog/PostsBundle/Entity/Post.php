@@ -64,7 +64,7 @@ class Post
     protected $comment;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post")
      * @ORM\JoinTable(name="posts_tag")
      */
     protected $tag;

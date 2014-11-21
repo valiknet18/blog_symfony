@@ -21,9 +21,11 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
+        $em = $this->getDoctrine()->getManager();
 
-        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
+        $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
+
+        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')
                                     ->createQueryBuilder('t')
                                     ->groupBy('t.hashTag')
                                     ->setMaxResults(10)
@@ -110,20 +112,22 @@ class PostController extends Controller
 
              $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
 
-//             foreach($post->getTag() as $key=>$value){
-//                $post->removeTag($value);
-//             }
+             foreach($post->getTag() as $key=>$value){
+                 $post->removeTag($value);
+                 $value->removePost($post);
+             }
 
              $post->setTitle($request->request->get('title'));
              $post->setText($request->request->get('text'));
              $post->setAuthor($request->request->get('author'));
 
-//             $tags = $request->request->get('tags');
-//             for($i = 0; $i < COUNT($tags); $i++){
-//                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
-//                 $tag->addPost($post);
-//                 $post->addTag($tag);
-//             }
+             $tags = $request->request->get('tags');
+             for($i = 0; $i < COUNT($tags); $i++){
+                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
+                 $tag->addPost($post);
+
+                 $post->addTag($tag);
+             }
 
              $em->flush();
 
@@ -147,6 +151,11 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id);
+
+        foreach($post->getTag() as $value){
+            $value->removePost($post);
+            $post->removeTag($value);
+        }
 
         $em->remove($post);
         $em->flush();
