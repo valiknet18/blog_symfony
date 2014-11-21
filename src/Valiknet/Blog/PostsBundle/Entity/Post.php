@@ -9,7 +9,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="post")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
-class Post {
+class Post
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -66,6 +67,7 @@ class Post {
      * @ORM\JoinTable(name="posts_tag")
      */
     protected $tag;
+
     /**
      * Constructor
      */

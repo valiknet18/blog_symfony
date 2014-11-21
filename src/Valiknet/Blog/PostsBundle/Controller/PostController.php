@@ -59,11 +59,9 @@ class PostController extends Controller
 
             $post = new Post();
 
-            $rq = $request->request;
-
-            $post->setTitle($rq->get('title'))
-                 ->setText($rq->get('text'))
-                 ->setAuthor($rq->get('author'));
+            $post->setTitle($request->request->get('title'))
+                 ->setText($request->request->get('text'))
+                 ->setAuthor($request->request->get('author'));
 
             $tags = $rq->get('tags');
 

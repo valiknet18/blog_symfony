@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="tag")
  */
-class Tag {
+class Tag
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -77,7 +78,7 @@ class Tag {
     /**
      * Set hashSlug
      *
-     * @param string $hashSlug
+g     * @param string $hashSlug
      * @return Tag
      */
     public function setHashSlug($hashSlug)
