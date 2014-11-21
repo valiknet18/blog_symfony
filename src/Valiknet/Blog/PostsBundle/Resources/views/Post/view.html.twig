@@ -6,6 +6,11 @@
 
 {% block content %}
     <div>
+        <div>
+            {#{{ dump(post) }}#}
+            <a href="{{ path('edit_post', {'slug':post.getSlugPost }) }}">Редагувати</a>
+            <a href="">Видалити</a>
+        </div>
         <div class="title">{{ post.title }}</div>
         <div>{{ post.text }}</div>
         <div>{{ post.author }}</div>
@@ -18,5 +23,18 @@
             </div>
         {% endif %}
 
+        {% if(post.comment) %}
+            <div>
+                <fieldset>
+                    <legend>Коментарі</legend>
+                    {% for comment in post.comment %}
+
+                    {% else %}
+                        <h3>До даної статі не створили ні одного коментаря</h3>
+                    {% endfor %}
+                </fieldset>
+            </div>
+        {% endif %}
+        <div></div>
     </div>
 {% endblock %}
