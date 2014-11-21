@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="comment")
  */
-class Comment {
+class Comment
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -31,7 +32,7 @@ class Comment {
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comment")
@@ -96,6 +97,29 @@ class Comment {
     }
 
     /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Comment
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * Set post
      *
      * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
@@ -116,28 +140,5 @@ class Comment {
     public function getPost()
     {
         return $this->post;
-    }
-
-    /**
-     * Set created_at
-     *
-     * @param \DateTime $createdAt
-     * @return Comment
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
     }
 }

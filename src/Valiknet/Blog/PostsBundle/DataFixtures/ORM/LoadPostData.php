@@ -16,8 +16,6 @@ class LoadPostData implements FixtureInterface
         $post->setAuthor('Гриневич В. О');
         $post->setCreatedAt(new \DateTime());
 
-
-
         $tag1 = new Tag();
         $tag1->setHashTag("programming");
         $tag1->addPost($post);

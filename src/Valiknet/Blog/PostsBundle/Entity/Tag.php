@@ -18,13 +18,13 @@ class Tag {
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="hashTag")
+     * @ORM\Column(type="string", length=100)
      */
-    protected $hash_tag;
+    protected $hashTag;
 
     /**
-     * @Gedmo\Slug(fields={"hash_tag"})
-     * @ORM\Column(type="string", length=128, name="hashSlug")
+     * @Gedmo\Slug(fields={"hashTag"})
+     * @ORM\Column(type="string", length=128)
      */
     protected $hashSlug;
 
@@ -52,26 +52,26 @@ class Tag {
     }
 
     /**
-     * Set hash_tag
+     * Set hashTag
      *
      * @param string $hashTag
      * @return Tag
      */
     public function setHashTag($hashTag)
     {
-        $this->hash_tag = $hashTag;
+        $this->hashTag = $hashTag;
 
         return $this;
     }
 
     /**
-     * Get hash_tag
+     * Get hashTag
      *
      * @return string 
      */
     public function getHashTag()
     {
-        return $this->hash_tag;
+        return $this->hashTag;
     }
 
     /**

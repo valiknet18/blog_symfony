@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="post")
- * @Gedmo\SoftDeleteable(fieldName="deleted_at", timeAware=false)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Post {
 
@@ -37,24 +37,24 @@ class Post {
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", name="createdAt")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true, name="updatedAt")
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true, name="deletedAt")
      */
-    protected $deleted_at;
+    protected $deletedAt;
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", length=128, unique=true, name="slug")
+     * @ORM\Column(type="string", length=128, unique=true)
      */
-    protected $slug_post;
+    protected $slugPost;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
@@ -155,95 +155,95 @@ class Post {
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param \DateTime $createdAt
      * @return Post
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return \DateTime 
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param \DateTime $updatedAt
      * @return Post
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return \DateTime 
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * Set deleted_at
+     * Set deletedAt
      *
      * @param \DateTime $deletedAt
      * @return Post
      */
     public function setDeletedAt($deletedAt)
     {
-        $this->deleted_at = $deletedAt;
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
 
     /**
-     * Get deleted_at
+     * Get deletedAt
      *
      * @return \DateTime 
      */
     public function getDeletedAt()
     {
-        return $this->deleted_at;
+        return $this->deletedAt;
     }
 
     /**
-     * Set slug_post
+     * Set slugPost
      *
      * @param string $slugPost
      * @return Post
      */
     public function setSlugPost($slugPost)
     {
-        $this->slug_post = $slugPost;
+        $this->slugPost = $slugPost;
 
         return $this;
     }
 
     /**
-     * Get slug_post
+     * Get slugPost
      *
      * @return string 
      */
     public function getSlugPost()
     {
-        return $this->slug_post;
+        return $this->slugPost;
     }
 
     /**

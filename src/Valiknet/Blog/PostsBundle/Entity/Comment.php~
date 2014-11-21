@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="comment")
  */
-class Comment {
+class Comment
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -31,113 +32,11 @@ class Comment {
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comment")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $post;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     * @return Comment
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set text
-     *
-     * @param string $text
-     * @return Comment
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-
-        return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return string 
-     */
-    public function getText()
-    {
-        return $this->text;
-    }
-
-    /**
-     * Set post
-     *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
-     * @return Comment
-     */
-    public function setPost(\Valiknet\Blog\PostsBundle\Entity\Post $post = null)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \Valiknet\Blog\PostsBundle\Entity\Post 
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
-     * Set created_at
-     *
-     * @param \DateTime $createdAt
-     * @return Comment
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
 }

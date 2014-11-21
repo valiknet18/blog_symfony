@@ -18,13 +18,13 @@ class Tag {
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="hashTag")
+     * @ORM\Column(type="string", length=100)
      */
-    protected $hash_tag;
+    protected $hashTag;
 
     /**
      * @Gedmo\Slug(fields={"hash_tag"})
-     * @ORM\Column(type="string", length=128, name="hashSlug")
+     * @ORM\Column(type="string", length=128)
      */
     protected $hashSlug;
 

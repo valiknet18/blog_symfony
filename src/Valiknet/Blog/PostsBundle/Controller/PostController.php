@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
                                     ->createQueryBuilder('t')
-                                    ->groupBy('t.hash_tag')
+                                    ->groupBy('t.hashTag')
                                     ->setMaxResults(10)
                                     ->getQuery()
                                     ->getResult();
@@ -93,11 +93,32 @@ class PostController extends Controller
      */
     public function viewPostAction($slug)
     {
-        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
+        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
 
         return array(
             "post" => $post
         );
     }
+
+    /**
+     * @Route("/post/edit/{slug}", name="edit_post")
+     * @Method({"GET", "PUT"})
+     * @Template("ValiknetBlogPostsBundle:Post:edit.html.twig")
+     */
+     public function editPostAction($slug, Request $request)
+     {
+//         if($request->isMethod('PUT')){
+//             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
+//
+//         }
+
+         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slug_post' => $slug]);
+         $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->findAll();
+
+         return array(
+             "post" => $post,
+             "tags" => $tags
+         );
+     }
 }
 

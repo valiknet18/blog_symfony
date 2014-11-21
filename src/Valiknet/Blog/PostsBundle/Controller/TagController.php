@@ -22,7 +22,7 @@ class TagController extends Controller{
     public function getTagPageAction($slug)
     {
         $em = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag');
-        $tag = $em->findByHashSlug($slug);
+        $tag = $em->findOneByHashSlug($slug);
 
         return array(
             "tag" => $tag
@@ -50,6 +50,24 @@ class TagController extends Controller{
 
         return array(
 
+        );
+    }
+
+    /**
+     * @Route("/last", name="tag_last_page")
+     * @Method({"GET"})
+     * @Template("ValiknetBlogPostsBundle:Tag:last.html.twig")
+     */
+    public function getLastTags()
+    {
+        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
+                                    ->createQueryBuilder('t')
+                                    ->orderBy('t.id', 'DESC')
+                                    ->setMaxResults(15)
+                                    ->getQuery()
+                                    ->getResult();
+        return array(
+            "tags" => $tags
         );
     }
 } 

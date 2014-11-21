@@ -27,11 +27,38 @@
             <div>
                 <fieldset>
                     <legend>Коментарі</legend>
-                    {% for comment in post.comment %}
-
+                    <ul id="category_list">
+                    {% for comment in post.comment|reverse %}
+                        <li>
+                            <div>
+                                <div>{{ comment.author }}</div>
+                                <div>{{ comment.text }}</div>
+                                <div>{{ comment.createdAt|date("d.m.Y H:i:s") }}</div>
+                            </div>
+                        </li>
                     {% else %}
-                        <h3>До даної статі не створили ні одного коментаря</h3>
+                        <li>
+                            <h3>До даної статі не створили ні одного коментаря</h3>
+                        </li>
                     {% endfor %}
+                    </ul>
+                    <form action="{{ path("comment_add", {"id" : post.id}) }}" role="form" method="POST" id="comment_add">
+                        <div>
+                            <label>Автор: </label>
+                            <input type="text" name="author"/>
+                        </div>
+
+                        <div>
+                            <label>
+                                Текст коментаря:
+                            </label>
+                            <textarea maxlength="255" name="text"></textarea>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="create"/>
+                        </div>
+                    </form>
                 </fieldset>
             </div>
         {% endif %}
