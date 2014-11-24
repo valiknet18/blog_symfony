@@ -5,46 +5,49 @@
 {% endblock %}
 
 {% block content %}
-    <div id="posts_list">
-        <div>
-            <a href="{{ path("post_add_get") }}">Створити новий запис</a>
-        </div>
-
+    <div id="left_bar">
         {% for post in posts %}
-            <div>
-                <div class="title"><a href="{{ path("view_post", {"slug" : post.slugPost}) }}">{{ post.title }}</a></div>
-                <div>{{ post.text|slice(0,150) }}</div>
-                <div>{{ post.author }}</div>
-                <div>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</div>
-                {% if(post.tag) %}
-                    <div>Теги:
+            <div class="webber-article">
+                <div class="title">
+                    <a href="{{ path("view_post", {"slug" : post.slugPost}) }}">{{ post.title }}</a>
+                </div>
+                <div class="info-block">
+                    <p>
+                        Дата створення: <b>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</b><br>
+                        Створено користувачем: <b>{{ post.author }}</b><br>
+                        Кількість коментарів під записом: <b>{{ post.comment|length }}</b>
+                    </p>
+                </div>
+                <div class="tag-block">
+                    <p>
+                        Теги:
                         {% for tag in post.tag %}
                             <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">#{{ tag.hashTag }}</a>
                         {% endfor %}
-                    </div>
-                {% endif %}
-
+                    </p>
+                </div>
+                <div class="text">
+                    <p>{{ post.text|slice(0,400) }}...</p>
+                </div>
             </div>
+
         {% else %}
-            <div>
-                <h3>На даний момент в блогі немає ні одного запису</h3>
+            <div id="warning_page">
+                <h3>На даний момент в блогу немає ні одного запису</h3>
             </div>
         {% endfor %}
     </div>
 
-    <div id="top_tags_list">
-        <div>
-            <a href="{{ path("tag_add_page") }}">Створити новий тег</a>
+    <div id="right_bar">
+        <div id="title">
+            <span>Список популярних тегів</span>
         </div>
-        <span>10 найпопулярніших тегів</span>
         <ul>
             {% for tag in tags %}
             <li>
-                <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">{{ tag.hashTag }}</a>
+                <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">#{{ tag.hashTag }}</a>
             </li>
-
             {% endfor %}
-
         </ul>
     </div>
 {% endblock %}

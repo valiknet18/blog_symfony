@@ -7,12 +7,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverter;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 
 /**
  * @Route("/tag")
  */
-class TagController extends Controller{
+class TagController extends Controller
+{
 
     /**
      * @Route("/view/{slug}", name="tag_page")

@@ -4,6 +4,10 @@
     Створення нової категорії
 {% endblock %}
 
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblogposts/style/tag/add.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
     <div>
         <form role="form" method="POST">
@@ -14,7 +18,7 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Create">
+                    <input type="submit" value="Створити тег">
                 </div>
             </fieldset>
         </form>

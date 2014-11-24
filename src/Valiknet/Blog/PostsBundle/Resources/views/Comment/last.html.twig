@@ -4,19 +4,34 @@
     Останні коментарі
 {% endblock %}
 
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblogposts/style/comment/last.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
-    <div>
+    <div class="comment-article">
         <h3>
-            20 останніх коментарів
+            {{ comments|length }} останніх коментарів
         </h3>
         <ul>
             {% for comment in comments %}
                 <li>
-                    <div>
-                        <div><b>Автор:</b> {{ comment.author }}</div>
-                        <div><b>Комментар:</b> {{ comment.text }}</div>
-                        <div><b>Дата створення:</b> {{ comment.createdAt|date("d.m.Y H:i:s") }}</div>
-                        <div><b>Стаття: </b><a href="{{ path("view_post", { "slug" : comment.post.slugPost}) }}">{{ comment.post.title }}</a></div>
+                    <div class="comment">
+                        <div class="info-block">
+                            <p>
+                                <b>Автор:</b> {{ comment.author }}
+                                <br />
+                                <b>Дата створення:</b> {{ comment.createdAt|date("d.m.Y H:i:s") }}
+                            </p>
+                        </div>
+                        <div class="text">
+                            <p>
+                                <b>Комментар:</b> {{ comment.text }}
+                            </p>
+                        </div>
+                        <div class="link_to_article">
+                            <b>Стаття: </b><a href="{{ path("view_post", { "slug" : comment.post.slugPost}) }}">{{ comment.post.title }}</a>
+                        </div>
                     </div>
                 </li>
             {% else %}

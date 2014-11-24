@@ -18,17 +18,26 @@ $(document).on('submit', '#comment_add', function(e){
                 html = "";
                 for(var i = data.data.length - 1; i >= 0 ; i--){
                     html += "<li>" +
-                                "<div>" +
-                                    "<div>" + data.data[i].author +  "</div>" +
-                                    "<div>" + data.data[i].text +  "</div>" +
-                                    "<div>" + data.data[i].createdAt +  "</div>" +
+                                "<div class='comment'>" +
+                                    "<div class='info-block'>" +
+                                        "<p>" +
+                                            "Додано користувачем: <b>" + data.data[i].author + "</b></br>" +
+                                            "Дата створення: <b>" + data.data[i].createdAt + "</b>" +
+                                        "</p>" +
+                                    "</div>" +
+
+                                    "<div class='text'>" +
+                                        "<p>" +
+                                                data.data[i].text +
+                                        "</p>" +
+                                    "</div>" +
                                 "</div>" +
                             "</li>";
                 }
             }
                 break;
             case 404: {
-                html = "<li>Сталась якась помилка</li>";
+                html = "<li><h3>Сталась якась помилка</h3></li>";
             }
         }
 

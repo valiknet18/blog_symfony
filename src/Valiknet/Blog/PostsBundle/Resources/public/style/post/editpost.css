@@ -1,0 +1,17 @@
+#webber #webber_content #content form fieldset > div{
+    min-height: 30px;
+}
+
+#webber #webber_content #content form fieldset > div:last-child{
+    text-align: center;
+}
+
+#webber #webber_content #content form fieldset > div select{
+    height: 200px;
+}
+
+#webber #webber_content #content form fieldset > div input[type=submit]{
+    width: 300px;
+    height: 40px;
+    margin-top: 20px;
+}

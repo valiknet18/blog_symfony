@@ -4,12 +4,16 @@
     Список останніх тегів
 {% endblock %}
 
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblogposts/style/tag/last.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
-    <div>
+    <div id="last_tag">
         <ul>
             {% for tag in tags %}
                 <li>
-                    <a href='{{ path('tag_page', { "slug" : tag.hashSlug }) }}'>{{ tag.hashTag }}</a>
+                    <a href='{{ path('tag_page', { "slug" : tag.hashSlug }) }}'>#{{ tag.hashTag }}</a>
                 </li>
             {% else %}
 

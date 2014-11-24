@@ -1,0 +1,37 @@
+#webber #webber_content #content .comment-article{
+
+}
+#webber #webber_content #content .comment-article ul li{
+    list-style: none;
+    margin-left: 20px;
+}
+
+#webber #webber_content #content .comment-article ul li .comment{
+    color: rgba(121, 121, 121, 0.87);
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 10px;
+    width: 75%;
+    text-align: justify;
+}
+
+#webber #webber_content #content .comment-article ul li .comment .info-block{
+    font-size: 13px;
+}
+
+#webber #webber_content #content .comment-article ul li .comment .text{
+    font-size: 16px;
+}
+
+#webber #webber_content #content .comment-article ul li .comment .link_to_article {
+    margin-bottom: 10px;
+}
+
+#webber #webber_content #content .comment-article ul li .comment .link_to_article a{
+    color: #2288bb;
+    text-decoration: none;
+}
+
+#webber #webber_content #content .comment-article ul li .comment .link_to_article a:hover{
+    color: #000000;
+    text-decoration: underline;
+}

@@ -5,27 +5,31 @@
 
         <link href="{{ asset('bundles/valiknetblogposts/style/common.css') }}" rel="stylesheet" />
 
+
         <script src="{{ asset('bundles/valiknetblogposts/js/jquery.js') }}" ></script>
         <script src="{{ asset('bundles/valiknetblogposts/js/common.js') }}" ></script>
+
+        {% block styles %}
+        {% endblock %}
     </head>
 
     <body>
         <div id="webber">
             <header>
-                <div id="logo">
-                    Home Blog
-                </div>
-                {% include "ValiknetBlogPostsBundle:Layouts:header.html.twig" %}
+               {% include "ValiknetBlogPostsBundle:Layouts:header.html.twig" %}
             </header>
 
-            <div id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
+            <div id="webber_content">
+                <div id="content">
+                    {% block content %}
+                    {% endblock %}
+                    <div id="clear"></div>
+                </div>
 
-            <footer>
-                ©Valik Grinevich
-            </footer>
+                <footer>
+                    Copyright © 2014. Valik Grinevich
+                </footer>
+            </div>
         </div>
     </body>
 </html>

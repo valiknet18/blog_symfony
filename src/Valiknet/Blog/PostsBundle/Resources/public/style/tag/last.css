@@ -1,0 +1,17 @@
+#webber > #webber_content #last_tag #title{
+    font-weight: 900;
+}
+
+#webber > #webber_content #last_tag ul li{
+    border-bottom: 1px solid #dddddd;
+    list-style: none;
+}
+
+#webber > #webber_content #last_tag ul li a{
+    text-decoration: none;
+    color: #2288bb;
+}
+
+#webber > #webber_content #last_tag ul li a:hover{
+    color: #000000;
+}

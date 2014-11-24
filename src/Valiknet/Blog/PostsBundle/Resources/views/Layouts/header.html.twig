@@ -1,15 +1,43 @@
-<nav>
-    <ul>
-        <li>
-            <a href="{{ path('blog_home') }}">Головна сторінка</a>
-        </li>
+<ul>
+    <li>
+        <a href="{{ path('blog_home') }}">
+            <div class="nav-link">
+                Home Blog
+            </div>
+        </a>
+    </li>
 
-        <li>
-            <a href="{{ path('comment_last') }}">Останні коментарі</a>
-        </li>
+    <li>
+        <a href="{{ path('comment_last') }}">
+            <div class="nav-link">
+                Останні комментарі
+            </div>
+        </a>
+    </li>
 
-        <li>
-            <a href="{{ path('tag_last_page') }}">Останні теги</a>
-        </li>
-    </ul>
-</nav>
+    <li>
+        <a href="{{ path('tag_last_page') }}">
+            <div class="nav-link">
+                Останні теги
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul id="nav_create_list">
+    <li>
+        <a href="{{ path('post_add_get') }}">
+            <div class="nav-link">
+                Створити статтю
+            </div>
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('tag_add_page') }}">
+            <div class="nav-link">
+                Створити тег
+            </div>
+        </a>
+    </li>
+</ul>

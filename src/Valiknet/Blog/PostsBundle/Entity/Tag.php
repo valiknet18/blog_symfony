@@ -25,7 +25,7 @@ class Tag
 
     /**
      * @Gedmo\Slug(fields={"hashTag"})
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=12)
      */
     protected $hashSlug;
 
