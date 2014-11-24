@@ -1,6 +1,7 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +11,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 
-
 class PostController extends Controller
 {
-
     /**
      * @Route("/", name="blog_home")
      * @Method({"GET"})
-     * @Template("ValiknetBlogPostsBundle:Post:index.html.twig")
+     * @Template()
      */
     public function indexAction()
     {
@@ -25,23 +24,7 @@ class PostController extends Controller
 
         $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
 
-        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')
-                                    ->createQueryBuilder('t')
-                                    ->groupBy('t.hashTag')
-                                    ->setMaxResults(10)
-                                    ->getQuery()
-                                    ->getResult();
-
-
-
-
-        usort($tags, function($a, $b){
-            if(COUNT($a->getPost()) == COUNT($b->getPost())){
-                return 0;
-            }
-
-            return (COUNT($a->getPost()) > COUNT($b->getPost()))? -1: 1;
-        });
+        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
 
         return array(
             "posts" => $posts,
@@ -52,11 +35,11 @@ class PostController extends Controller
     /**
      * @Route("/post/add", name="post_add_get")
      * @Method({"GET", "POST"})
-     * @Template("ValiknetBlogPostsBundle:Post:add.html.twig")
+     * @Template()
      */
-    public function addPostAction(Request $request)
+    public function addAction(Request $request)
     {
-        if($request->isMethod('POST')){
+        if($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
 
             $post = new Post();
@@ -67,13 +50,12 @@ class PostController extends Controller
 
             $tags = $request->request->get('tags');
 
-            for($i = 0; $i < COUNT($tags); $i++){
+            for($i = 0; $i < COUNT($tags); $i++) {
                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
 
                 $tag->addPost($post);
                 $post->addTag($tag);
             }
-
 
             $em->persist($post);
             $em->flush();
@@ -87,11 +69,11 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/view/{slug}", name="view_post")
+     * @Route("/post/{slug}/", name="view_post")
      * @Method({"GET"})
-     * @Template("ValiknetBlogPostsBundle:Post:view.html.twig")
+     * @Template()
      */
-    public function viewPostAction($slug)
+    public function viewAction($slug)
     {
         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
 
@@ -101,18 +83,18 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/edit/{slug}", name="edit_post")
+     * @Route("/post/{slug}/edit", name="edit_post")
      * @Method({"GET", "POST"})
-     * @Template("ValiknetBlogPostsBundle:Post:edit.html.twig")
+     * @Template()
      */
-     public function editPostAction($slug, Request $request)
+     public function editAction($slug, Request $request)
      {
-         if($request->isMethod('POST')){
+         if($request->isMethod('POST')) {
              $em = $this->getDoctrine()->getManager();
 
              $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
 
-             foreach($post->getTag() as $key=>$value){
+             foreach($post->getTag() as $key=>$value) {
                  $post->removeTag($value);
                  $value->removePost($post);
              }
@@ -122,7 +104,7 @@ class PostController extends Controller
              $post->setAuthor($request->request->get('author'));
 
              $tags = $request->request->get('tags');
-             for($i = 0; $i < COUNT($tags); $i++){
+             for($i = 0; $i < COUNT($tags); $i++) {
                  $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
                  $tag->addPost($post);
 
@@ -144,15 +126,15 @@ class PostController extends Controller
      }
 
     /**
-     * @Route("/post/delete/{id}", name="delete_post")
+     * @Route("/post/{slug}/delete", name="delete_post")
      * @Method({"DELETE"})
      */
-    public function deletePostAction($id)
+    public function deletePostAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id);
+        $post = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
 
-        foreach($post->getTag() as $value){
+        foreach($post->getTag() as $value) {
             $value->removePost($post);
             $post->removeTag($value);
         }
@@ -160,13 +142,7 @@ class PostController extends Controller
         $em->remove($post);
         $em->flush();
 
-        return new Response(
-            json_encode(
-                array(
-                    "code" => 200
-                )
-            )
-        );
+        return JsonResponse::create(["code" => 200]);
     }
 }
 

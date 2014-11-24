@@ -17,11 +17,25 @@ class TagController extends Controller
 {
 
     /**
-     * @Route("/view/{slug}", name="tag_page")
+     * @Route("/last", name="tag_last_page")
      * @Method({"GET"})
-     * @Template("ValiknetBlogPostsBundle:Tag:index.html.twig")
+     * @Template()
      */
-    public function getTagPageAction($slug)
+    public function lastAction()
+    {
+        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->getLastTags(15);
+
+        return array(
+            "tags" => $tags
+        );
+    }
+
+    /**
+     * @Route("/{slug}", name="tag_page")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function indexAction($slug)
     {
         $em = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag');
         $tag = $em->findOneByHashSlug($slug);
@@ -34,11 +48,11 @@ class TagController extends Controller
     /**
      * @Route("/add", name="tag_add_page")
      * @Method({"POST", "GET"})
-     * @Template("ValiknetBlogPostsBundle:Tag:add.html.twig")
+     * @Template()
      */
-    public function getAddPageAction(Request $request)
+    public function addAction(Request $request)
     {
-        if($request->isMethod('POST')){
+        if($request->isMethod('POST')) {
             $tag = new Tag();
             $tag->setHashTag($request->request->get('tag_name'));
 
@@ -50,26 +64,6 @@ class TagController extends Controller
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
 
-        return array(
-
-        );
-    }
-
-    /**
-     * @Route("/last", name="tag_last_page")
-     * @Method({"GET"})
-     * @Template("ValiknetBlogPostsBundle:Tag:last.html.twig")
-     */
-    public function getLastTags()
-    {
-        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')
-                                    ->createQueryBuilder('t')
-                                    ->orderBy('t.id', 'DESC')
-                                    ->setMaxResults(15)
-                                    ->getQuery()
-                                    ->getResult();
-        return array(
-            "tags" => $tags
-        );
+        return [];
     }
 } 

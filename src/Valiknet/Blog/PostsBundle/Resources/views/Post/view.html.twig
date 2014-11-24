@@ -12,7 +12,7 @@
     <div class="webber-article">
         <div class="control-block">
             <a href="{{ path('edit_post', {'slug':post.getSlugPost }) }}">Редагувати</a>
-            <a href="{{ path('delete_post', {'id':post.id}) }}" id="delete_post">Видалити</a>
+            <a href="{{ path('delete_post', {'slug':post.getSlugPost }) }}" id="delete_post">Видалити</a>
         </div>
 
         <div class="title">
@@ -78,7 +78,7 @@
 
                     <input type="text" name="author" id="author" required="true"/>
                 </div>
-                <div>
+                <div class="text">
                     <label for="text">Текст коментаря(максимум 255 символів):</label>
 
                     <textarea name="text" id="text" maxlength="255" required="true"></textarea>

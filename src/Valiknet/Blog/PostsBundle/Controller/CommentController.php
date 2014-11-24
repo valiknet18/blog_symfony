@@ -15,59 +15,48 @@ use Symfony\Component\HttpFoundation\Response;
 class CommentController extends Controller
 {
     /**
-     * @Route("/add/{id}", name="comment_add")
+     * @Route("/{id}/add", name="comment_add")
      * @Method({"POST"})
      */
     public function createCommentAction($id, Request $request)
     {
-        if($request->isMethod('POST')){
-            $comment = new Comment();
-            $comment->setAuthor($request->request->get('author'));
-            $comment->setText($request->request->get('text'));
-            $comment->setPost($this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id));
+        $comment = new Comment();
+        $comment->setAuthor($request->request->get('author'));
+        $comment->setText($request->request->get('text'));
+        $comment->setPost($this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id));
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
 
-            $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id);
+        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->find($id);
 
-            $comments = array();
+        $comments = array();
 
-            for($i = 0; $i < count($post->getComment()); $i++){
-                $comments[$i]["author"] = $post->getComment()[$i]->getAuthor();
-                $comments[$i]["text"] = $post->getComment()[$i]->getText();
-                $comments[$i]["createdAt"] = $post->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
-            }
-
-            return new Response(
-                json_encode(
-                    array(
-                        "code" => 200,
-                        "data" => $comments
-                    )
-                )
-            );
+        for($i = 0; $i < count($post->getComment()); $i++) {
+            $comments[$i]["author"] = $post->getComment()[$i]->getAuthor();
+            $comments[$i]["text"] = $post->getComment()[$i]->getText();
+            $comments[$i]["createdAt"] = $post->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
         }
 
         return new Response(
             json_encode(
                 array(
-                    "code" => 404
+                    "code" => 200,
+                    "data" => $comments
                 )
-            ),
-            404
+            )
         );
     }
 
     /**
-     * @Route("/last", name="comment_last")
+     * @Route("/last/{count}", defaults={"count" = 10} ,requirements={"count" = "\d+"} , name="comment_last")
      * @Method({"GET"})
-     * @Template("ValiknetBlogPostsBundle:Comment:last.html.twig")
+     * @Template()
      */
-    public function getLastCommentsAction()
+    public function lastAction($count)
     {
-        $comments = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Comment')->findBy([], ['id' => 'DESC'], 20);
+        $comments = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Comment')->findBy([], ['id' => 'DESC'], $count);
 
         return array(
             "comments" => $comments
