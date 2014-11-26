@@ -24,11 +24,8 @@ class PostController extends Controller
 
         $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
 
-        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
-
         return array(
-            "posts" => $posts,
-            "tags" => $tags
+            "posts" => $posts
         );
     }
 

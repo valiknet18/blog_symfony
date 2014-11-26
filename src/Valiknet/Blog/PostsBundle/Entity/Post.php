@@ -12,7 +12,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Post
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -309,5 +308,4 @@ class Post
     {
         return $this->tag;
     }
-
 }

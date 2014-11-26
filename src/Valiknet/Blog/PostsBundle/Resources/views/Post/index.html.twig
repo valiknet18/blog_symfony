@@ -22,7 +22,7 @@
                     <p>
                         Теги:
                         {% for tag in post.tag %}
-                            <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">#{{ tag.hashTag }}</a>
+                            <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">{{ tag.hashTag|hashTag }}</a>
                         {% endfor %}
                     </p>
                 </div>
@@ -39,15 +39,6 @@
     </div>
 
     <div id="right_bar">
-        <div id="title">
-            <span>Список популярних тегів</span>
-        </div>
-        <ul>
-            {% for tag in tags %}
-            <li>
-                <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">#{{ tag.hashTag }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+        {{ render(controller('ValiknetBlogPostsBundle:Tag:topTags')) }}
     </div>
 {% endblock %}

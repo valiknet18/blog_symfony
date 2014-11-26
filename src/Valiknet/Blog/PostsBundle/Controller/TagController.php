@@ -15,6 +15,27 @@ use Valiknet\Blog\PostsBundle\Entity\Tag;
  */
 class TagController extends Controller
 {
+    /**
+     * @Route("/add", name="tag_add_page")
+     * @Method({"POST", "GET"})
+     * @Template()
+     */
+    public function addAction(Request $request)
+    {
+        if($request->isMethod('POST')) {
+            $tag = new Tag();
+            $tag->setHashTag($request->request->get('tag_name'));
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($tag);
+            $em->flush();
+
+            return $this->redirect($this->get('router')->generate('blog_home'));
+        }
+
+        return [];
+    }
 
     /**
      * @Route("/last", name="tag_last_page")
@@ -46,24 +67,16 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("/add", name="tag_add_page")
-     * @Method({"POST", "GET"})
+     * @Route("/topTags")
+     * @Method({"GET"})
      * @Template()
      */
-    public function addAction(Request $request)
+    public function topTagsAction()
     {
-        if($request->isMethod('POST')) {
-            $tag = new Tag();
-            $tag->setHashTag($request->request->get('tag_name'));
+        $tags = $this->getDoctrine()->getManager()->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
 
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($tag);
-            $em->flush();
-
-            return $this->redirect($this->get('router')->generate('blog_home'));
-        }
-
-        return [];
+        return [
+            "tags" => $tags
+        ];
     }
 } 

@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @ValiknetBlogPostsBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -79,7 +80,16 @@ stof_doctrine_extensions:
             timestampable: true
             softdeleteable: true
 
+
 sensio_framework_extra:
     request:
         converters: true
         auto_convert: false
+#
+#doctrine:
+#    orm:
+#        filters:
+#            softdeleteable:
+#                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+#                enabled: true
+
