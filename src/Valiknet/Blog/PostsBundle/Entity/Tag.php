@@ -130,4 +130,9 @@ g     * @param string $hashSlug
     {
         return $this->post;
     }
+
+    public function __toString()
+    {
+        return $this->hashTag;
+    }
 }

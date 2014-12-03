@@ -12,34 +12,35 @@
     <form role="form" method="POST" id="create_post">
         <fieldset>
             <legend>Створення статі</legend>
-            <div>
-                <label for="title">Назва статі:</label>
-                <input type="text" name="title" id="title" required/>
-                <div id="clear"></div>
-            </div>
+            {{ form(form) }}
+            {#<div>#}
+                {#<label for="title">Назва статі:</label>#}
+                {#<input type="text" name="title" id="title" required/>#}
+                {#<div id="clear"></div>#}
+            {#</div>#}
 
-            <div>
-                <label for="text">Стаття:</label>
-                <textarea name="text" id="text" required />
-                </textarea>
-                <div id="clear"></div>
-            </div>
+            {#<div>#}
+                {#<label for="text">Стаття:</label>#}
+                {#<textarea name="text" id="text" required />#}
+                {#</textarea>#}
+                {#<div id="clear"></div>#}
+            {#</div>#}
 
-            <div>
-                <label for="author">Автор:</label>
-                <input type="text" name="author" id="author" required/>
-                <div id="clear"></div>
-            </div>
+            {#<div>#}
+                {#<label for="author">Автор:</label>#}
+                {#<input type="text" name="author" id="author" required/>#}
+                {#<div id="clear"></div>#}
+            {#</div>#}
 
-            <div>
-                <label for="tags">Теги:</label>
-                <select name="tags[]" multiple required>
-                    {% for tag in tags %}
-                        <option value="{{ tag.id }}">{{ tag.hashTag }}</option>
-                    {% endfor %}
-                </select>
-                <div id="clear"></div>
-            </div>
+            {#<div>#}
+                {#<label for="tags">Теги:</label>#}
+                {#<select name="tags[]" multiple required>#}
+                    {#{% for tag in tags %}#}
+                        {#<option value="{{ tag.id }}">{{ tag.hashTag }}</option>#}
+                    {#{% endfor %}#}
+                {#</select>#}
+                {#<div id="clear"></div>#}
+            {#</div>#}
 
             <div>
                 <input type="submit" value="Створити статтю">

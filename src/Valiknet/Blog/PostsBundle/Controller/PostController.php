@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Valiknet\Blog\PostsBundle\Entity\Post;
+use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
 
 class PostController extends Controller
 {
@@ -36,32 +37,50 @@ class PostController extends Controller
      */
     public function addAction(Request $request)
     {
-        if($request->isMethod('POST')) {
-            $em = $this->getDoctrine()->getManager();
+        $tag = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ValiknetBlogPostsBundle:Tag')
+                    ->findBy([]);
 
-            $post = new Post();
+        $post = new Post();
 
-            $post->setTitle($request->request->get('title'))
-                 ->setText($request->request->get('text'))
-                 ->setAuthor($request->request->get('author'));
+        $form = $this->createForm(new AddPostType($tag), $post);
 
-            $tags = $request->request->get('tags');
+        $form->handleRequest($request);
 
-            for($i = 0; $i < COUNT($tags); $i++) {
-                $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
-
-                $tag->addPost($post);
-                $post->addTag($tag);
-            }
-
-            $em->persist($post);
-            $em->flush();
+        if($form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($post);
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
 
+//        if($request->isMethod('POST')) {
+//            $em = $this->getDoctrine()->getManager();
+//
+//            $post = new Post();
+//
+//            $post->setTitle($request->request->get('title'))
+//                 ->setText($request->request->get('text'))
+//                 ->setAuthor($request->request->get('author'));
+//
+//            $tags = $request->request->get('tags');
+//
+//            for($i = 0; $i < COUNT($tags); $i++) {
+//                $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
+//
+//                $tag->addPost($post);
+//                $post->addTag($tag);
+//            }
+//
+//            $em->persist($post);
+//            $em->flush();
+//
+//            return $this->redirect($this->get('router')->generate('blog_home'));
+//        }
+
         return array(
-            "tags" => $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->findAll()
+            "form" => $form->createView()
         );
     }
 
