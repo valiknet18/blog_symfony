@@ -1,0 +1,4 @@
+valiknet_blog_posts:
+    resource: "@ValiknetBlogPostsBundle/Controller/"
+    type:     annotation
+    prefix:   /

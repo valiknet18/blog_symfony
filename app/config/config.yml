@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @ValiknetBlogPostsBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -70,3 +71,25 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+            timestampable: true
+            softdeleteable: true
+
+
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: false
+#
+#doctrine:
+#    orm:
+#        filters:
+#            softdeleteable:
+#                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+#                enabled: true
+

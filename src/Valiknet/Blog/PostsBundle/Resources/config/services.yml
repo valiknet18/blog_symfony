@@ -1,0 +1,5 @@
+services:
+    valiknet.blog.postsbundle.twig.valiknet_blog_extension:
+        class: Valiknet\Blog\PostsBundle\Twig\ValiknetBlogExtension
+        tags:
+            - { name: twig.extension }

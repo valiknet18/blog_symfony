@@ -1,0 +1,44 @@
+{% extends "ValiknetBlogPostsBundle:Layouts:main.html.twig" %}
+
+{% block title %}
+    Головна сторінка
+{% endblock %}
+
+{% block content %}
+    <div id="left_bar">
+        {% for post in posts %}
+            <div class="webber-article">
+                <div class="title">
+                    <a href="{{ path("view_post", {"slug" : post.slugPost}) }}">{{ post.title }}</a>
+                </div>
+                <div class="info-block">
+                    <p>
+                        Дата створення: <b>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</b><br>
+                        Створено користувачем: <b>{{ post.author }}</b><br>
+                        Кількість коментарів під записом: <b>{{ post.comment|length }}</b>
+                    </p>
+                </div>
+                <div class="tag-block">
+                    <p>
+                        Теги:
+                        {% for tag in post.tag %}
+                            <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">{{ tag.hashTag|hashTag }}</a>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="text">
+                    <p>{{ post.text|slice(0,400) }}...</p>
+                </div>
+            </div>
+
+        {% else %}
+            <div id="warning_page">
+                <h3>На даний момент в блогу немає ні одного запису</h3>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="right_bar">
+        {{ render(controller('ValiknetBlogPostsBundle:Tag:topTags')) }}
+    </div>
+{% endblock %}

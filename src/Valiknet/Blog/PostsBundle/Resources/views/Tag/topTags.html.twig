@@ -1,0 +1,10 @@
+<div id="title">
+    <span>Список популярних тегів</span>
+</div>
+<ul>
+    {% for tag in tags %}
+        <li>
+            <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">{{ tag.hashTag|hashTag }}</a>
+        </li>
+    {% endfor %}
+</ul>

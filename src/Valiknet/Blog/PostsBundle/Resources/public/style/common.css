@@ -1,0 +1,186 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+#webber{
+    width: 100%;
+    padding: 0px;
+    background-color: rgba(27, 27, 28, 0.35);
+    min-height: 700px;
+}
+
+#webber > header{
+    margin: 0;
+    background-color: #50B7DC;
+    height: 50px;
+    border: 1px solid #2693ba;
+}
+
+#webber > header ul{
+    margin: 0;
+}
+
+#webber > header ul li{
+    float: left;
+    margin: 0px 0px;
+    list-style: none;
+}
+
+#webber > header #nav_create_list{
+    margin: 0;
+    margin-left: 65%;
+}
+
+#webber > header ul li a{
+    text-decoration: none;
+}
+
+#webber > header ul li .nav-link{
+    height: 35px;
+    padding: 15px 20px 0px 20px;
+    color: #ffffff;
+}
+
+#webber > header ul li .nav-link:hover{
+    background-color: #2AA4CF;
+}
+
+#webber > #webber_content{
+    clear: both;
+    width: 70%;
+    margin: 0px auto;
+    background-color: #ffffff;
+    display: table;
+    padding: 20px 30px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#webber > #webber_content #content{
+}
+
+#webber > #webber_content #left_bar{
+    float: left;
+    width: 70%;
+    min-height: 300px;
+}
+
+#webber > #webber_content .webber-article{
+    padding: 0px 20px;
+    background-color: #ffffff;
+
+}
+
+#webber > #webber_content .webber-article:not(:last-child){
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 10px;
+}
+
+
+#webber > #webber_content .webber-article .title a{
+    color: #2288bb;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+#webber > #webber_content .webber-article .title a:hover{
+    color: #000000;
+    text-decoration: underline;
+}
+
+#webber > #webber_content .webber-article .info-block {
+    color: rgba(121, 121, 121, 0.87);
+    font-size: 13px;
+}
+
+#webber > #webber_content .webber-article .tag-block{
+    color: rgba(121, 121, 121, 0.87);
+    font-size: 13px;
+}
+
+#webber > #webber_content .webber-article .tag-block a{
+    text-decoration: none;
+    color: #2288bb;
+}
+
+#webber > #webber_content .webber-article .tag-block a:hover{
+    color: #000000;
+}
+
+#webber > #webber_content .webber-article .text{
+    text-align: justify;
+    color: rgba(121, 121, 121, 0.87);
+}
+
+#webber > #webber_content #right_bar{
+
+}
+
+#webber > #webber_content #right_bar #title{
+    font-weight: 900;
+}
+
+#webber > #webber_content #right_bar ul li{
+    border-bottom: 1px solid #dddddd;
+    list-style: none;
+}
+
+#webber > #webber_content #right_bar ul li a{
+    text-decoration: none;
+    color: #2288bb;
+}
+
+#webber > #webber_content #right_bar ul li a:hover{
+    color: #000000;
+}
+
+#webber > #webber_content footer{
+    clear: both;
+    text-align: center;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 15px;
+}
+
+#clear{
+    clear: both;
+}
+
+#webber #webber_content #content form{
+    margin: 5px 10px;
+}
+
+#webber #webber_content #content form > div{
+    clear: both;
+    min-height: 50px;
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 30px;
+}
+
+#webber #webber_content #content form div input[type=text], #webber #webber_content #content form div textarea, #webber #webber_content #content form div select{
+    width: 500px;
+    float: right;
+}
+
+#webber #webber_content #content form div textarea{
+    height: 300px;
+    margin-bottom: 30px;
+    resize: none;
+}
+
+#webber #webber_content #content form div:last-child{
+    clear: both;
+}
+
+#webber #webber_content #content form > div:last-child{
+    text-align: center;
+    border-bottom: 0;
+}
+
+#webber #webber_content #content form > div input[type=submit]{
+    width: 300px;
+    height: 50px;
+}
+#webber #webber_content #content form div label{
+    float: left;
+}
+

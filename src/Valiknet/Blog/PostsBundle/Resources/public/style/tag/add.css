@@ -1,0 +1,9 @@
+#webber #webber_content #content form fieldset div:last-child{
+    text-align: center;
+}
+
+#webber #webber_content #content form fieldset input[type=submit]{
+    width: 300px;
+    height: 40px;
+    margin-top: 10px;
+}
