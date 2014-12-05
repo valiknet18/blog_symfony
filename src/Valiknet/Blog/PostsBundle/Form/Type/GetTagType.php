@@ -4,6 +4,7 @@ namespace Valiknet\Blog\PostsBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 
 class GetTagType extends AbstractType
@@ -17,12 +18,15 @@ class GetTagType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $tags = [];
+        foreach($this->tags->getTag() as $key => $value){
+            $tags[$value->getId()] = $value->getHashTag();
+        }
+
         $builder
             ->add('hashTag', 'choice', [
-                'choices' => $this->tags,
-                'multiple' => true
-            ])
-            ->add('save', 'submit');
+                'choices' => $tags
+            ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

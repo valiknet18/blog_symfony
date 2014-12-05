@@ -4,31 +4,28 @@ namespace Valiknet\Blog\PostsBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 
-class AddPostType extends AbstractType
+class EditPostType extends AbstractType
 {
-    public $tags;
-
-    public function __construct(array $tags)
+   public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->tags = $tags;
-    }
+        $tags = $options['data'];
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $tag = $this->tags;
+        $obj = new GetTagType($tags);
 
         $builder
             ->add('title')
             ->add('text')
-            ->add('author')
-            ->add('tag', 'entity', [
-                'class' => 'ValiknetBlogPostsBundle:Tag',
-                'choices' => new GetTagType($tag),
-                'multiple' => true
-            ]);
+            ->add('author');
+
+        $builder
+            ->add('tag', 'collection', array(
+                'type' =>  $obj,
+                'mapped' => true,
+                'allow_add' => false,
+                'by_reference' => false,
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -13,37 +13,39 @@
         <form role="form" method="POST">
             <fieldset>
                 <legend>Редагування статі</legend>
-                <div>
-                    <label for="title">Назва:</label>
-                    <input type="text" name="title" id="title" required value="{{ post.title }}"/>
-                    <div id="clear"></div>
-                </div>
 
-                <div>
-                    <label for="text">Текст:</label>
-                    <textarea name="text" id="text" required>{{ post.text }}</textarea>
-                    <div id="clear"></div>
-                </div>
+                {{ form(form) }}
+                {#<div>#}
+                    {#<label for="title">Назва:</label>#}
+                    {#<input type="text" name="title" id="title" required value="{{ post.title }}"/>#}
+                    {#<div id="clear"></div>#}
+                {#</div>#}
 
-                <div>
-                    <label for="author">Автор:</label>
-                    <input type="text" name="author" id="author" required value="{{ post.author }}"/>
-                    <div id="clear"></div>
-                </div>
+                {#<div>#}
+                    {#<label for="text">Текст:</label>#}
+                    {#<textarea name="text" id="text" required>{{ post.text }}</textarea>#}
+                    {#<div id="clear"></div>#}
+                {#</div>#}
 
-                <div>
-                    <label for="tags">Теги: </label>
-                    <select name="tags[]" id="tags" multiple required>
-                        {% for tag in tags %}
-                            {% if tag in post.tag %}
-                                <option value="{{ tag.id }}" selected>{{ tag.hashTag }}</option>
-                            {% else %}
-                                <option value="{{ tag.id }}">{{ tag.hashTag }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                    <div id="clear"></div>
-                </div>
+                {#<div>#}
+                    {#<label for="author">Автор:</label>#}
+                    {#<input type="text" name="author" id="author" required value="{{ post.author }}"/>#}
+                    {#<div id="clear"></div>#}
+                {#</div>#}
+
+                {#<div>#}
+                    {#<label for="tags">Теги: </label>#}
+                    {#<select name="tags[]" id="tags" multiple required>#}
+                        {#{% for tag in tags %}#}
+                            {#{% if tag in post.tag %}#}
+                                {#<option value="{{ tag.id }}" selected>{{ tag.hashTag }}</option>#}
+                            {#{% else %}#}
+                                {#<option value="{{ tag.id }}">{{ tag.hashTag }}</option>#}
+                            {#{% endif %}#}
+                        {#{% endfor %}#}
+                    {#</select>#}
+                    {#<div id="clear"></div>#}
+                {#</div>#}
 
                 <div>
                     <input type="submit" value="Редагувати статтю">
