@@ -37,4 +37,14 @@ class TagRepository extends EntityRepository
 
         return $tags;
     }
+
+    public function getHastTags()
+    {
+        return $this->getEntityManager()
+            ->getRepository('ValiknetBlogPostsBundle:Tag')
+            ->createQueryBuilder('t')
+            ->select('t.hashTag')
+            ->getQuery()
+            ->getResult();
+    }
 } 
