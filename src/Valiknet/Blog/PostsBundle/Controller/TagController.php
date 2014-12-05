@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverter;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\Blog\PostsBundle\Form\Type\AddTagType;
+use Valiknet\Blog\PostsBundle\Form\Type\GetTagType;
 
 /**
  * @Route("/tag")
@@ -22,11 +24,17 @@ class TagController extends Controller
      */
     public function addAction(Request $request)
     {
-        if($request->isMethod('POST')) {
-            $tag = new Tag();
-            $tag->setHashTag($request->request->get('tag_name'));
+        $tag = new Tag();
 
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+
+        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')->getHastTags();
+
+        $form = $this->createForm(new GetTagType($tags), $tag);
+
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
 
             $em->persist($tag);
             $em->flush();
@@ -34,7 +42,9 @@ class TagController extends Controller
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
 
-        return [];
+        return [
+            "form" => $form->createView()
+        ];
     }
 
     /**

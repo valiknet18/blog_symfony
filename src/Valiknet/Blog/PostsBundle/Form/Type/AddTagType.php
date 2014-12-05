@@ -6,23 +6,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 
-class GetTagType extends AbstractType
+class AddTagType extends AbstractType
 {
-    public $tags;
-
-    public function __construct(array $tags)
-    {
-        $this->tags = $tags;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('hashTag', 'choice', [
-                'choices' => $this->tags,
-                'multiple' => true
-            ])
-            ->add('save', 'submit');
+            ->add('hashTag', 'text', ['label' => 'Назва тегу']);
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -34,6 +24,6 @@ class GetTagType extends AbstractType
 
     public function getName()
     {
-        return 'getTag';
+        return 'addTag';
     }
 }

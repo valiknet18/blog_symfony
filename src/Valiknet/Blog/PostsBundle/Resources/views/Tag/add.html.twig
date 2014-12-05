@@ -13,10 +13,11 @@
         <form role="form" method="POST">
             <fieldset>
                 <div>
-                    <label for="tag_name">Назва тегу</label>
-                    <input type="text" id="tag_name" name="tag_name">
+                    {{ form_label(form.hashTag) }}
+                    {{ form_widget(form.hashTag) }}
                 </div>
 
+                {{ form_rest(form) }}
                 <div>
                     <input type="submit" value="Створити тег">
                 </div>

@@ -17,19 +17,17 @@ class AddPostType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $obj = new GetTagType($this->tags);
+
         $builder
             ->add('title')
             ->add('text')
             ->add('author')
-            ->add('tag', 'collection', [
-                'type' => 'choice',
-                'options' => [
-                    'choices' => [
-                        0 => 'data-1',
-                        1 => 'data-2'
-                    ]
-                ],
-            ]);
+            ->add('tag', 'collection', array(
+                'type' =>  $obj,
+                'allow_add' => true,
+                'by_reference' => false
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

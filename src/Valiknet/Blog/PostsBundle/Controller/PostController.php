@@ -37,14 +37,14 @@ class PostController extends Controller
      */
     public function addAction(Request $request)
     {
-        $tag = $this->getDoctrine()
+        $tags = $this->getDoctrine()
                     ->getManager()
                     ->getRepository('ValiknetBlogPostsBundle:Tag')
-                    ->findBy([]);
+                    ->getHastTags();
 
         $post = new Post();
 
-        $form = $this->createForm(new AddPostType($tag), $post);
+        $form = $this->createForm(new AddPostType($tags), $post);
 
         $form->handleRequest($request);
 
