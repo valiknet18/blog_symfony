@@ -61,7 +61,7 @@ class PostController extends Controller
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
 
-        return array(
+        return array (
             "form" => $form->createView()
         );
     }
@@ -99,28 +99,28 @@ class PostController extends Controller
          if($form->isValid()) {
              $em = $this->getDoctrine()->getManager();
 
-//             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
-//
-//             foreach($post->getTag() as $key=>$value) {
-//                 $post->removeTag($value);
-//                 $value->removePost($post);
-//             }
-//
-//             $post->setTitle($request->request->get('title'));
-//             $post->setText($request->request->get('text'));
-//             $post->setAuthor($request->request->get('author'));
-//
-//             $tags = $request->request->get('tags');
-//             for($i = 0; $i < COUNT($tags); $i++) {
-//                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
-//                 $tag->addPost($post);
-//
-//                 $post->addTag($tag);
-//             }
+             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
+
+             foreach($post->getTag() as $key=>$value) {
+                 $post->removeTag($value);
+                 $value->removePost($post);
+             }
+
+             $post->setTitle($request->request->get('title'));
+             $post->setText($request->request->get('text'));
+             $post->setAuthor($request->request->get('author'));
+
+             $tags = $request->request->get('tags');
+             for($i = 0; $i < COUNT($tags); $i++) {
+                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
+                 $tag->addPost($post);
+
+                 $post->addTag($tag);
+             }
 
              $em->flush();
 
-//             return $this->redirect($this->get('router')->generate('blog_home'));
+             return $this->redirect($this->get('router')->generate('blog_home'));
          }
 
 
