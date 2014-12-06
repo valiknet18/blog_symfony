@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
-use Valiknet\Blog\PostsBundle\Form\Type\GetTagType;
+use Valiknet\Blog\PostsBundle\Form\Type\AddTagType;
 
 /**
  * @Route("/tag")
@@ -25,9 +25,7 @@ class TagController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $tags = $em->getRepository('ValiknetBlogPostsBundle:Tag')->getHastTags();
-
-        $form = $this->createForm(new GetTagType($tags), $tag);
+        $form = $this->createForm(new AddTagType(), $tag);
 
         $form->handleRequest($request);
 

@@ -34,7 +34,7 @@ class CommentController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findBy(['slugPost' => $slug]);
+            $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug);
 
             $comments = array();
 
