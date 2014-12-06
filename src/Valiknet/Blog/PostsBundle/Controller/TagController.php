@@ -3,13 +3,10 @@ namespace Valiknet\Blog\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverter;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
-use Valiknet\Blog\PostsBundle\Form\Type\AddTagType;
 use Valiknet\Blog\PostsBundle\Form\Type\GetTagType;
 
 /**
@@ -34,8 +31,7 @@ class TagController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
-
+        if ($form->isValid()) {
             $em->persist($tag);
             $em->flush();
 
@@ -57,7 +53,7 @@ class TagController extends Controller
         $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->getLastTags(15);
 
         return array(
-            "tags" => $tags
+            "tags" => $tags,
         );
     }
 
@@ -72,7 +68,7 @@ class TagController extends Controller
         $tag = $em->findOneByHashSlug($slug);
 
         return array(
-            "tag" => $tag
+            "tag" => $tag,
         );
     }
 
@@ -89,4 +85,4 @@ class TagController extends Controller
             "tags" => $tags
         ];
     }
-} 
+}

@@ -2,7 +2,6 @@
 namespace Valiknet\Blog\PostsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\Entity;
 
 class TagRepository extends EntityRepository
 {
@@ -15,12 +14,12 @@ class TagRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        usort($tags, function($a, $b){
-            if(COUNT($a->getPost()) == COUNT($b->getPost())){
+        usort($tags, function ($a, $b) {
+            if (COUNT($a->getPost()) == COUNT($b->getPost())) {
                 return 0;
             }
 
-            return (COUNT($a->getPost()) > COUNT($b->getPost()))? -1: 1;
+            return (COUNT($a->getPost()) > COUNT($b->getPost())) ? -1 : 1;
         });
 
         return $tags;
@@ -47,4 +46,4 @@ class TagRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
-} 
+}

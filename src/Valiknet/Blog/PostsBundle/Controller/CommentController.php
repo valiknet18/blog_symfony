@@ -33,7 +33,7 @@ class CommentController extends Controller
 
         $comments = array();
 
-        for($i = 0; $i < count($post->getComment()); $i++) {
+        for ($i = 0; $i < count($post->getComment()); $i++) {
             $comments[$i]["author"] = $post->getComment()[$i]->getAuthor();
             $comments[$i]["text"] = $post->getComment()[$i]->getText();
             $comments[$i]["createdAt"] = $post->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
@@ -43,7 +43,7 @@ class CommentController extends Controller
             json_encode(
                 array(
                     "code" => 200,
-                    "data" => $comments
+                    "data" => $comments,
                 )
             )
         );
@@ -59,7 +59,7 @@ class CommentController extends Controller
         $comments = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Comment')->findBy([], ['id' => 'DESC'], $count);
 
         return array(
-            "comments" => $comments
+            "comments" => $comments,
         );
     }
-} 
+}

@@ -18,6 +18,5 @@ class ValiknetBlogPostsBundle extends Bundle
         $em = $doctrine->getManager();
 
         $em->getFilters()->enable('soft-deleteable');
-
     }
 }

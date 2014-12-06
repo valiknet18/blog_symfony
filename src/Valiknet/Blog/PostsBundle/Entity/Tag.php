@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tag
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -45,7 +44,7 @@ class Tag
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +54,7 @@ class Tag
     /**
      * Set hashTag
      *
-     * @param string $hashTag
+     * @param  string $hashTag
      * @return Tag
      */
     public function setHashTag($hashTag)
@@ -68,7 +67,7 @@ class Tag
     /**
      * Get hashTag
      *
-     * @return string 
+     * @return string
      */
     public function getHashTag()
     {
@@ -91,7 +90,7 @@ g     * @param string $hashSlug
     /**
      * Get hashSlug
      *
-     * @return string 
+     * @return string
      */
     public function getHashSlug()
     {
@@ -101,7 +100,7 @@ g     * @param string $hashSlug
     /**
      * Add post
      *
-     * @param \Valiknet\Blog\PostsBundle\Entity\Post $post
+     * @param  \Valiknet\Blog\PostsBundle\Entity\Post $post
      * @return Tag
      */
     public function addPost(\Valiknet\Blog\PostsBundle\Entity\Post $post)
@@ -124,7 +123,7 @@ g     * @param string $hashSlug
     /**
      * Get post
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPost()
     {

@@ -17,4 +17,4 @@ class CommentType extends AbstractType
     {
         return 'comment';
     }
-} 
+}
