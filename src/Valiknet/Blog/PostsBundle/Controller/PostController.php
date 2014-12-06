@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\EditPostType;
+use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 
 class PostController extends Controller
 {
@@ -72,8 +73,11 @@ class PostController extends Controller
     {
         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
 
+        $form = $this->createForm(new AddCommentType());
+
         return array(
             "post" => $post,
+            "form" => $form->createView()
         );
     }
 
