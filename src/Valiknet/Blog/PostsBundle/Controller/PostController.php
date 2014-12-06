@@ -77,7 +77,7 @@ class PostController extends Controller
 
         return array(
             "post" => $post,
-            "form" => $form->createView()
+            "form" => $form->createView(),
         );
     }
 
@@ -95,7 +95,7 @@ class PostController extends Controller
              ->getRepository('ValiknetBlogPostsBundle:Post')
              ->findOneBySlugPost($slug);
 
-         if($request->isMethod('POST')) {
+         if ($request->isMethod('POST')) {
              foreach ($post->getTag() as $key => $value) {
                  $post->removeTag($value);
                  $value->removePost($post);
@@ -108,7 +108,7 @@ class PostController extends Controller
 
          if ($form->isValid()) {
              foreach ($post->getTag() as $value) {
-                $value->addPost($post);
+                 $value->addPost($post);
              }
 
              $em->flush();

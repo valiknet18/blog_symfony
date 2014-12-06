@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Comment;
-use Symfony\Component\HttpFoundation\Response;
 use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 
 /**
@@ -28,7 +27,7 @@ class CommentController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $comment->setPost($this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug));
 
             $em = $this->getDoctrine()->getManager();
