@@ -44,7 +44,7 @@
             Коментарі:
         </h3>
         <ul id="category_list">
-            {% for comment in post.comment %}
+            {% for comment in post.comment|reverse %}
                 <li>
                     <div class="comment">
                         <div class="info-block">
@@ -71,20 +71,18 @@
 
         <div>
             <h3>Створення нового коментаря:</h3>
-            <form id="comment_add" role="form" action="{{ path("comment_add", {"id" : post.id}) }}" method="POST">
+            <form id="comment_add" role="form" action="{{ path("comment_add", {"slug" : post.slugPost}) }}" method="POST">
                 <div>
-                    <label for="author">Ім'я автора:
-                    </label>
-
-                    <input type="text" name="author" id="author" required="true"/>
+                    {{ form_row(form.author) }}
                 </div>
+
                 <div class="text">
-                    <label for="text">Текст коментаря(максимум 255 символів):</label>
-
-                    <textarea name="text" id="text" maxlength="255" required="true"></textarea>
-
+                    {{ form_row(form.text) }}
                     <div id="clear"></div>
                 </div>
+
+                {{ form_rest(form) }}
+
                 <div>
                     <input type="submit" value="Додати коментар">
                 </div>

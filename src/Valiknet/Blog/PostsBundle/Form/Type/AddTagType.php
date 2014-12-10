@@ -12,7 +12,6 @@ class AddTagType extends AbstractType
     {
         $builder
             ->add('hashTag', 'text', ['label' => 'Назва тегу']);
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

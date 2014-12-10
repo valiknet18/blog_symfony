@@ -6,7 +6,7 @@ class ValiknetBlogExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('hashTag', array($this, 'addHashTag'))
+            new \Twig_SimpleFilter('hashTag', array($this, 'addHashTag')),
         );
     }
 
@@ -19,4 +19,4 @@ class ValiknetBlogExtension extends \Twig_Extension
     {
         return "valiknet_blog_extension";
     }
-} 
+}

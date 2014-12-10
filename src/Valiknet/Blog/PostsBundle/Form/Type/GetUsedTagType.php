@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 
-class GetTagType extends AbstractType
+class GetUsedTagType extends AbstractType
 {
     public $tags;
 

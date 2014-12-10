@@ -3,15 +3,14 @@ namespace Valiknet\Blog\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\EditPostType;
+use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 
 class PostController extends Controller
 {
@@ -27,7 +26,7 @@ class PostController extends Controller
         $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
 
         return array(
-            "posts" => $posts
+            "posts" => $posts,
         );
     }
 
@@ -49,9 +48,8 @@ class PostController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
-            foreach($post->getTag() as $value)
-            {
+        if ($form->isValid()) {
+            foreach ($post->getTag() as $value) {
                 $value->addPost($post);
             }
 
@@ -62,7 +60,7 @@ class PostController extends Controller
         }
 
         return array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
         );
     }
 
@@ -75,8 +73,11 @@ class PostController extends Controller
     {
         $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
 
+        $form = $this->createForm(new AddCommentType());
+
         return array(
-            "post" => $post
+            "post" => $post,
+            "form" => $form->createView(),
         );
     }
 
@@ -87,45 +88,36 @@ class PostController extends Controller
      */
      public function editAction($slug, Request $request)
      {
+         $em = $this->getDoctrine()->getManager();
+
          $post = $this->getDoctrine()
              ->getManager()
              ->getRepository('ValiknetBlogPostsBundle:Post')
              ->findOneBySlugPost($slug);
 
-         $form = $this->createForm(new EditPostType(), $post);
+         if ($request->isMethod('POST')) {
+             foreach ($post->getTag() as $key => $value) {
+                 $post->removeTag($value);
+                 $value->removePost($post);
+             }
+         }
+
+         $form = $this->createForm(new EditPostType($em), $post);
 
          $form->handleRequest($request);
 
-         if($form->isValid()) {
-             $em = $this->getDoctrine()->getManager();
-
-//             $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug);
-//
-//             foreach($post->getTag() as $key=>$value) {
-//                 $post->removeTag($value);
-//                 $value->removePost($post);
-//             }
-//
-//             $post->setTitle($request->request->get('title'));
-//             $post->setText($request->request->get('text'));
-//             $post->setAuthor($request->request->get('author'));
-//
-//             $tags = $request->request->get('tags');
-//             for($i = 0; $i < COUNT($tags); $i++) {
-//                 $tag = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->find($tags[$i]);
-//                 $tag->addPost($post);
-//
-//                 $post->addTag($tag);
-//             }
+         if ($form->isValid()) {
+             foreach ($post->getTag() as $value) {
+                 $value->addPost($post);
+             }
 
              $em->flush();
 
-//             return $this->redirect($this->get('router')->generate('blog_home'));
+             return $this->redirect($this->get('router')->generate('blog_home'));
          }
 
-
          return array(
-             "form" => $form->createView()
+             "form" => $form->createView(),
          );
      }
 
@@ -138,7 +130,7 @@ class PostController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
 
-        foreach($post->getTag() as $value) {
+        foreach ($post->getTag() as $value) {
             $value->removePost($post);
             $post->removeTag($value);
         }
@@ -149,4 +141,3 @@ class PostController extends Controller
         return JsonResponse::create(["code" => 200]);
     }
 }
-

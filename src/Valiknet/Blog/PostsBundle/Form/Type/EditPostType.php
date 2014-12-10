@@ -8,24 +8,31 @@ use Valiknet\Blog\PostsBundle\Entity\Tag;
 
 class EditPostType extends AbstractType
 {
-   public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $tags = $options['data'];
+    public $em;
 
-        $obj = new GetTagType($tags);
+    public function __construct($em)
+    {
+        $this->em = $em;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $selected = array();
+
+        foreach ($options['data']->getTag() as $key => $value) {
+            $selected[] = $this->em->getReference('ValiknetBlogPostsBundle:Tag', $value->getId());
+        }
 
         $builder
             ->add('title')
             ->add('text')
-            ->add('author');
-
-        $builder
-            ->add('tag', 'collection', array(
-                'type' =>  $obj,
-                'mapped' => true,
-                'allow_add' => false,
-                'by_reference' => false,
-            ));
+            ->add('author')
+            ->add('tag', 'entity', [
+                'class' => 'ValiknetBlogPostsBundle:Tag',
+                'property' => 'hashTag',
+                'data' => $selected,
+                'multiple' => true
+            ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
