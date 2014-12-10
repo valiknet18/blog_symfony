@@ -8,5 +8,9 @@
         <service id="valiknet.blog.postsbundle.twig.valiknet_blog_extension" class="Valiknet\Blog\PostsBundle\Twig\ValiknetBlogExtension">
             <tag name="twig.extension" />
         </service>
+
+        <service id="valiknet.blog.postsbundle.services.post_handler" class="Valiknet\Blog\PostsBundle\Services\PostHandler">
+            <argument type="service" id="service_container" />
+        </service>
     </services>
 </container>

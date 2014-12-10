@@ -46,13 +46,7 @@ class PostController extends Controller
 
         $form = $this->createForm(new AddPostType($tags), $post);
 
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            foreach ($post->getTag() as $value) {
-                $value->addPost($post);
-            }
-
+        if ($this->container->get('valiknet.blog.postsbundle.services.post_handler')->handleAddPost($form, $post)) {
             $this->getDoctrine()->getManager()->persist($post);
             $this->getDoctrine()->getManager()->flush();
 
