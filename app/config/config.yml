@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @ValiknetBlogPostsBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
