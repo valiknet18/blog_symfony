@@ -10,7 +10,11 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('author')
-            ->add('text');
+            ->add('text', 'textarea', [
+                'attr' => [
+                    'maxlength' => '255',
+                ]
+            ]);
     }
 
     public function getName()

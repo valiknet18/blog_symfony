@@ -14,19 +14,20 @@ $(document).on('submit', '#comment_add', function(e){
         console.log(data);
 
         html = "";
-        for(var i = data.length - 1; i >= 0 ; i--){
+        for(var i = data[0].length - 1; i >= 0 ; i--){
+
             html += "<li>" +
                         "<div class='comment'>" +
                             "<div class='info-block'>" +
                                 "<p>" +
-                                    "Додано користувачем: <b>" + data[i].author + "</b></br>" +
-                                    "Дата створення: <b>" + data[i].createdAt + "</b>" +
+                                    "Додано користувачем: <b>" + data[0][i].author + "</b></br>" +
+                                    "Дата створення: <b>" + data[0][i].createdAt + "</b>" +
                                 "</p>" +
                             "</div>" +
 
                             "<div class='text'>" +
                                 "<p>" +
-                                        data[i].text +
+                                        data[0][i].text +
                                 "</p>" +
                             "</div>" +
                         "</div>" +

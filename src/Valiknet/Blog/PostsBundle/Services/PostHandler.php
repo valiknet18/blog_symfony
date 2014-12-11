@@ -24,18 +24,8 @@ class PostHandler
         return $this->container->get('doctrine');
     }
 
-    public function handleAddPost(Form $form, Post &$post)
+    public function handleAddPost(Form $form, Post $post)
     {
-        $form->handleRequest($this->getRequest());
-
-        if ($form->isValid()) {
-            foreach ($post->getTag() as $value) {
-                $value->addPost($post);
-            }
-
-            return true;
-        }
-
         return false;
     }
 }
