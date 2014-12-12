@@ -11,6 +11,8 @@ namespace Valiknet\Blog\PostsBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CommentHandler
 {
@@ -26,6 +28,10 @@ class CommentHandler
     public function handleAddComment($slug)
     {
         $post = $this->doctrine->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug);
+
+        if (!$post) {
+            throw new NotFoundHttpException("Page not found");
+        }
 
         $comments = array();
 
