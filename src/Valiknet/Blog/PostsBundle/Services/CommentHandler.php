@@ -13,22 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Valiknet\Blog\PostsBundle\Entity\Post;
 
 class CommentHandler
 {
     private $request;
-    private $doctrine;
 
-    public function __construct(RequestStack $request_stack, EntityManager $doctrine)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->request = $request_stack->getCurrentRequest();
-        $this->doctrine = $doctrine;
+        $this->request = $requestStack->getCurrentRequest();
     }
 
-    public function handleAddComment($slug)
+    public function handleAddComment(Post $post)
     {
-        $post = $this->doctrine->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug);
-
         if (!$post) {
             throw new NotFoundHttpException("Page not found");
         }

@@ -11,11 +11,20 @@ class CommentHandlerTest extends WebTestCase
 
         $container = $client->getContainer();
 
-        $result = $container->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment('nope');
+        $post = $container->get('doctrine')
+            ->getRepository('ValiknetBlogPostsBundle:Post')
+            ->findBySlugPost('nope');
+
+        $result = $container->get('valiknet.blog.postsbundle.services.comment_handler')
+            ->handleAddComment($post);
 
         $this->assertInstanceOf('NotFoundHttpException', $result);
 
-        $result = $container->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment('lorem-ipsum-1521');
+        $post = $container->get('doctrine')
+            ->getRepository('ValiknetBlogPostsBundle:Post')
+            ->findBySlugPost('lorem-ipsum-1521');
+
+        $result = $container->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($post);
 
         $this->assertInstanceOf('array', $result);
     }

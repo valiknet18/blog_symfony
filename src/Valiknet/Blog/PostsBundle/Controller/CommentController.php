@@ -34,7 +34,12 @@ class CommentController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            $comments = $this->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($slug);
+            $post = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ValiknetBlogPostsBundle:Post')
+                    ->findBySlugPost($slug);
+
+            $comments = $this->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($post);
 
             return new JsonResponse([$comments]);
         }
