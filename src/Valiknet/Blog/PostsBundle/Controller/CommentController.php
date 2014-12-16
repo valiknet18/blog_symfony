@@ -21,30 +21,27 @@ class CommentController extends Controller
      */
     public function createCommentAction($slug, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $comment = new Comment();
 
         $form = $this->createForm(new AddCommentType(), $comment);
-
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $comment->setPost($this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug));
+            $comment->setPost($this->getDoctrine()->getManager()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug));
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
 
-            $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug);
+            $post = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ValiknetBlogPostsBundle:Post')
+                    ->findBySlugPost($slug);
 
-            $comments = array();
+            $comments = $this->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($post);
 
-            for ($i = 0; $i < count($post[0]->getComment()); $i++) {
-                $comments[$i]["author"] = $post[0]->getComment()[$i]->getAuthor();
-                $comments[$i]["text"] = $post[0]->getComment()[$i]->getText();
-                $comments[$i]["createdAt"] = $post[0]->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
-            }
-
-            return new JsonResponse($comments);
+            return new JsonResponse([$comments]);
         }
 
         return new JsonResponse([], 500);

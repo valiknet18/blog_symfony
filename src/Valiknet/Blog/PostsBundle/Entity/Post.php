@@ -284,6 +284,7 @@ class Post
      */
     public function addTag(\Valiknet\Blog\PostsBundle\Entity\Tag $tag)
     {
+        $tag->addPost($this);
         $this->tag[] = $tag;
 
         return $this;

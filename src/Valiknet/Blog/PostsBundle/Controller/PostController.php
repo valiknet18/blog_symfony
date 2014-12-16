@@ -46,13 +46,9 @@ class PostController extends Controller
 
         $form = $this->createForm(new AddPostType($tags), $post);
 
-        $form->handleRequest($request);
+        $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
-            foreach ($post->getTag() as $value) {
-                $value->addPost($post);
-            }
-
             $this->getDoctrine()->getManager()->persist($post);
             $this->getDoctrine()->getManager()->flush();
 
@@ -96,10 +92,8 @@ class PostController extends Controller
              ->findOneBySlugPost($slug);
 
          if ($request->isMethod('POST')) {
-             foreach ($post->getTag() as $key => $value) {
-                 $post->removeTag($value);
-                 $value->removePost($post);
-             }
+             $this->get('valiknet.blog.postsbundle.services.post_handler')
+                 ->removeTags($post);
          }
 
          $form = $this->createForm(new EditPostType($em), $post);
@@ -107,10 +101,6 @@ class PostController extends Controller
          $form->handleRequest($request);
 
          if ($form->isValid()) {
-             foreach ($post->getTag() as $value) {
-                 $value->addPost($post);
-             }
-
              $em->flush();
 
              return $this->redirect($this->get('router')->generate('blog_home'));
@@ -130,10 +120,8 @@ class PostController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
 
-        foreach ($post->getTag() as $value) {
-            $value->removePost($post);
-            $post->removeTag($value);
-        }
+        $this->get('valiknet.blog.postsbundle.services.post_handler')
+            ->removeTags($post);
 
         $em->remove($post);
         $em->flush();
