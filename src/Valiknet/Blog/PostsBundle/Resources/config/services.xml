@@ -15,5 +15,8 @@
         <service id="valiknet.blog.postsbundle.services.comment_handler" class="Valiknet\Blog\PostsBundle\Services\CommentHandler">
             <argument type="service" id="request_stack" />
         </service>
+
+        <service id="valiknet.blog.postsbundle.services.post_handler" class="Valiknet\Blog\PostsBundle\Services\PostHandler">
+        </service>
     </services>
 </container>
