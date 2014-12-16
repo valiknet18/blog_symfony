@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Post;
+use Valiknet\Blog\PostsBundle\Entity\Tag;
 use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\EditPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
@@ -37,20 +38,38 @@ class PostController extends Controller
      */
     public function addAction(Request $request)
     {
-        $tags = $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('ValiknetBlogPostsBundle:Tag')
-                    ->getHastTags();
+        $em = $this->getDoctrine()->getManager();
 
         $post = new Post();
 
-        $form = $this->createForm(new AddPostType($tags), $post);
+        if ($request->isMethod('POST')) {
+            $tags = $request->request->get('addPost')['tag'];
+            $tags = $this->get('valiknet.blog.postsbundle.services.tag_handler')->convertTags($tags);
+
+            foreach ($tags as $tag) {
+                $tagRequest = $em->getRepository('ValiknetBlogPostsBundle:Tag')
+                                ->findByHashTag($tag);
+
+                if (!$tagRequest) {
+                    $newTag = new Tag();
+                    $newTag->setHashTag($tag);
+
+                    $post->addTag($newTag);
+
+                    $em->persist($newTag);
+                } else {
+                    $post->addTag($tagRequest[0]);
+                }
+            }
+        }
+
+        $form = $this->createForm(new AddPostType(), $post);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($post);
-            $this->getDoctrine()->getManager()->flush();
+            $em->persist($post);
+            $em->flush();
 
             return $this->redirect($this->get('router')->generate('blog_home'));
         }

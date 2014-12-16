@@ -16,7 +16,7 @@
             <argument type="service" id="request_stack" />
         </service>
 
-        <service id="valiknet.blog.postsbundle.services.post_handler" class="Valiknet\Blog\PostsBundle\Services\PostHandler">
+        <service id="valiknet.blog.postsbundle.services.tag_handler" class="Valiknet\Blog\PostsBundle\Services\TagHandler">
         </service>
     </services>
 </container>

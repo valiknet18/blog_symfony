@@ -29,4 +29,3 @@ class CommentHandlerTest extends WebTestCase
         $this->assertInstanceOf('array', $result);
     }
 }
- 

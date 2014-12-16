@@ -18,4 +18,4 @@ class TagHandler
     {
         return ucfirst(strtolower(trim($tag)));
     }
-} 
+}

@@ -8,10 +8,8 @@
 
 namespace Valiknet\Blog\PostsBundle\Services;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 
