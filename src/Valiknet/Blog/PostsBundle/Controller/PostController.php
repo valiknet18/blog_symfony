@@ -46,7 +46,7 @@ class PostController extends Controller
 
         $form = $this->createForm(new AddPostType($tags), $post);
 
-        $form->handleRequest($this->getRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($post);
