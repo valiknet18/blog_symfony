@@ -46,6 +46,6 @@ $(document).on('click', '#delete_post', function(e){
         url: $(this).attr('href'),
         type: 'DELETE'
     }).done(function(data, status){
-        document.location.href = "app_dev.php/";
+        document.location.href = "http://blog.val.ua/app_dev.php/";
     });
 });

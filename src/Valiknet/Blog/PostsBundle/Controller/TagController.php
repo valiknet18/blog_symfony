@@ -14,34 +14,7 @@ use Valiknet\Blog\PostsBundle\Form\Type\AddTagType;
  */
 class TagController extends Controller
 {
-    /**
-     * @Route("/add", name="tag_add_page")
-     * @Method({"POST", "GET"})
-     * @Template()
-     */
-    public function addAction(Request $request)
-    {
-        $tag = new Tag();
-
-        $em = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm(new AddTagType(), $tag);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em->persist($tag);
-            $em->flush();
-
-            return $this->redirect($this->get('router')->generate('blog_home'));
-        }
-
-        return [
-            "form" => $form->createView()
-        ];
-    }
-
-    /**
+   /**
      * @Route("/last", name="tag_last_page")
      * @Method({"GET"})
      * @Template()
