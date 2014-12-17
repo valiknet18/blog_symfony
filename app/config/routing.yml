@@ -1,4 +1,4 @@
 valiknet_blog_posts:
-    resource: "@ValiknetBlogPostsBundle/Controller/"
-    type:     annotation
+    resource: "@ValiknetBlogPostsBundle/Resources/config/routing.yml"
+    type:     yaml
     prefix:   /

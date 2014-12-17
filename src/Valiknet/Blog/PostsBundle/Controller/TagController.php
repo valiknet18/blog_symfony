@@ -3,21 +3,15 @@ namespace Valiknet\Blog\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
 use Valiknet\Blog\PostsBundle\Form\Type\AddTagType;
 
-/**
- * @Route("/tag")
- */
 class TagController extends Controller
 {
-   /**
-     * @Route("/last", name="tag_last_page")
-     * @Method({"GET"})
+    /**
      * @Template()
+     * @return array
      */
     public function lastAction()
     {
@@ -29,9 +23,9 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("/{slug}", name="tag_page")
-     * @Method({"GET"})
      * @Template()
+     * @param $slug
+     * @return array
      */
     public function indexAction($slug)
     {
@@ -44,9 +38,8 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("/topTags")
-     * @Method({"GET"})
      * @Template()
+     * @return array
      */
     public function topTagsAction()
     {

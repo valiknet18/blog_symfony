@@ -4,8 +4,6 @@ namespace Valiknet\Blog\PostsBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
@@ -16,9 +14,8 @@ use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 class PostController extends Controller
 {
     /**
-     * @Route("/", name="blog_home")
-     * @Method({"GET"})
      * @Template()
+     * @return array
      */
     public function indexAction()
     {
@@ -32,9 +29,10 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/add", name="post_add_get")
-     * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(Request $request)
     {
@@ -80,9 +78,10 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/{slug}/", name="view_post")
-     * @Method({"GET"})
      * @Template()
+     *
+     * @param $slug
+     * @return array
      */
     public function viewAction($slug)
     {
@@ -97,9 +96,11 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/{slug}/edit", name="edit_post")
-     * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @param $slug
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
      public function editAction($slug, Request $request)
      {
@@ -131,8 +132,8 @@ class PostController extends Controller
      }
 
     /**
-     * @Route("/post/{slug}/delete", name="delete_post")
-     * @Method({"DELETE"})
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response|static
      */
     public function deletePostAction($slug)
     {
