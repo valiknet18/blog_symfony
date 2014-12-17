@@ -31,7 +31,7 @@ class PostController extends Controller
     /**
      * @Template()
      *
-     * @param Request $request
+     * @param  Request                                                  $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(Request $request)
@@ -99,7 +99,7 @@ class PostController extends Controller
      * @Template()
      *
      * @param $slug
-     * @param Request $request
+     * @param  Request                                                  $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
      public function editAction($slug, Request $request)

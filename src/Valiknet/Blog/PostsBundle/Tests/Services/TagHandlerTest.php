@@ -28,7 +28,7 @@ class TagHandlerTest extends WebTestCase
                     "Laravel",
                     "Symfony",
                     "Yii"
-                ]
+                ],
             ]
         ];
     }

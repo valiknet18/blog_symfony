@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     /**
      * @param $slug
-     * @param Request $request
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function createCommentAction($slug, Request $request)
