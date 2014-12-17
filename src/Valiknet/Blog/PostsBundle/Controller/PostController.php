@@ -1,6 +1,7 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Controller;
 
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,13 +41,16 @@ class PostController extends Controller
 
         $post = new Post();
 
-        if ($request->isMethod('POST')) {
-            $tags = $request->request->get('addPost')['tag'];
-            $tags = $this->get('valiknet.blog.postsbundle.services.tag_handler')->convertTags($tags);
+        $form = $this->createForm(new AddPostType(), $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $tags = $form->get('tag')->getData();
 
             foreach ($tags as $tag) {
                 $tagRequest = $em->getRepository('ValiknetBlogPostsBundle:Tag')
-                                ->findByHashTag($tag);
+                    ->findByHashTag($tag);
 
                 if (!$tagRequest) {
                     $newTag = new Tag();
@@ -59,13 +63,7 @@ class PostController extends Controller
                     $post->addTag($tagRequest[0]);
                 }
             }
-        }
 
-        $form = $this->createForm(new AddPostType(), $post);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
             $em->persist($post);
             $em->flush();
 
