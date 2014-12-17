@@ -4,20 +4,16 @@ namespace Valiknet\Blog\PostsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Comment;
 use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 
-/**
- * @Route("/comment")
- */
 class CommentController extends Controller
 {
     /**
-     * @Route("/{slug}/add", name="comment_add")
-     * @Method({"POST"})
+     * @param $slug
+     * @param Request $request
+     * @return JsonResponse
      */
     public function createCommentAction($slug, Request $request)
     {
@@ -48,9 +44,10 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("/last/{count}", defaults={"count" = 10} ,requirements={"count" = "\d+"} , name="comment_last")
-     * @Method({"GET"})
      * @Template()
+     *
+     * @param $count
+     * @return array
      */
     public function lastAction($count)
     {
