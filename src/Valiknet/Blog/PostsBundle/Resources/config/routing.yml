@@ -2,6 +2,8 @@ blog_home:
   path: /
   methods: [GET]
   defaults: { _controller: ValiknetBlogPostsBundle:Post:index}
+  options:
+    expose: true
 
 post_add_get:
   path: /post/add
