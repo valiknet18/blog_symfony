@@ -32,7 +32,7 @@ class StringToArrayTransformer implements DataTransformerInterface
             $tags[] = $tag->getHashTag();
         }
 
-        return implode(", " , $tags);
+        return implode(", ", $tags);
     }
 
     public function reverseTransform($string)
@@ -49,4 +49,4 @@ class StringToArrayTransformer implements DataTransformerInterface
 
         return $tags;
     }
-} 
+}
