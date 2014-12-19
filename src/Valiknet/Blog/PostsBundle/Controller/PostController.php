@@ -110,8 +110,7 @@ class PostController extends Controller
              ->findOneBySlugPost($slug);
 
          if ($request->isMethod('POST')) {
-             $this->get('valiknet.blog.postsbundle.services.post_handler')
-                 ->removeTags($post);
+             $this->get('valiknet.blog.postsbundle.services.post_handler')->removeTags($post);
          }
 
          $form = $this->createForm(new EditPostType($em), $post);
@@ -119,6 +118,11 @@ class PostController extends Controller
          $form->handleRequest($request);
 
          if ($form->isValid()) {
+             $tags = $form->get('tag')->getData();
+
+             $this->get('valiknet.blog.postsbundle.services.post_handler')
+                 ->addTags($post, $tags, $em);
+
              $em->flush();
 
              return $this->redirect($this->get('router')->generate('blog_home'));

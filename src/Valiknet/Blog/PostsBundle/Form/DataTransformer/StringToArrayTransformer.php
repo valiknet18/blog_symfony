@@ -37,8 +37,8 @@ class StringToArrayTransformer implements DataTransformerInterface
 
     public function reverseTransform($string)
     {
-        if ($string === null) {
-            return array();
+        if ($string === null || is_array($string)) {
+            return (is_array($string)) ? $string : null;
         }
 
         $tags = explode(',', $string);
