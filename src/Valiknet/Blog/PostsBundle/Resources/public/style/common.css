@@ -46,6 +46,10 @@ html, body{
     background-color: #2AA4CF;
 }
 
+#webber > header ul li .active{
+    background-color: #2AA4CF;
+}
+
 #webber > #webber_content{
     clear: both;
     width: 70%;
