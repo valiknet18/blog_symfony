@@ -10,7 +10,9 @@ class AddCommentType extends AbstractType
     {
         $builder
             ->add('author')
-            ->add('text', 'textarea');
+            ->add('text', 'textarea', [
+                'max_length' => 255
+            ]);
     }
 
     public function getName()

@@ -1,0 +1,53 @@
+blog_home:
+  path: /
+  methods: [GET]
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:index}
+  options:
+    expose: true
+
+post_add_get:
+  path: /post/add
+  methods: [GET, POST]
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:add}
+
+view_post:
+  path: /post/{slug}/view
+  methods: [GET]
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:view}
+
+edit_post:
+  path: /post/{slug}/edit
+  methods: [GET, POST]
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:edit}
+
+delete_post:
+  path: /post/{slug}/delete
+  methods: [DELETE]
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:deletePost}
+
+tag_last_page:
+  path: /tag/last
+  methods: [GET]
+  defaults: { _controller: ValiknetBlogPostsBundle:Tag:last}
+
+tag_page:
+  path: /tag/{slug}/view
+  methods: [GET]
+  defaults: { _controller: ValiknetBlogPostsBundle:Tag:index}
+
+tag_top:
+  path: /tag/topTags
+  methods: [GET]
+  defaults: { _controller: ValiknetBlogPostsBundle:Tag:topTags}
+
+comment_add:
+  path: /comment/{slug}/add
+  methods: [POST]
+  defaults: { _controller: ValiknetBlogPostsBundle:Comment:createComment}
+
+comment_last:
+  path: /comment/last/{count}
+  defaults: { _controller: ValiknetBlogPostsBundle:Comment:last, count: 10}
+  requirements:
+    count: \d+
+  methods: [GET]

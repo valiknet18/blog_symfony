@@ -6,29 +6,25 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Valiknet\Blog\PostsBundle\Entity\Post;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\Blog\PostsBundle\Form\DataTransformer\StringToArrayTransformer;
 
 class AddPostType extends AbstractType
 {
-    public $tags;
-
-    public function __construct(array $tags)
-    {
-        $this->tags = $tags;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $tag = $this->tags;
+        $transformer = new StringToArrayTransformer();
 
         $builder
             ->add('title')
             ->add('text')
             ->add('author')
-            ->add('tag', 'entity', [
-                'class' => 'ValiknetBlogPostsBundle:Tag',
-                'choices' => new GetTagType($tag),
-                'multiple' => true
-            ]);
+            ->add(
+                $builder->create('tag', 'text', [
+                        "mapped" => false
+                    ]
+                )
+                    ->addModelTransformer($transformer)
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

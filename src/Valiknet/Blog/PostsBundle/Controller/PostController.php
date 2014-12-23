@@ -1,13 +1,13 @@
 <?php
 namespace Valiknet\Blog\PostsBundle\Controller;
 
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method as Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\Blog\PostsBundle\Entity\Post;
+use Valiknet\Blog\PostsBundle\Entity\Tag;
 use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\EditPostType;
 use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
@@ -15,9 +15,8 @@ use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
 class PostController extends Controller
 {
     /**
-     * @Route("/", name="blog_home")
-     * @Method({"GET"})
      * @Template()
+     * @return array
      */
     public function indexAction()
     {
@@ -31,26 +30,42 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/add", name="post_add_get")
-     * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @param  Request                                                  $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(Request $request)
     {
-        $tags = $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('ValiknetBlogPostsBundle:Tag')
-                    ->getHastTags();
+        $em = $this->getDoctrine()->getManager();
 
         $post = new Post();
 
-        $form = $this->createForm(new AddPostType($tags), $post);
+        $form = $this->createForm(new AddPostType(), $post);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($post);
-            $this->getDoctrine()->getManager()->flush();
+            $tags = $form->get('tag')->getData();
+
+            foreach ($tags as $tag) {
+                $tagRequest = $em->getRepository('ValiknetBlogPostsBundle:Tag')
+                    ->findByHashTag($tag);
+
+                if (!$tagRequest) {
+                    $newTag = new Tag();
+                    $newTag->setHashTag($tag);
+
+                    $post->addTag($newTag);
+
+                    $em->persist($newTag);
+                } else {
+                    $post->addTag($tagRequest[0]);
+                }
+            }
+
+            $em->persist($post);
+            $em->flush();
 
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
@@ -61,9 +76,10 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/{slug}/", name="view_post")
-     * @Method({"GET"})
      * @Template()
+     *
+     * @param $slug
+     * @return array
      */
     public function viewAction($slug)
     {
@@ -78,9 +94,11 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/post/{slug}/edit", name="edit_post")
-     * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @param $slug
+     * @param  Request                                                  $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
      public function editAction($slug, Request $request)
      {
@@ -92,8 +110,7 @@ class PostController extends Controller
              ->findOneBySlugPost($slug);
 
          if ($request->isMethod('POST')) {
-             $this->get('valiknet.blog.postsbundle.services.post_handler')
-                 ->removeTags($post);
+             $this->get('valiknet.blog.postsbundle.services.post_handler')->removeTags($post);
          }
 
          $form = $this->createForm(new EditPostType($em), $post);
@@ -101,6 +118,11 @@ class PostController extends Controller
          $form->handleRequest($request);
 
          if ($form->isValid()) {
+             $tags = $form->get('tag')->getData();
+
+             $this->get('valiknet.blog.postsbundle.services.post_handler')
+                 ->addTags($post, $tags, $em);
+
              $em->flush();
 
              return $this->redirect($this->get('router')->generate('blog_home'));
@@ -112,8 +134,8 @@ class PostController extends Controller
      }
 
     /**
-     * @Route("/post/{slug}/delete", name="delete_post")
-     * @Method({"DELETE"})
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response|static
      */
     public function deletePostAction($slug)
     {

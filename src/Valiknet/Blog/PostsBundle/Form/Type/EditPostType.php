@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\Blog\PostsBundle\Form\DataTransformer\StringToArrayTransformer;
 
 class EditPostType extends AbstractType
 {
@@ -17,22 +18,19 @@ class EditPostType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $selected = array();
-
-        foreach ($options['data']->getTag() as $key => $value) {
-            $selected[] = $this->em->getReference('ValiknetBlogPostsBundle:Tag', $value->getId());
-        }
+        $transformer = new StringToArrayTransformer($this->em, $builder->getData());
 
         $builder
             ->add('title')
             ->add('text')
             ->add('author')
-            ->add('tag', 'entity', [
-                'class' => 'ValiknetBlogPostsBundle:Tag',
-                'property' => 'hashTag',
-                'data' => $selected,
-                'multiple' => true
-            ]);
+            ->add(
+                $builder->create('tag', 'text', [
+                    'mapped' => false
+                ])
+//                ->addModelTransformer($transformer)
+                ->addViewTransformer($transformer)
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

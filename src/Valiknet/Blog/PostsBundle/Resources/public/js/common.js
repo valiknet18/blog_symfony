@@ -46,6 +46,18 @@ $(document).on('click', '#delete_post', function(e){
         url: $(this).attr('href'),
         type: 'DELETE'
     }).done(function(data, status){
-        document.location.href = "app_dev.php/";
+        document.location.href = Routing.generate('blog_home');
     });
+});
+
+$(document).on('keydown', '#addPost_tag', function(){
+    var value = $(this).val()
+    var result = value.split(",");
+
+    var li = "<li>Cписок добавлених категорій</li>";
+    for (var i = 0; i < result.length; i++) {
+        li += "<li>" + result[i] + "</li>";
+    }
+
+    $('#list_tag').html(li);
 });

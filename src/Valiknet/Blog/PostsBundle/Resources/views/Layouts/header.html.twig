@@ -1,7 +1,10 @@
+{% set currentPath = path(app.request.attributes.get('_route'),
+app.request.attributes.get('_route_params')) %}
+
 <ul>
     <li>
         <a href="{{ path('blog_home') }}">
-            <div class="nav-link">
+            <div class="nav-link {% if currentPath == "/" %} active {% endif %}">
                 Home Blog
             </div>
         </a>
@@ -9,7 +12,7 @@
 
     <li>
         <a href="{{ path('comment_last') }}">
-            <div class="nav-link">
+            <div class="nav-link {% if "/comment/last" in currentPath %} active {% endif %}">
                 Останні комментарі
             </div>
         </a>
@@ -17,7 +20,7 @@
 
     <li>
         <a href="{{ path('tag_last_page') }}">
-            <div class="nav-link">
+            <div class="nav-link {% if "/tag/last" in currentPath %} active {% endif %}">
                 Останні теги
             </div>
         </a>
@@ -27,16 +30,8 @@
 <ul id="nav_create_list">
     <li>
         <a href="{{ path('post_add_get') }}">
-            <div class="nav-link">
+            <div class="nav-link {% if "/post/add" in currentPath %} active {% endif %}">
                 Створити статтю
-            </div>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ path('tag_add_page') }}">
-            <div class="nav-link">
-                Створити тег
             </div>
         </a>
     </li>
