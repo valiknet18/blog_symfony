@@ -36,7 +36,7 @@ comments:
     comment_text: Text
     comment_save_button: Create
     comment_created_at: Created At
-    comment_post: Article
+    comment_post: Post
 
 another:
     list_top_tags_on_main_page: List top tags
