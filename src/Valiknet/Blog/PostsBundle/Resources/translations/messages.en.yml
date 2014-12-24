@@ -1,0 +1,34 @@
+title:
+    main_page: Main page
+
+navigator:
+    last_comments: Last comments
+    last_tags: Last tags
+    language: Language
+    create_post: Create post
+
+post:
+    post_created_at: Created at
+    post_updated_at: Updated at
+    post_author: Author
+    post_comments_count: Comments count
+    post_tags: Tags
+    post_edit_message: Edit
+    post_delete_message: Delete
+    post_list_added_tags: List added tags
+    post_create_title: Create post
+
+comments:
+    comments_name: Comments
+    comments_no_create: Currently, this post is not has comments
+    create_new_comment_message: Create new comment
+    comment_author: Author
+    comment_text: Text
+    comment_save_button: Create
+    comment_created_at: Created At
+    comment_post: Article
+
+another:
+    list_top_tags_on_main_page: List top tags
+    ten_last_comments: 10 last comments
+    list_last_tags: 10 last tags

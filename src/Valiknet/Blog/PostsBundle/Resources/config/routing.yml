@@ -1,7 +1,7 @@
 blog_home:
   path: /{_locale}/
   methods: [GET]
-  defaults: { _controller: ValiknetBlogPostsBundle:Post:index, _locale: ua}
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:index, _locale: "ua"}
   options:
     expose: true
 
