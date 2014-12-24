@@ -13,7 +13,7 @@ app.request.attributes.get('_route_params')) %}
     <li>
         <a href="{{ path('comment_last') }}">
             <div class="nav-link {% if "/comment/last" in currentPath %} active {% endif %}">
-                Останні комментарі
+                {{ "navigator.last_tags"|trans() }}
             </div>
         </a>
     </li>
@@ -22,6 +22,33 @@ app.request.attributes.get('_route_params')) %}
         <a href="{{ path('tag_last_page') }}">
             <div class="nav-link {% if "/tag/last" in currentPath %} active {% endif %}">
                 Останні теги
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul id="nav_language_list">
+    <li>
+        <div>Доступні мови:</div>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'en'}) }}">
+            <div class="nav-link {% if "/en/" in currentPath %} active {% endif %}">
+                en
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'ua'})  }}">
+            <div class="nav-link {% if "/ua/" in currentPath %} active {% endif %}">
+                ua
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'ru'})  }}">
+            <div class="nav-link {% if "/ru/" in currentPath %} active {% endif %}">
+                ru
             </div>
         </a>
     </li>

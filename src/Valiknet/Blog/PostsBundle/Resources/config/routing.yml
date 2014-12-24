@@ -1,22 +1,22 @@
 blog_home:
-  path: /
+  path: /{_locale}/
   methods: [GET]
-  defaults: { _controller: ValiknetBlogPostsBundle:Post:index}
+  defaults: { _controller: ValiknetBlogPostsBundle:Post:index, _locale: ua}
   options:
     expose: true
 
 post_add_get:
-  path: /post/add
+  path: /{_locale}/post/add
   methods: [GET, POST]
   defaults: { _controller: ValiknetBlogPostsBundle:Post:add}
 
 view_post:
-  path: /post/{slug}/view
+  path: /{_locale}/post/{slug}/view
   methods: [GET]
   defaults: { _controller: ValiknetBlogPostsBundle:Post:view}
 
 edit_post:
-  path: /post/{slug}/edit
+  path: /{_locale}/post/{slug}/edit
   methods: [GET, POST]
   defaults: { _controller: ValiknetBlogPostsBundle:Post:edit}
 
@@ -26,12 +26,12 @@ delete_post:
   defaults: { _controller: ValiknetBlogPostsBundle:Post:deletePost}
 
 tag_last_page:
-  path: /tag/last
+  path: /{_locale}/tag/last
   methods: [GET]
   defaults: { _controller: ValiknetBlogPostsBundle:Tag:last}
 
 tag_page:
-  path: /tag/{slug}/view
+  path: /{_locale}/tag/{slug}/view
   methods: [GET]
   defaults: { _controller: ValiknetBlogPostsBundle:Tag:index}
 
@@ -46,7 +46,7 @@ comment_add:
   defaults: { _controller: ValiknetBlogPostsBundle:Comment:createComment}
 
 comment_last:
-  path: /comment/last/{count}
+  path: /{_locale}/comment/last/{count}
   defaults: { _controller: ValiknetBlogPostsBundle:Comment:last, count: 10}
   requirements:
     count: \d+
