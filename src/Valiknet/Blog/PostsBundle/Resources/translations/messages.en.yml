@@ -1,5 +1,9 @@
 title:
     main_page: Main page
+    last_comments: Last comments
+    last_tags: Last tags
+    create_post: Create post
+    list_posts_on_tag: List posts on tag
 
 navigator:
     last_comments: Last comments
