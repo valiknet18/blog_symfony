@@ -11,7 +11,7 @@
 {% block content %}
     <div id="last_tag">
         <h3>
-            {{ tags|length }} {{ "another.last_tags"|trans() }}
+            {{ tags|length }} {{ "another.last_tags"|transchoice(tags|length) }}
         </h3>
         <ul>
             {% for tag in tags %}

@@ -11,7 +11,7 @@
 {% block content %}
     <div class="comment-article">
         <h3>
-            {{ comments|length }} {{ "another.last_comments"|trans() }}
+            {{ comments|length }} {{ "another.last_comments"|transchoice(comments|length) }}
         </h3>
         <ul>
             {% for comment in comments %}
