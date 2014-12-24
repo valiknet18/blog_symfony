@@ -10,7 +10,6 @@ class TagRepository extends EntityRepository
         $tags = $this->getEntityManager()->getRepository('ValiknetBlogPostsBundle:Tag')
             ->createQueryBuilder('t')
             ->groupBy('t.hashTag')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult();
 
@@ -21,6 +20,8 @@ class TagRepository extends EntityRepository
 
             return (COUNT($a->getPost()) > COUNT($b->getPost())) ? -1 : 1;
         });
+
+        $tags = array_slice($tags, 0, 10);
 
         return $tags;
     }

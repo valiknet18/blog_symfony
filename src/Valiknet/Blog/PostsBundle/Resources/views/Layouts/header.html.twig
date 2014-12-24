@@ -4,7 +4,7 @@ app.request.attributes.get('_route_params')) %}
 <ul>
     <li>
         <a href="{{ path('blog_home') }}">
-            <div class="nav-link {% if currentPath == "/" or currentPath == "/en/" or currentPath == "/ru/" or currentPath == "/ua/" %} active {% endif %}">
+            <div class="nav-link {% if currentPath == "/" or currentPath == "/en" or currentPath == "/ru" or currentPath == "/ua" %} active {% endif %}">
                 Home Blog
             </div>
         </a>
@@ -33,21 +33,21 @@ app.request.attributes.get('_route_params')) %}
     </li>
     <li>
         <a href="{{ path('blog_home', {'_locale' : 'en'}) }}" title="English">
-            <div class="nav-link {% if "/en/" in currentPath %} active {% endif %}">
+            <div class="nav-link {% if "/en" in currentPath %} active {% endif %}">
                 en
             </div>
         </a>
     </li>
     <li>
         <a href="{{ path('blog_home', {'_locale' : 'ua'})  }}" title="Українська">
-            <div class="nav-link {% if "/ua/" in currentPath %} active {% endif %}">
+            <div class="nav-link {% if "/ua" in currentPath or "/" == currentPath %} active {% endif %}">
                 ua
             </div>
         </a>
     </li>
     <li>
         <a href="{{ path('blog_home', {'_locale' : 'ru'})  }}" title="Русский">
-            <div class="nav-link {% if "/ru/" in currentPath %} active {% endif %}">
+            <div class="nav-link {% if "/ru" in currentPath %} active {% endif %}">
                 ru
             </div>
         </a>
