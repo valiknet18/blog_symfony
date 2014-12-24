@@ -9,7 +9,7 @@ title:
 navigator:
     last_comments: Последние комментарии
     last_tags: Последние теги
-    language: Языки
+    language: Доступные языки
     create_post: Создать пост
 
 post:
@@ -22,15 +22,15 @@ post:
     post_delete_message: Удалить
     post_list_added_tags: Список добавленных тегов
     post_create_title: Создать пост
-    post_error_message: На данный момент не добавлено ни одного поста
-    post_error_on_tag: На данный момент в этой категории нету ни одного поста
+    post_error_message: Извините, в данный момент не добавлено ни одного поста
+    post_error_on_tag: Извините, в данный момент в этой категории нету ни одного поста
     post_create_button: Создать пост
     post_edit_title: Редактировать пост
     post_button_edit_title: Обновить поста
 
 comments:
     comments_name: Комментарии
-    comments_no_create: На данный момент, в этом посте нету ни одного комментария
+    comments_no_create: Извините, в данный момент, в этом посте нету ни одного комментария
     create_new_comment_message: Создания нового комментария
     comment_author: Автор
     comment_text: Текст
@@ -44,4 +44,4 @@ another:
     last_tags: последних тегов
 
 tags:
-    tags_error_message: На данный момент в блоге нету ни одного комментария
+    tags_error_message: Извините,в данный момент в блоге нету ни одного комментария

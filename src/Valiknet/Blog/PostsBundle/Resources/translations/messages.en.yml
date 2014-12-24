@@ -9,7 +9,7 @@ title:
 navigator:
     last_comments: Last comments
     last_tags: Last tags
-    language: Language
+    language: Languages
     create_post: Create post
 
 post:
@@ -22,15 +22,15 @@ post:
     post_delete_message: Delete
     post_list_added_tags: List added tags
     post_create_title: Create post
-    post_error_message: Currently, blog is empty
-    post_error_on_tag: Currenty, post with this tag not isset
+    post_error_message: Sorry, currently, blog is empty
+    post_error_on_tag: Sorry, currenty, post with this tag not isset
     post_create_button: Create post
     post_edit_title: Edit post
     post_button_edit_title: Update post
 
 comments:
     comments_name: Comments
-    comments_no_create: Currently, this post is not has comments
+    comments_no_create: Sorry, currently, this post is not has comments
     create_new_comment_message: Create new comment
     comment_author: Author
     comment_text: Text
@@ -44,5 +44,4 @@ another:
     last_tags: last tags
 
 tags:
-    tags_error_message: Currently, blog not has tag
-
+    tags_error_message: Sorry, currently, blog not has tag
