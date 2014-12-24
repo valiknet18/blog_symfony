@@ -54,7 +54,7 @@ $(document).on('keydown', '#addPost_tag', function(){
     var value = $(this).val()
     var result = value.split(",");
 
-    var li = "<li>Cписок добавлених категорій</li>";
+    var li = "";
     for (var i = 0; i < result.length; i++) {
         li += "<li>" + result[i] + "</li>";
     }

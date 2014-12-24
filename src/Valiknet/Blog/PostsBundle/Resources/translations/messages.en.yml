@@ -4,6 +4,7 @@ title:
     last_tags: Last tags
     create_post: Create post
     list_posts_on_tag: List posts on tag
+    edit_post: Edit post
 
 navigator:
     last_comments: Last comments
@@ -21,6 +22,11 @@ post:
     post_delete_message: Delete
     post_list_added_tags: List added tags
     post_create_title: Create post
+    post_error_message: Currently, blog is empty
+    post_error_on_tag: Currenty, post with this tag not isset
+    post_create_button: Create post
+    post_edit_title: Edit post
+    post_button_edit_title: Update post
 
 comments:
     comments_name: Comments
@@ -34,5 +40,9 @@ comments:
 
 another:
     list_top_tags_on_main_page: List top tags
-    ten_last_comments: 10 last comments
-    list_last_tags: 10 last tags
+    last_comments: last comments
+    last_tags: last tags
+
+tags:
+    tags_error_message: Currently, blog not has tag
+

@@ -1,7 +1,7 @@
 {% extends 'ValiknetBlogPostsBundle:Layouts:main.html.twig' %}
 
 {% block title %}
-    Створення статі
+    {{ "title.create_post"|trans() }}
 {% endblock %}
 
 {% block styles %}
@@ -11,7 +11,7 @@
 {% block content %}
     <form role="form" method="POST" id="create_post">
         <fieldset>
-            <legend>Створення статі</legend>
+            <legend>{{ "post.post_create_title"|trans() }}</legend>
             <div>
                 {{ form_label(form.title) }}
                 {{ form_widget(form.title) }}
@@ -35,15 +35,15 @@
                 {{ form_widget(form.tag) }}
                 <div id="clear"></div>
 
+                <h3>{{ "post.post_list_added_tags"|trans() }}</h3>
                 <ul id="list_tag">
-                    <li>Cписок добавлених категорій</li>
                 </ul>
 
                 {{ form_rest(form) }}
             </div>
 
             <div>
-                <input type="submit" value="Створити статтю">
+                <input type="submit" value="{{ "post.post_create_button"|trans() }}">
             </div>
         </fieldset>
     </form>

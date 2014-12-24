@@ -4,7 +4,7 @@ app.request.attributes.get('_route_params')) %}
 <ul>
     <li>
         <a href="{{ path('blog_home') }}">
-            <div class="nav-link {% if currentPath == "/" %} active {% endif %}">
+            <div class="nav-link {% if currentPath == "/" or currentPath == "/en/" or currentPath == "/ru/" or currentPath == "/ua/" %} active {% endif %}">
                 Home Blog
             </div>
         </a>
@@ -29,7 +29,7 @@ app.request.attributes.get('_route_params')) %}
 
 <ul id="nav_language_list">
     <li>
-        <div>Доступні мови:</div>
+        <div>{{ "navigator.language"|trans() }}:</div>
     </li>
     <li>
         <a href="{{ path('blog_home', {'_locale' : 'en'}) }}" title="English">
@@ -58,7 +58,7 @@ app.request.attributes.get('_route_params')) %}
     <li>
         <a href="{{ path('post_add_get') }}">
             <div class="nav-link {% if "/post/add" in currentPath %} active {% endif %}">
-                Створити статтю
+                {{ "navigator.create_post"|trans() }}
             </div>
         </a>
     </li>
