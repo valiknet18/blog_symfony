@@ -18,11 +18,18 @@ class PostController extends Controller
      * @Template()
      * @return array
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
+
+        $paginator  = $this->get('knp_paginator');
+        $posts = $paginator->paginate(
+            $posts,
+            $request->query->get('page', 1),
+            3
+        );
 
         return array(
             "posts" => $posts,
