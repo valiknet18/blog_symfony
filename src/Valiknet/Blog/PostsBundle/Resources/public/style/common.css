@@ -29,7 +29,17 @@ html, body{
 
 #webber > header #nav_create_list{
     margin: 0;
-    margin-left: 65%;
+    margin-left: 80%;
+}
+
+#webber > header #nav_language_list{
+    margin-left: 45%;
+}
+
+#webber > header #nav_language_list li div{
+    height: 35px;
+    padding: 15px 20px 0px 20px;
+    color: #ffffff;
 }
 
 #webber > header ul li a{
@@ -185,7 +195,21 @@ html, body{
     width: 300px;
     height: 50px;
 }
+
 #webber #webber_content #content form div label{
     float: left;
 }
 
+#webber #webber_content #content #left_bar #pagination_webber .pagination{
+    width: 150px;
+    margin: 0px auto;
+}
+
+#webber #webber_content #content #left_bar #pagination_webber .pagination span a{
+    color: #2288bb;
+    text-decoration: none;
+}
+
+#webber #webber_content #content #left_bar #pagination_webber .pagination span a:hover{
+    color: #000000;
+}

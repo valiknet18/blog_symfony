@@ -4,7 +4,7 @@ app.request.attributes.get('_route_params')) %}
 <ul>
     <li>
         <a href="{{ path('blog_home') }}">
-            <div class="nav-link {% if currentPath == "/" %} active {% endif %}">
+            <div class="nav-link {% if currentPath == "/" or currentPath == "/en" or currentPath == "/ru" or currentPath == "/ua" %} active {% endif %}">
                 Home Blog
             </div>
         </a>
@@ -13,7 +13,7 @@ app.request.attributes.get('_route_params')) %}
     <li>
         <a href="{{ path('comment_last') }}">
             <div class="nav-link {% if "/comment/last" in currentPath %} active {% endif %}">
-                Останні комментарі
+                {{ "navigator.last_comments"|trans() }}
             </div>
         </a>
     </li>
@@ -21,7 +21,34 @@ app.request.attributes.get('_route_params')) %}
     <li>
         <a href="{{ path('tag_last_page') }}">
             <div class="nav-link {% if "/tag/last" in currentPath %} active {% endif %}">
-                Останні теги
+                {{ "navigator.last_tags"|trans() }}
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul id="nav_language_list">
+    <li>
+        <div>{{ "navigator.language"|trans() }}:</div>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'en'}) }}" title="English">
+            <div class="nav-link {% if "/en" in currentPath %} active {% endif %}">
+                en
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'ua'})  }}" title="Українська">
+            <div class="nav-link {% if "/ua" in currentPath or "/" == currentPath %} active {% endif %}">
+                ua
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('blog_home', {'_locale' : 'ru'})  }}" title="Русский">
+            <div class="nav-link {% if "/ru" in currentPath %} active {% endif %}">
+                ru
             </div>
         </a>
     </li>
@@ -31,7 +58,7 @@ app.request.attributes.get('_route_params')) %}
     <li>
         <a href="{{ path('post_add_get') }}">
             <div class="nav-link {% if "/post/add" in currentPath %} active {% endif %}">
-                Створити статтю
+                {{ "navigator.create_post"|trans() }}
             </div>
         </a>
     </li>

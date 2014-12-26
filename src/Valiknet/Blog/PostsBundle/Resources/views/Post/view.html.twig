@@ -11,8 +11,8 @@
 {% block content %}
     <div class="webber-article">
         <div class="control-block">
-            <a href="{{ path('edit_post', {'slug':post.getSlugPost }) }}">Редагувати</a>
-            <a href="{{ path('delete_post', {'slug':post.getSlugPost }) }}" id="delete_post">Видалити</a>
+            <a href="{{ path('edit_post', {'slug':post.getSlugPost }) }}">{{ "post.post_edit_message"|trans() }}</a>
+            <a href="{{ path('delete_post', {'slug':post.getSlugPost }) }}" id="delete_post">{{ "post.post_delete_message"|trans() }}</a>
         </div>
 
         <div class="title">
@@ -20,15 +20,15 @@
         </div>
         <div class="info-block">
             <p>
-                Дата створення: <b>{{ post.createdAt|date("d.m.Y H:i:s") }}</b><br>
-                Дата останнього оновлення: <b>{{ post.updatedAt|date("d.m.Y H:i:s") }}</b><br>
-                Створено користувачем: <b>{{ post.author }}</b><br>
-                Кількість коментарів під записом: <b>{{ post.comment|length }}</b>
+                {{ "post.post_created_at"|trans() }}: <b>{{ post.createdAt|date("d.m.Y H:i:s") }}</b><br>
+                {{ "post.post_updated_at"|trans() }}: <b>{{ post.updatedAt|date("d.m.Y H:i:s") }}</b><br>
+                {{ "post.post_author"|trans() }}: <b>{{ post.author }}</b><br>
+                {{ "post.post_comments_count"|trans() }}: <b>{{ post.comment|length }}</b>
             </p>
         </div>
         <div class="tag-block">
             <p>
-                Теги:
+                {{ "post.post_tags"|trans() }}:
                 {% for tag in post.tag %}
                     <a href="{{ path('tag_page', {'slug': tag.hashSlug }) }}">{{ tag.hashTag|hashTag }}</a>
                 {% endfor %}
@@ -41,7 +41,7 @@
     </div>
     <div class="comment-article">
         <h3>
-            Коментарі:
+            {{ "comments.comments_name"|trans() }}:
         </h3>
         <ul id="category_list">
             {% for comment in post.comment|reverse %}
@@ -49,8 +49,8 @@
                     <div class="comment">
                         <div class="info-block">
                             <p>
-                                Додано користувачем: <b>{{ comment.author }}</b></br>
-                                Дата створення: <b>{{ comment.createdAt|date("d.m.Y H:i:s") }}</b>
+                                {{ "comments.comment_author"|trans() }}: <b>{{ comment.author }}</b></br>
+                                {{ "comments.comment_created_at"|trans() }}: <b>{{ comment.createdAt|date("d.m.Y H:i:s") }}</b>
                             </p>
                         </div>
 
@@ -63,14 +63,14 @@
                 </li>
             {% else %}
                 <li>
-                    <h3>На даний момент до цього запису не створено ні одного коментаря</h3>
+                    <h3>{{ "comments.comments_no_create"|trans() }}</h3>
                 </li>
             {% endfor %}
         </ul>
 
 
         <div>
-            <h3>Створення нового коментаря:</h3>
+            <h3>{{ "comments.create_new_comment_message"|trans() }}:</h3>
             <form id="comment_add" role="form" action="{{ path("comment_add", {"slug" : post.slugPost}) }}" method="POST">
                 <div>
                     {{ form_row(form.author) }}
@@ -84,7 +84,7 @@
                 {{ form_rest(form) }}
 
                 <div>
-                    <input type="submit" value="Додати коментар">
+                    <input type="submit" value="{{ "comments.comment_save_button"|trans() }}">
                 </div>
             </form>
         </div>
