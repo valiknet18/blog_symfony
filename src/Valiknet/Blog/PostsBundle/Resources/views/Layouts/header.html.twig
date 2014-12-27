@@ -32,21 +32,21 @@ app.request.attributes.get('_route_params')) %}
         <div>{{ "navigator.language"|trans() }}:</div>
     </li>
     <li>
-        <a href="{{ path('blog_home', {'_locale' : 'en'}) }}" title="English">
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({"_locale": "en"})) }}" title="English">
             <div class="nav-link {% if "/en" in currentPath %} active {% endif %}">
                 en
             </div>
         </a>
     </li>
     <li>
-        <a href="{{ path('blog_home', {'_locale' : 'ua'})  }}" title="Українська">
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({"_locale": "ua"})) }}" title="Українська">
             <div class="nav-link {% if "/ua" in currentPath or "/" == currentPath %} active {% endif %}">
                 ua
             </div>
         </a>
     </li>
     <li>
-        <a href="{{ path('blog_home', {'_locale' : 'ru'})  }}" title="Русский">
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({"_locale": "ru"})) }}" title="Русский">
             <div class="nav-link {% if "/ru" in currentPath %} active {% endif %}">
                 ru
             </div>
