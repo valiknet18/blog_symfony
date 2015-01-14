@@ -29,11 +29,11 @@ html, body{
 
 #webber > header #nav_create_list{
     margin: 0;
-    margin-left: 80%;
+    margin-left: 70%;
 }
 
 #webber > header #nav_language_list{
-    margin-left: 45%;
+    margin-left: 40%;
 }
 
 #webber > header #nav_language_list li div{
@@ -156,7 +156,7 @@ html, body{
     padding-top: 15px;
 }
 
-#clear{
+#clear, .clear{
     clear: both;
 }
 
@@ -171,7 +171,7 @@ html, body{
     margin-bottom: 30px;
 }
 
-#webber #webber_content #content form div input[type=text], #webber #webber_content #content form div textarea, #webber #webber_content #content form div select{
+#webber #webber_content #content form div input[type=text], #webber #webber_content #content form div input[type=email], #webber #webber_content #content form div input[type=password], #webber #webber_content #content form div textarea, #webber #webber_content #content form div select{
     width: 500px;
     float: right;
 }

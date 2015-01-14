@@ -55,11 +55,29 @@ app.request.attributes.get('_route_params')) %}
 </ul>
 
 <ul id="nav_create_list">
-    <li>
-        <a href="{{ path('post_add_get') }}">
-            <div class="nav-link {% if "/post/add" in currentPath %} active {% endif %}">
-                {{ "navigator.create_post"|trans() }}
-            </div>
-        </a>
-    </li>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li>
+            <a href="{{ path('post_add_get') }}">
+                <div class="nav-link {% if "/post/add" in currentPath %} active {% endif %}">
+                    {{ "navigator.create_post"|trans() }}
+                </div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ path('fos_user_security_logout') }}">
+                <div class="nav-link">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </div>
+            </a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ path('login_path') }}">
+                <div class="nav-link">
+                    {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                </div>
+            </a>
+        </li>
+    {% endif %}
 </ul>
