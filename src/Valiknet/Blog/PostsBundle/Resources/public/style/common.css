@@ -213,3 +213,7 @@ html, body{
 #webber #webber_content #content #left_bar #pagination_webber .pagination span a:hover{
     color: #000000;
 }
+
+#webber .logout-icon {
+    height: 25px;
+}

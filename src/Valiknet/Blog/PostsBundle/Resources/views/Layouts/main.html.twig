@@ -4,7 +4,7 @@
         <title>{% block title %}{% endblock %} | Home Blog</title>
 
         <link href="{{ asset('bundles/valiknetblogposts/style/common.css') }}" rel="stylesheet" />
-
+        <link rel="icon" type="image/x-icon" href="{{ asset('media/blog-icon.png') }}">
 
         <script src="{{ asset('bundles/valiknetblogposts/js/jquery.js') }}" ></script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -29,7 +29,7 @@
                 </div>
 
                 <footer>
-                    Copyright © 2014. Valik Grinevich
+                    Copyright © 2014 - {{ "now"|date('Y') }}. Valik Grinevich
                 </footer>
             </div>
         </div>

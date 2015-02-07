@@ -1,9 +1,17 @@
 {% extends "ValiknetBlogPostsBundle:Layouts:main.html.twig" %}
 
+{% block title %}
+    Авторизація
+{% endblock %}
+
 {% block content %}
     {% if error %}
         <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
     {% endif %}
+
+    <h3>
+        Авторизація
+    </h3>
 
     <form action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -21,6 +29,12 @@
         <div>
             <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        </div>
+
+        <div>
+            <p>
+                Якщо у вас ще немає аккаунту, ви можете його створити <a href="{{ path('registration_path') }}">тут</a>
+            </p>
         </div>
 
         <div>

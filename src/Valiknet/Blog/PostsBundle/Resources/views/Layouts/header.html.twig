@@ -65,9 +65,15 @@ app.request.attributes.get('_route_params')) %}
         </li>
 
         <li>
+            <div class="nav-link">
+                Nickname
+            </div>
+        </li>
+
+        <li>
             <a href="{{ path('fos_user_security_logout') }}">
                 <div class="nav-link">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    <img src="{{ asset('media/logout.png') }}" class='logout-icon'/>
                 </div>
             </a>
         </li>
