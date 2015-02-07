@@ -1,12 +1,12 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Form\Type;
+namespace Valiknet\BlogBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Valiknet\Blog\PostsBundle\Entity\Post;
-use Valiknet\Blog\PostsBundle\Entity\Tag;
-use Valiknet\Blog\PostsBundle\Form\DataTransformer\StringToArrayTransformer;
+use Valiknet\BlogBundle\Document\Post;
+use Valiknet\BlogBundle\Document\Tag;
+use Valiknet\BlogBundle\Form\DataTransformer\StringToArrayTransformer;
 
 class AddPostType extends AbstractType
 {
@@ -30,7 +30,7 @@ class AddPostType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Valiknet\Blog\PostsBundle\Entity\Post',
+            'data_class' => 'Valiknet\BlogBundle\Document\Post',
         ));
     }
 

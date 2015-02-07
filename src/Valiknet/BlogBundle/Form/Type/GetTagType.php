@@ -1,12 +1,12 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Form\Type;
+namespace Valiknet\BlogBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\BlogBundle\Document\Tag;
 
-class GetUsedTagType extends AbstractType
+class GetTagType extends AbstractType
 {
     public $tags;
 
@@ -31,7 +31,7 @@ class GetUsedTagType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Valiknet\Blog\PostsBundle\Entity\Tag',
+            'data_class' => 'Valiknet\BlogBundle\Document\Tag',
         ));
     }
 

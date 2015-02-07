@@ -1,7 +1,6 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Form\DataTransformer;
+namespace Valiknet\BlogBundle\Form\DataTransformer;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class StringToArrayTransformer implements DataTransformerInterface
@@ -9,7 +8,7 @@ class StringToArrayTransformer implements DataTransformerInterface
     private $em;
     private $data;
 
-    public function __construct(EntityManager $em = null, $data = null)
+    public function __construct($em = null, $data = null)
     {
         if ($em !== null) {
             $this->em = $em;
