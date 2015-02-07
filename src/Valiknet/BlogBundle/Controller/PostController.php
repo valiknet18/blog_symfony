@@ -1,18 +1,18 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Controller;
+namespace Valiknet\BlogBundle\Controller;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Valiknet\Blog\PostsBundle\Entity\Post;
-use Valiknet\Blog\PostsBundle\Entity\Tag;
-use Valiknet\Blog\PostsBundle\Form\Type\AddPostType;
-use Valiknet\Blog\PostsBundle\Form\Type\EditPostType;
-use Valiknet\Blog\PostsBundle\Form\Type\AddCommentType;
+use Valiknet\BlogBundle\BlogAbstractController;
+use Valiknet\BlogBundle\Document\Post;
+use Valiknet\BlogBundle\Document\Tag;
+use Valiknet\BlogBundle\Form\Type\AddCommentType;
+use Valiknet\BlogBundle\Form\Type\AddPostType;
+use Valiknet\BlogBundle\Form\Type\EditPostType;
 
-class PostController extends Controller
+class PostController extends BlogAbstractController
 {
     /**
      * @Template()
@@ -20,9 +20,9 @@ class PostController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $dm = $this->getMongoDbManager();
 
-        $posts = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
+        $posts = $dm->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
 
         $paginator  = $this->get('knp_paginator');
         $posts = $paginator->paginate(
@@ -44,7 +44,7 @@ class PostController extends Controller
      */
     public function addAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $dm = $this->getMongoDbManager();
 
         $post = new Post();
 
@@ -56,7 +56,7 @@ class PostController extends Controller
             $tags = $form->get('tag')->getData();
 
             foreach ($tags as $tag) {
-                $tagRequest = $em->getRepository('ValiknetBlogPostsBundle:Tag')
+                $tagRequest = $dm->getRepository('ValiknetBlogPostsBundle:Tag')
                     ->findByHashTag($tag);
 
                 if (!$tagRequest) {
@@ -65,14 +65,14 @@ class PostController extends Controller
 
                     $post->addTag($newTag);
 
-                    $em->persist($newTag);
+                    $dm->persist($newTag);
                 } else {
                     $post->addTag($tagRequest[0]);
                 }
             }
 
-            $em->persist($post);
-            $em->flush();
+            $dm->persist($post);
+            $dm->flush();
 
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
@@ -90,7 +90,7 @@ class PostController extends Controller
      */
     public function viewAction($slug)
     {
-        $post = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
+        $post = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
 
         $form = $this->createForm(new AddCommentType());
 
@@ -109,7 +109,7 @@ class PostController extends Controller
      */
      public function editAction($slug, Request $request)
      {
-         $em = $this->getDoctrine()->getManager();
+         $dm = $this->getMongoDbManager();
 
          $post = $this->getDoctrine()
              ->getManager()
@@ -120,7 +120,7 @@ class PostController extends Controller
              $this->get('valiknet.blog.postsbundle.services.post_handler')->removeTags($post);
          }
 
-         $form = $this->createForm(new EditPostType($em), $post);
+         $form = $this->createForm(new EditPostType($dm), $post);
 
          $form->handleRequest($request);
 
@@ -128,9 +128,9 @@ class PostController extends Controller
              $tags = $form->get('tag')->getData();
 
              $this->get('valiknet.blog.postsbundle.services.post_handler')
-                 ->addTags($post, $tags, $em);
+                 ->addTags($post, $tags, $dm);
 
-             $em->flush();
+             $dm->flush();
 
              return $this->redirect($this->get('router')->generate('blog_home'));
          }
@@ -146,14 +146,15 @@ class PostController extends Controller
      */
     public function deletePostAction($slug)
     {
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
+        $dm = $this->getMongoDbManager();
+
+        $post = $dm->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
 
         $this->get('valiknet.blog.postsbundle.services.post_handler')
-            ->removeTags($post);
+             ->removeTags($post);
 
-        $em->remove($post);
-        $em->flush();
+        $dm->remove($post);
+        $dm->flush();
 
         return JsonResponse::create(["code" => 200]);
     }

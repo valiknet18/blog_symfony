@@ -1,11 +1,11 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Controller;
+namespace Valiknet\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\BlogBundle\BlogAbstractController;
 
-class TagController extends Controller
+class TagController extends BlogAbstractController
 {
     /**
      * @Template()
@@ -13,7 +13,7 @@ class TagController extends Controller
      */
     public function lastAction()
     {
-        $tags = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag')->getLastTags(15);
+        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag')->getLastTags(15);
 
         return array(
             "tags" => $tags,
@@ -27,8 +27,8 @@ class TagController extends Controller
      */
     public function indexAction($slug)
     {
-        $em = $this->getDoctrine()->getRepository('ValiknetBlogPostsBundle:Tag');
-        $tag = $em->findOneByHashSlug($slug);
+        $dm = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag');
+        $tag = $dm->findOneByHashSlug($slug);
 
         return array(
             "tag" => $tag,
@@ -41,7 +41,7 @@ class TagController extends Controller
      */
     public function topTagsAction()
     {
-        $tags = $this->getDoctrine()->getManager()->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
+        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
 
         return [
             "tags" => $tags
