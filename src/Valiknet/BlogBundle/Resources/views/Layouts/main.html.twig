@@ -3,13 +3,13 @@
     <head>
         <title>{% block title %}{% endblock %} | Home Blog</title>
 
-        <link href="{{ asset('bundles/valiknetblogposts/style/common.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/valiknetblog/style/common.css') }}" rel="stylesheet" />
 
 
-        <script src="{{ asset('bundles/valiknetblogposts/js/jquery.js') }}" ></script>
+        <script src="{{ asset('bundles/valiknetblog/js/jquery.js') }}" ></script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        <script src="{{ asset('bundles/valiknetblogposts/js/common.js') }}" ></script>
+        <script src="{{ asset('bundles/valiknetblog/js/common.js') }}" ></script>
 
         {% block styles %}
         {% endblock %}
@@ -18,7 +18,7 @@
     <body>
         <div id="webber">
             <header>
-               {% include "ValiknetBlogPostsBundle:Layouts:header.html.twig" %}
+               {% include "ValiknetBlogBundle:Layouts:header.html.twig" %}
             </header>
 
             <div id="webber_content">
