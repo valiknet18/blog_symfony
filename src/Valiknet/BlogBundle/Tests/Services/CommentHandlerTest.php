@@ -1,5 +1,5 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Tests\Services;
+namespace Valiknet\BlogBundle\Tests\Services;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

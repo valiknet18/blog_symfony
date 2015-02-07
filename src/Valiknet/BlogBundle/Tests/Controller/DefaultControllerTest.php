@@ -1,6 +1,6 @@
 <?php
 
-namespace Valiknet\Blog\PostsBundle\Tests\Controller;
+namespace Valiknet\BlogBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
