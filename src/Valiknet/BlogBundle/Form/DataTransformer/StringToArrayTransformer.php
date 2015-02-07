@@ -22,7 +22,7 @@ class StringToArrayTransformer implements DataTransformerInterface
             return "";
         }
 
-        $post = $this->em->getRepository('ValiknetBlogPostsBundle:Post')
+        $post = $this->em->getRepository('ValiknetBlogBundle:Post')
                 ->findOneById($this->data->getId());
 
         $tags = [];

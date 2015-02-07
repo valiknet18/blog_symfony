@@ -17,6 +17,10 @@
         <service id="valiknet.blogbundle.services.comment_handler" class="Valiknet\BlogBundle\Services\CommentHandler">
             <argument type="service" id="request_stack" />
         </service>
-    </services>
 
+        <service id="doctrine_mongo_db_param_converter" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
+            <argument type="service" id="doctrine_mongodb" />
+            <tag name="request.param_converter" converter="doctrine.odm" />
+        </service>
+    </services>
 </container>
