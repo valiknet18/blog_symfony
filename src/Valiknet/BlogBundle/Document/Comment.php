@@ -51,13 +51,12 @@ class Comment
     /**
      * Set author
      *
-     * @param  string $author
+     * @param string $author
      * @return self
      */
     public function setAuthor($author)
     {
         $this->author = $author;
-
         return $this;
     }
 
@@ -74,13 +73,12 @@ class Comment
     /**
      * Set text
      *
-     * @param  string $text
+     * @param string $text
      * @return self
      */
     public function setText($text)
     {
         $this->text = $text;
-
         return $this;
     }
 
@@ -97,13 +95,12 @@ class Comment
     /**
      * Set createdAt
      *
-     * @param  date $createdAt
+     * @param date $createdAt
      * @return self
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -120,20 +117,19 @@ class Comment
     /**
      * Set post
      *
-     * @param  Valiknet\Blog\PostsBundle\Document\Post $post
+     * @param Valiknet\BlogBundle\Document\Post $post
      * @return self
      */
-    public function setPost(\Valiknet\Blog\PostsBundle\Document\Post $post)
+    public function setPost(\Valiknet\BlogBundle\Document\Post $post)
     {
         $this->post = $post;
-
         return $this;
     }
 
     /**
      * Get post
      *
-     * @return Valiknet\Blog\PostsBundle\Document\Post $post
+     * @return Valiknet\BlogBundle\Document\Post $post
      */
     public function getPost()
     {

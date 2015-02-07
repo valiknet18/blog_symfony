@@ -1,17 +1,21 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Repository;
+namespace Valiknet\BlogBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ODM\MongoDB\DocumentRepository;
 
-class TagRepository extends EntityRepository
+class TagRepository extends DocumentRepository
 {
     public function findTopTags()
     {
-        $tags = $this->getEntityManager()->getRepository('ValiknetBlogPostsBundle:Tag')
+        $tags = $this->getDocumentManager()->getRepository('ValiknetBlogBundle:Tag')
             ->createQueryBuilder('t')
-            ->groupBy('t.hashTag')
+            ->group(array(), array('t.hashTag' => 0))
             ->getQuery()
-            ->getResult();
+            ->execute();
+
+        if (count($tags) == 0) {
+            return 0;
+        }
 
         usort($tags, function ($a, $b) {
             if (COUNT($a->getPost()) == COUNT($b->getPost())) {
@@ -28,23 +32,23 @@ class TagRepository extends EntityRepository
 
     public function getLastTags($count)
     {
-        $tags = $this->getEntityManager()->getRepository('ValiknetBlogPostsBundle:Tag')
+        $tags = $this->getDocumentManager()->getRepository('ValiknetBlogBundle:Tag')
             ->createQueryBuilder('t')
-            ->orderBy('t.id', 'DESC')
-            ->setMaxResults($count)
+            ->sort('t.id', 'desc')
+            ->limit($count)
             ->getQuery()
-            ->getResult();
+            ->execute();
 
         return $tags;
     }
 
     public function getHastTags()
     {
-        return $this->getEntityManager()
-            ->getRepository('ValiknetBlogPostsBundle:Tag')
+        return $this->getDocumentManager()
+            ->getRepository('ValiknetBlogBundle:Tag')
             ->createQueryBuilder('t')
             ->select('t.hashTag')
             ->getQuery()
-            ->getResult();
+            ->execute();
     }
 }
