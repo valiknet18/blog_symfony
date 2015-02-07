@@ -1,7 +1,6 @@
 <?php
 namespace Valiknet\BlogBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\BlogBundle\BlogAbstractController;
 
@@ -9,6 +8,7 @@ class TagController extends BlogAbstractController
 {
     /**
      * @Template()
+     *
      * @return array
      */
     public function lastAction()
@@ -22,6 +22,7 @@ class TagController extends BlogAbstractController
 
     /**
      * @Template()
+     *
      * @param $slug
      * @return array
      */

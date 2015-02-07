@@ -71,7 +71,7 @@ class Post
         $this->comment = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -85,12 +85,13 @@ class Post
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return self
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -107,12 +108,13 @@ class Post
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string $text
      * @return self
      */
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -129,12 +131,13 @@ class Post
     /**
      * Set author
      *
-     * @param string $author
+     * @param  string $author
      * @return self
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -151,12 +154,13 @@ class Post
     /**
      * Set createdAt
      *
-     * @param date $createdAt
+     * @param  date $createdAt
      * @return self
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -173,12 +177,13 @@ class Post
     /**
      * Set updatedAt
      *
-     * @param date $updatedAt
+     * @param  date $updatedAt
      * @return self
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -195,12 +200,13 @@ class Post
     /**
      * Set deletedAt
      *
-     * @param date $deletedAt
+     * @param  date $deletedAt
      * @return self
      */
     public function setDeletedAt($deletedAt)
     {
         $this->deletedAt = $deletedAt;
+
         return $this;
     }
 
@@ -217,12 +223,13 @@ class Post
     /**
      * Set slugPost
      *
-     * @param string $slugPost
+     * @param  string $slugPost
      * @return self
      */
     public function setSlugPost($slugPost)
     {
         $this->slugPost = $slugPost;
+
         return $this;
     }
 

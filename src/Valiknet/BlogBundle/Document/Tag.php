@@ -36,7 +36,7 @@ class Tag
     {
         $this->post = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -50,12 +50,13 @@ class Tag
     /**
      * Set hashTag
      *
-     * @param string $hashTag
+     * @param  string $hashTag
      * @return self
      */
     public function setHashTag($hashTag)
     {
         $this->hashTag = $hashTag;
+
         return $this;
     }
 
@@ -72,12 +73,13 @@ class Tag
     /**
      * Set hashSlug
      *
-     * @param string $hashSlug
+     * @param  string $hashSlug
      * @return self
      */
     public function setHashSlug($hashSlug)
     {
         $this->hashSlug = $hashSlug;
+
         return $this;
     }
 

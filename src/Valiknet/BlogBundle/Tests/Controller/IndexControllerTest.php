@@ -43,7 +43,7 @@ class IndexControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', $lang);
 
-        $this->assertTrue($crawler->filter('html:contains(' . $someText . ')')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains('.$someText.')')->count() > 0);
     }
 
     public function provider2()
