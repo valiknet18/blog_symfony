@@ -1,9 +1,9 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Services;
+namespace Valiknet\BlogBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Valiknet\Blog\PostsBundle\Entity\Post;
-use Valiknet\Blog\PostsBundle\Entity\Tag;
+use Valiknet\BlogBundle\Document\Post;
+use Valiknet\BlogBundle\Document\Tag;
 
 class PostHandler
 {

@@ -6,12 +6,12 @@
  * Time: 17:40
  */
 
-namespace Valiknet\Blog\PostsBundle\Services;
+namespace Valiknet\BlogBundle\Services;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Valiknet\Blog\PostsBundle\Entity\Post;
+use Valiknet\BlogBundle\Document\Post;
 
 class CommentHandler
 {

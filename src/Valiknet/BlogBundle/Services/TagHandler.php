@@ -1,5 +1,5 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Services;
+namespace Valiknet\BlogBundle\Services;
 
 class TagHandler
 {

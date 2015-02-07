@@ -1,7 +1,7 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Twig;
+namespace Valiknet\BlogBundle\Twig;
 
-class ValiknetBlogExtension extends \Twig_Extension
+class ValiknetExtension extends \Twig_Extension
 {
     public function getFilters()
     {
@@ -17,6 +17,6 @@ class ValiknetBlogExtension extends \Twig_Extension
 
     public function getName()
     {
-        return "valiknet_blog_extension";
+        return "valiknet_extension";
     }
 }

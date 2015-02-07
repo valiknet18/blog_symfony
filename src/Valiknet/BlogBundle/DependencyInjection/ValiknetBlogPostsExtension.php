@@ -1,12 +1,12 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\DependencyInjection;
+namespace Valiknet\BlogBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-class ValiknetBlogPostsExtension extends Extension
+class ValiknetBlogExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
