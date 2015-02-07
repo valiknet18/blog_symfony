@@ -5,12 +5,12 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Valiknet\BlogBundle\BlogAbstractController;
 use Valiknet\BlogBundle\Document\Post;
 use Valiknet\BlogBundle\Document\Tag;
 use Valiknet\BlogBundle\Form\Type\AddCommentType;
 use Valiknet\BlogBundle\Form\Type\AddPostType;
 use Valiknet\BlogBundle\Form\Type\EditPostType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class PostController extends BlogAbstractController
 {
@@ -22,7 +22,7 @@ class PostController extends BlogAbstractController
     {
         $dm = $this->getMongoDbManager();
 
-        $posts = $dm->getRepository('ValiknetBlogPostsBundle:Post')->findBy([], ['id' => 'DESC']);
+        $posts = $dm->getRepository('ValiknetBlogBundle:Post')->findBy([], ['id' => 'DESC']);
 
         $paginator  = $this->get('knp_paginator');
         $posts = $paginator->paginate(
@@ -56,7 +56,7 @@ class PostController extends BlogAbstractController
             $tags = $form->get('tag')->getData();
 
             foreach ($tags as $tag) {
-                $tagRequest = $dm->getRepository('ValiknetBlogPostsBundle:Tag')
+                $tagRequest = $dm->getRepository('ValiknetBlogBundle:Tag')
                     ->findByHashTag($tag);
 
                 if (!$tagRequest) {
@@ -85,13 +85,13 @@ class PostController extends BlogAbstractController
     /**
      * @Template()
      *
-     * @param $slug
+     * @param Post $post
      * @return array
+     *
+     * @ParamConverter("Post", options={"mapping": {"slugPost": "slug"}})
      */
-    public function viewAction($slug)
+    public function viewAction(Post $post)
     {
-        $post = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBy(['slugPost' => $slug]);
-
         $form = $this->createForm(new AddCommentType());
 
         return array(
@@ -113,11 +113,11 @@ class PostController extends BlogAbstractController
 
          $post = $this->getDoctrine()
              ->getManager()
-             ->getRepository('ValiknetBlogPostsBundle:Post')
+             ->getRepository('ValiknetBlogBundle:Post')
              ->findOneBySlugPost($slug);
 
          if ($request->isMethod('POST')) {
-             $this->get('valiknet.blog.postsbundle.services.post_handler')->removeTags($post);
+             $this->get('valiknet.blogbundle.services.post_handler')->removeTags($post);
          }
 
          $form = $this->createForm(new EditPostType($dm), $post);
@@ -127,7 +127,7 @@ class PostController extends BlogAbstractController
          if ($form->isValid()) {
              $tags = $form->get('tag')->getData();
 
-             $this->get('valiknet.blog.postsbundle.services.post_handler')
+             $this->get('valiknet.blogbundle.services.post_handler')
                  ->addTags($post, $tags, $dm);
 
              $dm->flush();
@@ -143,14 +143,14 @@ class PostController extends BlogAbstractController
     /**
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response|static
+     *
+     * @ParamConverter("Post", options={"mapping": {"slugPost": "slug"}})
      */
-    public function deletePostAction($slug)
+    public function deletePostAction(Post $post)
     {
         $dm = $this->getMongoDbManager();
 
-        $post = $dm->getRepository('ValiknetBlogPostsBundle:Post')->findBySlugPost($slug)[0];
-
-        $this->get('valiknet.blog.postsbundle.services.post_handler')
+        $this->get('valiknet.blogbundle.services.post_handler')
              ->removeTags($post);
 
         $dm->remove($post);

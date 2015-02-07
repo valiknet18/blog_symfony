@@ -4,7 +4,6 @@ namespace Valiknet\BlogBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Valiknet\BlogBundle\BlogAbstractController;
 use Valiknet\BlogBundle\Document\Comment;
 use Valiknet\BlogBundle\Form\Type\AddCommentType;
 
@@ -25,17 +24,17 @@ class CommentController extends BlogAbstractController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $comment->setPost($this->getDoctrine()->getManager()->getRepository('ValiknetBlogPostsBundle:Post')->findOneBySlugPost($slug));
+            $comment->setPost($this->getDoctrine()->getManager()->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug));
 
             $dm->persist($comment);
             $dm->flush();
 
             $post = $this->getDoctrine()
                     ->getManager()
-                    ->getRepository('ValiknetBlogPostsBundle:Post')
+                    ->getRepository('ValiknetBlogBundle:Post')
                     ->findBySlugPost($slug);
 
-            $comments = $this->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($post);
+            $comments = $this->get('valiknet.blogbundle.services.comment_handler')->handleAddComment($post);
 
             return new JsonResponse([$comments]);
         }
@@ -51,7 +50,7 @@ class CommentController extends BlogAbstractController
      */
     public function lastAction($count)
     {
-        $comments = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Comment')->findBy([], ['id' => 'DESC'], $count);
+        $comments = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Comment')->findBy([], ['id' => 'DESC'], $count);
 
         return array(
             "comments" => $comments,

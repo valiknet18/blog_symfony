@@ -2,7 +2,8 @@
 namespace Valiknet\BlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Valiknet\BlogBundle\BlogAbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Valiknet\BlogBundle\Document\Tag;
 
 class TagController extends BlogAbstractController
 {
@@ -13,7 +14,7 @@ class TagController extends BlogAbstractController
      */
     public function lastAction()
     {
-        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag')->getLastTags(15);
+        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->getLastTags(15);
 
         return array(
             "tags" => $tags,
@@ -23,14 +24,13 @@ class TagController extends BlogAbstractController
     /**
      * @Template()
      *
-     * @param $slug
+     * @param Tag $tag
      * @return array
+     *
+     * @ParamConverter("Tag", options={"mapping": {"hashSlug": "slug"}})
      */
-    public function indexAction($slug)
+    public function indexAction(Tag $tag)
     {
-        $dm = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag');
-        $tag = $dm->findOneByHashSlug($slug);
-
         return array(
             "tag" => $tag,
         );
@@ -42,7 +42,7 @@ class TagController extends BlogAbstractController
      */
     public function topTagsAction()
     {
-        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogPostsBundle:Tag')->findTopTags();
+        $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->findTopTags();
 
         return [
             "tags" => $tags

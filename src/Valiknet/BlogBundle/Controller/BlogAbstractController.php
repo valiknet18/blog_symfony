@@ -1,5 +1,5 @@
 <?php
-namespace Valiknet\BlogBundle;
+namespace Valiknet\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
