@@ -15,10 +15,10 @@ class PostHandler
         }
     }
 
-    public function addTags(Post $post, $tags, EntityManager $em)
+    public function addTags(Post $post, $tags, $dm)
     {
         foreach ($tags as $tag) {
-            $tagRequest = $em->getRepository('ValiknetBlogPostsBundle:Tag')
+            $tagRequest = $dm->getRepository('ValiknetBlogBundle:Tag')
                 ->findByHashTag($tag);
 
             if (!$tagRequest) {
@@ -27,7 +27,7 @@ class PostHandler
 
                 $post->addTag($newTag);
 
-                $em->persist($newTag);
+                $dm->persist($newTag);
             } else {
                 $post->addTag($tagRequest[0]);
             }

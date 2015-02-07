@@ -12,10 +12,10 @@ class CommentHandlerTest extends WebTestCase
         $container = $client->getContainer();
 
         $post = $container->get('doctrine')
-            ->getRepository('ValiknetBlogPostsBundle:Post')
+            ->getRepository('ValiknetBlogBundle:Post')
             ->findOneBySlugPost('lorem-ipsum-1521');
 
-        $result = $container->get('valiknet.blog.postsbundle.services.comment_handler')->handleAddComment($post);
+        $result = $container->get('valiknet.blogbundle.services.comment_handler')->handleAddComment($post);
 
         $this->assertInstanceOf('array', $result);
     }
