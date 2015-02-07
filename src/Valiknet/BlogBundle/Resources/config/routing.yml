@@ -30,26 +30,26 @@ delete_post:
 tag_last_page:
   path: /{_locale}/tag/last
   methods: [GET]
-  defaults: { _controller: ValiknetBlogPostsBundle:Tag:last}
+  defaults: { _controller: ValiknetBlogBundle:Tag:last}
 
 tag_page:
   path: /{_locale}/tag/{slug}/view
   methods: [GET]
-  defaults: { _controller: ValiknetBlogPostsBundle:Tag:index}
+  defaults: { _controller: ValiknetBlogBundle:Tag:index}
 
 tag_top:
   path: /tag/topTags
   methods: [GET]
-  defaults: { _controller: ValiknetBlogPostsBundle:Tag:topTags}
+  defaults: { _controller: ValiknetBlogBundle:Tag:topTags}
 
 comment_add:
   path: /comment/{slug}/add
   methods: [POST]
-  defaults: { _controller: ValiknetBlogPostsBundle:Comment:createComment}
+  defaults: { _controller: ValiknetBlogBundle:Comment:createComment}
 
 comment_last:
   path: /{_locale}/comment/last/{count}
-  defaults: { _controller: ValiknetBlogPostsBundle:Comment:last, count: 10}
+  defaults: { _controller: ValiknetBlogBundle:Comment:last, count: 10}
   requirements:
     count: \d+
   methods: [GET]
