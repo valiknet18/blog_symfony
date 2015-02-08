@@ -7,6 +7,11 @@
         >
 
     <services>
+        <service id="doctrine.odm.param_converter" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
+            <tag name="request.param_converter" converter="doctrine.odm" />
+            <argument type="service" id="doctrine_mongodb"/>
+        </service>
+
         <service id="valiknet.blogbundle.twig.valiknet_blog_extension" class="Valiknet\BlogBundle\Twig\ValiknetExtension">
             <tag name="twig.extension" />
         </service>
@@ -16,11 +21,6 @@
 
         <service id="valiknet.blogbundle.services.comment_handler" class="Valiknet\BlogBundle\Services\CommentHandler">
             <argument type="service" id="request_stack" />
-        </service>
-
-        <service id="doctrine_mongo_db_param_converter" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
-            <argument type="service" id="doctrine_mongodb" />
-            <tag name="request.param_converter" converter="doctrine.odm" />
         </service>
     </services>
 </container>

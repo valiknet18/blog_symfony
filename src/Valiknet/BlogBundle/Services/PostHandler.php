@@ -1,7 +1,6 @@
 <?php
 namespace Valiknet\BlogBundle\Services;
 
-use Doctrine\ORM\EntityManager;
 use Valiknet\BlogBundle\Document\Post;
 use Valiknet\BlogBundle\Document\Tag;
 

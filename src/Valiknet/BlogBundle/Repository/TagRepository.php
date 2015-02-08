@@ -7,11 +7,11 @@ class TagRepository extends DocumentRepository
 {
     public function findTopTags()
     {
-        $tags = $this->getDocumentManager()->getRepository('ValiknetBlogBundle:Tag')
-            ->createQueryBuilder('t')
-            ->group(array(), array('t.hashTag' => 0))
+        $tags = $this->getDocumentManager()
+            ->createQueryBuilder('Valiknet\BlogBundle\Document\Tag')
+//            ->group(array('hashTag' => 1), array('count' => 0))
             ->getQuery()
-            ->execute();
+            ->toArray();
 
         if (count($tags) == 0) {
             return 0;
