@@ -14,8 +14,6 @@ Valiknet\BlogBundle\Document\Tag:
 Valiknet\BlogBundle\Document\Comment:
   comments{1..300}:
     author: <userName()>
-    text: <realText>
+    text: <realText()>
     createdAt: <dateTimeBetween('-5 years', 'now')>
     post: @posts*
-
-
