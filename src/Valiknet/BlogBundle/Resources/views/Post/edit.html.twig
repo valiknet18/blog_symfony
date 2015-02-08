@@ -1,0 +1,45 @@
+{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+
+{% block title %}
+    {{ "title.edit_post"|trans() }}
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblog/style/post/editpost.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form role="form" method="POST">
+            <fieldset>
+                <legend>{{ "post.post_edit_title"|trans() }}</legend>
+
+                <div>
+                    {{ form_row(form.title) }}
+                    <div id="clear"></div>
+                </div>
+
+                <div>
+                    {{ form_row(form.text) }}
+                    <div id="clear"></div>
+                </div>
+
+                <div>
+                    {{ form_row(form.author) }}
+                    <div id="clear"></div>
+                </div>
+
+                <div>
+                    {{ form_row(form.tag) }}
+                    <div id="clear"></div>
+                </div>
+
+                {{ form_rest(form) }}
+
+                <div>
+                    <input type="submit" value="{{ "post.post_button_edit_title"|trans() }}">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

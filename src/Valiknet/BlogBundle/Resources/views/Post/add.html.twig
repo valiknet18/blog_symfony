@@ -1,0 +1,50 @@
+{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+
+{% block title %}
+    {{ "title.create_post"|trans() }}
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblog/style/post/createpost.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <form role="form" method="POST" id="create_post">
+        <fieldset>
+            <legend>{{ "post.post_create_title"|trans() }}</legend>
+            <div>
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                <div id="clear"></div>
+            </div>
+
+            <div>
+                {{ form_label(form.text) }}
+                {{ form_widget(form.text) }}
+                <div id="clear"></div>
+            </div>
+
+            <div>
+                {{ form_label(form.author) }}
+                {{ form_widget(form.author) }}
+                <div id="clear"></div>
+            </div>
+
+            <div>
+                {{ form_label(form.tag) }}
+                {{ form_widget(form.tag) }}
+                <div id="clear"></div>
+
+                <h3>{{ "post.post_list_added_tags"|trans() }}</h3>
+                <ul id="list_tag">
+                </ul>
+
+                {{ form_rest(form) }}
+            </div>
+
+            <div>
+                <input type="submit" value="{{ "post.post_create_button"|trans() }}">
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+Valiknet\BlogBundle\Document\Post:
+  posts{1..100}:
+    title: <word()>
+    text: <realText()>
+    author: <userName()>
+    createdAt: <dateTimeBetween('-5 years', 'now')>
+    tags: 5x @tags*
+
+
+Valiknet\BlogBundle\Document\Tag:
+  tags{1..50}:
+    hashTag: <word()>
+
+Valiknet\BlogBundle\Document\Comment:
+  comments{1..300}:
+    author: <userName()>
+    text: <realText()>
+    createdAt: <dateTimeBetween('-5 years', 'now')>
+    post: @posts*
