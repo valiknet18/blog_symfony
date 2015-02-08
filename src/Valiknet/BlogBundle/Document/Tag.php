@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Tag
  * @package Valiknet\Blog\PostsBundle\Document
  *
- * @ODM\Document(repositoryClass="Valiknet\Blog\PostsBundle\Repository\TagRepository2")
+ * @ODM\Document(repositoryClass="Valiknet\BlogBundle\Repository\TagRepository")
  */
 class Tag
 {
@@ -36,7 +36,7 @@ class Tag
     {
         $this->post = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -50,12 +50,13 @@ class Tag
     /**
      * Set hashTag
      *
-     * @param string $hashTag
+     * @param  string $hashTag
      * @return self
      */
     public function setHashTag($hashTag)
     {
         $this->hashTag = $hashTag;
+
         return $this;
     }
 
@@ -72,12 +73,13 @@ class Tag
     /**
      * Set hashSlug
      *
-     * @param string $hashSlug
+     * @param  string $hashSlug
      * @return self
      */
     public function setHashSlug($hashSlug)
     {
         $this->hashSlug = $hashSlug;
+
         return $this;
     }
 
@@ -94,9 +96,9 @@ class Tag
     /**
      * Add post
      *
-     * @param Valiknet\Blog\PostsBundle\Document\Post $post
+     * @param Valiknet\BlogBundle\Document\Post $post
      */
-    public function addPost(\Valiknet\Blog\PostsBundle\Document\Post $post)
+    public function addPost(\Valiknet\BlogBundle\Document\Post $post)
     {
         $this->post[] = $post;
     }
@@ -104,9 +106,9 @@ class Tag
     /**
      * Remove post
      *
-     * @param Valiknet\Blog\PostsBundle\Document\Post $post
+     * @param Valiknet\BlogBundle\Document\Post $post
      */
-    public function removePost(\Valiknet\Blog\PostsBundle\Document\Post $post)
+    public function removePost(\Valiknet\BlogBundle\Document\Post $post)
     {
         $this->post->removeElement($post);
     }

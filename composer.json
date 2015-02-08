@@ -17,7 +17,6 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
@@ -27,7 +26,9 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "tchwork/debug-bundle": "~1.4"
+        "tchwork/debug-bundle": "~1.4",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "hautelook/alice-bundle": "0.1.*"
     },
     "scripts": {
         "post-root-package-install": [
