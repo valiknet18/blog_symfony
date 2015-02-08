@@ -24,15 +24,13 @@ class CommentController extends BlogAbstractController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $comment->setPost($this->getDoctrine()->getManager()->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug));
+            $comment->setPost($dm->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug));
 
             $dm->persist($comment);
             $dm->flush();
 
-            $post = $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('ValiknetBlogBundle:Post')
-                    ->findBySlugPost($slug);
+            $post = $dm->getRepository('ValiknetBlogBundle:Post')
+                    ->findOneBySlugPost($slug);
 
             $comments = $this->get('valiknet.blogbundle.services.comment_handler')->handleAddComment($post);
 

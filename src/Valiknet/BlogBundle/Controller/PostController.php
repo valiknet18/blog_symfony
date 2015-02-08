@@ -113,9 +113,7 @@ class PostController extends BlogAbstractController
      {
          $dm = $this->getMongoDbManager();
 
-         $post = $this->getDoctrine()
-             ->getManager()
-             ->getRepository('ValiknetBlogBundle:Post')
+         $post = $dm->getRepository('ValiknetBlogBundle:Post')
              ->findOneBySlugPost($slug);
 
          if ($request->isMethod('POST')) {

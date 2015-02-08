@@ -15,6 +15,7 @@
                 <div class="title">
                     <a href="{{ path("view_post", {"slug" : post.slugPost}) }}">{{ post.title }}</a>
                 </div>
+
                 <div class="info-block">
                     <p>
                         {{ "post.post_created_at"|trans() }}: <b>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</b><br>
@@ -22,6 +23,7 @@
                         {{ "post.post_comments_count"|trans() }}: <b>{{ post.comment|length }}</b>
                     </p>
                 </div>
+
                 <div class="tag-block">
                     <p>
                         {{ "post.post_tags"|trans() }}:

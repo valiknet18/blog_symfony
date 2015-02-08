@@ -28,7 +28,7 @@ class EditPostType extends AbstractType
                 $builder->create('tag', 'text', [
                     'mapped' => false
                 ])
-//                ->addModelTransformer($transformer)
+                ->addModelTransformer($transformer)
                 ->addViewTransformer($transformer)
             );
     }

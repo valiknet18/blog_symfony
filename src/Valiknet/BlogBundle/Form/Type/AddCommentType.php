@@ -19,7 +19,7 @@ class AddCommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Valiknet\BlogBundle\Document\Post',
+            'data_class' => 'Valiknet\BlogBundle\Document\Comment',
         ));
     }
 

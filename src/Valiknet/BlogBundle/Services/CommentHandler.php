@@ -30,10 +30,10 @@ class CommentHandler
 
         $comments = array();
 
-        for ($i = 0; $i < count($post[0]->getComment()); $i++) {
-            $comments[$i]["author"] = $post[0]->getComment()[$i]->getAuthor();
-            $comments[$i]["text"] = substr($post[0]->getComment()[$i]->getText(), 0, 400);
-            $comments[$i]["createdAt"] = $post[0]->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
+        for ($i = 0; $i < count($post->getComment()); $i++) {
+            $comments[$i]["author"] = $post->getComment()[$i]->getAuthor();
+            $comments[$i]["text"] = substr($post->getComment()[$i]->getText(), 0, 400);
+            $comments[$i]["createdAt"] = $post->getComment()[$i]->getCreatedAt()->format("d.m.Y H:i:s");
         }
 
         return $comments;
