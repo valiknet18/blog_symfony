@@ -1,0 +1,27 @@
+{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+
+{% block title %}
+    Створення нової категорії
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ asset('bundles/valiknetblog/style/tag/add.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form role="form" method="POST">
+            <fieldset>
+                <div>
+                    {{ form_label(form.hashTag) }}
+                    {{ form_widget(form.hashTag) }}
+                </div>
+
+                {{ form_rest(form) }}
+                <div>
+                    <input type="submit" value="Створити тег">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

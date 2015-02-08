@@ -1,0 +1,53 @@
+{% extends "ValiknetBlogBundle:Layouts:main.html.twig" %}
+
+{% block title %}
+    {{ "title.main_page"|trans() }}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        Кількість постів на сайті: {{ countPosts }}
+    </h3>
+
+    <div id="left_bar">
+        {% for post in posts %}
+            <div class="webber-article">
+                <div class="title">
+                    <a href="{{ path("view_post", {"slug" : post.slugPost}) }}">{{ post.title }}</a>
+                </div>
+
+                <div class="info-block">
+                    <p>
+                        {{ "post.post_created_at"|trans() }}: <b>{{ post.createdAt.date|date("d.m.Y H:i:s") }}</b><br>
+                        {{ "post.post_author"|trans() }}: <b>{{ post.author }}</b><br>
+                        {{ "post.post_comments_count"|trans() }}: <b>{{ post.comment|length }}</b>
+                    </p>
+                </div>
+
+                <div class="tag-block">
+                    <p>
+                        {{ "post.post_tags"|trans() }}:
+                        {% for tag in post.tag %}
+                            <a href="{{ path('tag_page', {'slug': tag.hashSlug}) }}">{{ tag.hashTag|hashTag }}</a>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="text">
+                    <p>{{ post.text|slice(0,400) }}...</p>
+                </div>
+            </div>
+
+        {% else %}
+            <div id="warning_page">
+                <h3>{{ "post.post_error_message"|trans() }}</h3>
+            </div>
+        {% endfor %}
+        <div id="pagination_webber">
+            {{ knp_pagination_render(posts) }}
+        </div>
+    </div>
+
+    <div id="right_bar">
+        {{ render(controller('ValiknetBlogBundle:Tag:topTags')) }}
+    </div>
+{% endblock %}

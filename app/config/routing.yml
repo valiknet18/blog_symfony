@@ -17,6 +17,6 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 valiknet_blog_posts:
-    resource: "@ValiknetBlogPostsBundle/Resources/config/routing.yml"
+    resource: "@ValiknetBlogBundle/Resources/config/routing.yml"
     type:     yaml
     prefix:   /
