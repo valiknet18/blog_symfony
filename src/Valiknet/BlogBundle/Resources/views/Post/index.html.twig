@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block content %}
+    <h3>
+        Кількість постів на сайті: {{ countPosts }}
+    </h3>
+
     <div id="left_bar">
         {% for post in posts %}
             <div class="webber-article">

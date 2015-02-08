@@ -23,6 +23,8 @@ class PostController extends BlogAbstractController
 
         $posts = $dm->getRepository('ValiknetBlogBundle:Post')->findBy([], ['id' => 'DESC']);
 
+        $countPosts = count($posts);
+
         $paginator  = $this->get('knp_paginator');
         $posts = $paginator->paginate(
             $posts,
@@ -32,6 +34,7 @@ class PostController extends BlogAbstractController
 
         return array(
             "posts" => $posts,
+            "countPosts" => $countPosts,
         );
     }
 
