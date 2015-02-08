@@ -1,12 +1,15 @@
 <?php
 namespace Valiknet\BlogBundle\DataFixtures;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 
-class LoadPostData implements FixtureInterface
+class LoadPostData extends DataFixtureLoader
 {
-    public function load(ObjectManager $manager)
+    public function getFixtures()
     {
+        return [
+            __DIR__."/fixtures.yml"
+        ];
     }
 }
