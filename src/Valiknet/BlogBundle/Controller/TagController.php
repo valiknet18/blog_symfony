@@ -2,7 +2,6 @@
 namespace Valiknet\BlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Valiknet\BlogBundle\Document\Tag;
 
 class TagController extends BlogAbstractController
@@ -24,13 +23,13 @@ class TagController extends BlogAbstractController
     /**
      * @Template()
      *
-     * @param Tag $tag
+     * @param $slug
      * @return array
-     *
-     * @ParamConverter("Tag", options={"mapping": {"hashSlug": "slug"}})
      */
-    public function indexAction(Tag $tag)
+    public function indexAction($slug)
     {
+        $tag = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->findOneByHashSlug($slug);
+
         return array(
             "tag" => $tag,
         );

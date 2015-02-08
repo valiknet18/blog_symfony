@@ -10,7 +10,6 @@ use Valiknet\BlogBundle\Document\Tag;
 use Valiknet\BlogBundle\Form\Type\AddCommentType;
 use Valiknet\BlogBundle\Form\Type\AddPostType;
 use Valiknet\BlogBundle\Form\Type\EditPostType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class PostController extends BlogAbstractController
 {
@@ -85,13 +84,13 @@ class PostController extends BlogAbstractController
     /**
      * @Template()
      *
-     * @param Post $post
+     * @param $slug
      * @return array
-     *
-     * @ParamConverter("Post", options={"mapping": {"slugPost": "slug"}})
      */
-    public function viewAction(Post $post)
+    public function viewAction($slug)
     {
+        $post = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug);
+
         $form = $this->createForm(new AddCommentType());
 
         return array(
@@ -143,12 +142,12 @@ class PostController extends BlogAbstractController
     /**
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response|static
-     *
-     * @ParamConverter("Post", options={"mapping": {"slugPost": "slug"}})
      */
-    public function deletePostAction(Post $post)
+    public function deletePostAction($slug)
     {
         $dm = $this->getMongoDbManager();
+
+        $post = $dm->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug);
 
         $this->get('valiknet.blogbundle.services.post_handler')
              ->removeTags($post);
