@@ -1,5 +1,5 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Controller;
+namespace Valiknet\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;

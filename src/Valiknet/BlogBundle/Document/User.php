@@ -1,20 +1,17 @@
 <?php
-namespace Valiknet\Blog\PostsBundle\Entity;
+namespace Valiknet\BlogBundle\Document;
 
-use FOS\UserBundle\Entity\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Document\User as BaseUser;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ODM\Document()
  */
 class User extends BaseUser
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Id
      */
     protected $id;
 
@@ -26,7 +23,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -49,7 +46,7 @@ class User extends BaseUser
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -72,7 +69,7 @@ class User extends BaseUser
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -95,7 +92,7 @@ class User extends BaseUser
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
