@@ -7,7 +7,7 @@
 
 {% block content %}
     <h3>
-        Кількість постів: {{ tag.post|length     }}
+        Кількість постів з тегом {{ tag.hashTag }}: {{ tag.post|length     }}
     </h3>
     {% for post in tag.post|reverse %}
         <div class="webber-article">
