@@ -85,7 +85,7 @@ knp_paginator:
 fos_user:
     db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Valiknet\BlogBundle\Document\User
+    user_class: Valiknet\UserBundle\Document\User
 
 doctrine_mongodb:
     connections:
