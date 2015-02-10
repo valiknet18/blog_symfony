@@ -1,0 +1,48 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Авторизація{% endblock %}
+
+{% block fos_user_content %}
+<div>
+    <h3>Авторизація</h3>
+
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        <div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        </div>
+
+        {% if error %}
+            <div>
+                <h3><Помилка></h3>
+                <h5>{{ error|trans({}, 'FOSUserBundle') }}</h5>
+            </div>
+        {% endif %}
+
+        <div>
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+        </div>
+
+        <div>
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" id="password" name="_password" required="required" />
+        </div>
+
+        <div>
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+        </div>
+
+        <div>
+            <p>
+                Якщо ви не зареєстровані, ви можете це зробити <a href="{{ path('fos_user_registration_register') }}">тут</a>
+            </p>
+        </div>
+
+        <div>
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+    </form>
+</div>
+
+{% endblock fos_user_content %}

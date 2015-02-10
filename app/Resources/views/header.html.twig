@@ -79,7 +79,7 @@ app.request.attributes.get('_route_params')) %}
         </li>
     {% else %}
         <li>
-            <a href="{{ path('login_path') }}">
+            <a href="{{ path('fos_user_security_login') }}">
                 <div class="nav-link">
                     {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
                 </div>
