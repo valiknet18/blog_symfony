@@ -54,10 +54,10 @@ comment_last:
     count: \d+
   methods: [GET]
 
-registration_path:
-  path: /{_locale}/user/registration
-  defaults: { _controller: ValiknetBlogBundle:User:register }
-
-login_path:
-  path: /{_locale}/user/login
-  defaults: { _controller: ValiknetBlogBundle:User:login }
+#registration_path:
+#  path: /{_locale}/user/registration
+#  defaults: { _controller: ValiknetBlogBundle:User:register }
+#
+#login_path:
+#  path: /{_locale}/user/login
+#  defaults: { _controller: ValiknetBlogBundle:User:login }

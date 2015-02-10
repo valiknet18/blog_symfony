@@ -3,15 +3,14 @@ namespace Valiknet\UserBundle\Document;
 
 use FOS\UserBundle\Document\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ODM\Document()
+ * @ODM\Document
  */
 class User extends BaseUser
 {
     /**
-     * @ODM\Id
+     * @ODM\Id(strategy="auto")
      */
     protected $id;
 
@@ -23,79 +22,10 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer
+     * @return id $id
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     * @return User
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 }
