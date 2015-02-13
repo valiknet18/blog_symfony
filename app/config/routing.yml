@@ -24,3 +24,7 @@ valiknet_blog_posts:
     resource: "@ValiknetBlogBundle/Resources/config/routing.yml"
     type:     yaml
     prefix:   /
+
+valiknet_user:
+    resource: "@ValiknetUserBundle/Resources/config/routing.yml"
+    prefix: /{_locale}/account

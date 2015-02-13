@@ -1,0 +1,15 @@
+<div>
+    <ul>
+        <li>
+            <a href="{{ path("account_index_page", {"slug" : user.slug}) }}">Основна інформація</a>
+        </li>
+
+        <li>
+            <a href="{{ path("account_posts_page", {"slug" : user.slug}) }}">Статті</a>
+        </li>
+
+        <li>
+            <a href="{{ path("account_comments_page", {"slug" : user.slug}) }}">Комментарі</a>
+        </li>
+    </ul>
+</div>

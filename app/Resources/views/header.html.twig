@@ -65,9 +65,11 @@ app.request.attributes.get('_route_params')) %}
         </li>
 
         <li>
-            <div class="nav-link">
-                {{ user.username }}
-            </div>
+            <a href="{{ path("account_index_page", {"slug" : user.slug}) }}">
+                <div class="nav-link">
+                    {{ user.username }}
+                </div>
+            </a>
         </li>
 
         <li>

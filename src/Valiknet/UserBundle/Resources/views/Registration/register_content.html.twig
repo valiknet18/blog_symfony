@@ -6,6 +6,14 @@
 
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
         <div>
+            {{ form_row(form.firstName) }}
+        </div>
+
+        <div>
+            {{ form_row(form.lastName) }}
+        </div>
+
+        <div>
             {{ form_row(form.username) }}
         </div>
 
