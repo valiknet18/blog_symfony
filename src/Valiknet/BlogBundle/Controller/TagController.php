@@ -15,8 +15,11 @@ class TagController extends BlogAbstractController
     {
         $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->getLastTags(15);
 
+        $user = $this->getUser();
+
         return array(
             "tags" => $tags,
+            "user" => $user,
         );
     }
 
@@ -30,8 +33,11 @@ class TagController extends BlogAbstractController
     {
         $tag = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->findOneByHashSlug($slug);
 
+        $user = $this->getUser();
+
         return array(
             "tag" => $tag,
+            "user" => $user,
         );
     }
 
@@ -43,8 +49,11 @@ class TagController extends BlogAbstractController
     {
         $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->findTopTags();
 
+        $user = $this->getUser();
+
         return [
-            "tags" => $tags
+            "tags" => $tags,
+            "user" => $user
         ];
     }
 }

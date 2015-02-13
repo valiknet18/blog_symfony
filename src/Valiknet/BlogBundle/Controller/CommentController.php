@@ -50,8 +50,11 @@ class CommentController extends BlogAbstractController
     {
         $comments = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Comment')->findBy([], ['id' => 'DESC'], $count);
 
+        $user = $this->getUser();
+
         return array(
             "comments" => $comments,
+            "user" => $user,
         );
     }
 }
