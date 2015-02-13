@@ -48,6 +48,7 @@
                 <li>
                     <div class="comment">
                         <div class="info-block">
+                            {#{{ dump(comment.author) }}#}
                             <p>
                                 {{ "comments.comment_author"|trans() }}: <b>{{ comment.author }}</b></br>
                                 {{ "comments.comment_created_at"|trans() }}: <b>{{ comment.createdAt|date("d.m.Y H:i:s") }}</b>
@@ -72,10 +73,6 @@
         <div>
             <h3>{{ "comments.create_new_comment_message"|trans() }}:</h3>
             <form id="comment_add" role="form" action="{{ path("comment_add", {"slug" : post.slugPost}) }}" method="POST">
-                <div>
-                    {{ form_row(form.author) }}
-                </div>
-
                 <div class="text">
                     {{ form_row(form.text) }}
                     <div id="clear"></div>

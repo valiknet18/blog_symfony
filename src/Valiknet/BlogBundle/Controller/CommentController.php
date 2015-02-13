@@ -26,6 +26,8 @@ class CommentController extends BlogAbstractController
         if ($form->isValid()) {
             $comment->setPost($dm->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug));
 
+            $comment->setAuthor($this->getUser());
+
             $dm->persist($comment);
             $dm->flush();
 
