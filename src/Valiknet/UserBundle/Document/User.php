@@ -3,6 +3,7 @@ namespace Valiknet\UserBundle\Document;
 
 use FOS\UserBundle\Document\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ODM\Document
@@ -28,6 +29,12 @@ class User extends BaseUser
      * @ODM\ReferenceMany(targetDocument="Valiknet\BlogBundle\Document\Post")
      */
     protected $posts;
+
+    /**
+     * @Gedmo\Slug(fields={"firstName", "lastName"})
+     * @ODM\Field(type="string")
+     */
+    protected $slug;
 
     /**
      * @ODM\ReferenceMany(targetDocument="Valiknet\BlogBundle\Document\Comment")
@@ -151,5 +158,27 @@ class User extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return self
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

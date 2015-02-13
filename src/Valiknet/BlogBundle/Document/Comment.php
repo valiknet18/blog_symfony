@@ -131,6 +131,8 @@ class Comment
     public function setAuthor(\Valiknet\UserBundle\Document\User $author)
     {
         $this->author = $author;
+        $author->addComment($this);
+
         return $this;
     }
 
