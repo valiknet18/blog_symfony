@@ -30,7 +30,7 @@ class Post
     protected $text;
 
     /**
-     * @ODM\Field(type="string")
+     * @ODM\ReferenceOne(targetDocument="Valiknet\UserBundle\Document\User")
      */
     protected $author;
 
@@ -127,29 +127,6 @@ class Post
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set author
-     *
-     * @param  string $author
-     * @return self
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string $author
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -306,5 +283,29 @@ class Post
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set author
+     *
+     * @param Valiknet\UserBundle\Document\User $author
+     * @return self
+     */
+    public function setAuthor(\Valiknet\UserBundle\Document\User $author)
+    {
+        $this->author = $author;
+        $author->addPost($this);
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return Valiknet\UserBundle\User $author
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

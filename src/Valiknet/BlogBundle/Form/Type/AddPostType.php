@@ -16,8 +16,7 @@ class AddPostType extends AbstractType
 
         $builder
             ->add('title')
-            ->add('text')
-            ->add('author')
+            ->add('text', 'textarea')
             ->add(
                 $builder->create('tag', 'text', [
                         "mapped" => false
