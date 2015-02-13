@@ -18,7 +18,7 @@ class Comment
     protected $id;
 
     /**
-     * @ODM\Field(type="string")
+     * @ODM\ReferenceOne(targetDocument="Valiknet\UserBundle\Document\User")
      */
     protected $author;
 
@@ -46,29 +46,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set author
-     *
-     * @param  string $author
-     * @return self
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string $author
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -139,5 +116,31 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+    public function __construct()
+    {
+        $this->author = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set author
+     *
+     * @param Valiknet\UserBundle\Document\User $author
+     * @return self
+     */
+    public function setAuthor(\Valiknet\UserBundle\Document\User $author)
+    {
+        $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return Valiknet\UserBundle\Document\User $author
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

@@ -29,6 +29,11 @@ class User extends BaseUser
      */
     protected $posts;
 
+    /**
+     * @ODM\ReferenceMany(targetDocument="Valiknet\BlogBundle\Document\Comment")
+     */
+    protected $comments;
+
     public function __construct()
     {
         parent::__construct();
@@ -116,5 +121,35 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param Valiknet\BlogBundle\Document\Comment $comment
+     */
+    public function addComment(\Valiknet\BlogBundle\Document\Comment $comment)
+    {
+        $this->comments[] = $comment;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param Valiknet\BlogBundle\Document\Comment $comment
+     */
+    public function removeComment(\Valiknet\BlogBundle\Document\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Doctrine\Common\Collections\Collection $comments
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
