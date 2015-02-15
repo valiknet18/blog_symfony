@@ -34,12 +34,9 @@ class PostController extends BlogAbstractController
             3
         );
 
-        $user = $this->getUser();
-
         return array(
             "posts" => $posts,
             "countPosts" => $countPosts,
-            "user" => $user
         );
     }
 
@@ -86,11 +83,8 @@ class PostController extends BlogAbstractController
             return $this->redirect($this->get('router')->generate('blog_home'));
         }
 
-        $user = $this->getUser();
-
         return array(
             "form" => $form->createView(),
-            "user" => $user
         );
     }
 
@@ -111,7 +105,6 @@ class PostController extends BlogAbstractController
         return array(
             "post" => $post,
             "form" => $form->createView(),
-            "user" => $user,
         );
     }
 
@@ -152,7 +145,6 @@ class PostController extends BlogAbstractController
 
          return array(
              "form" => $form->createView(),
-             "user" => $user,
          );
      }
 

@@ -50,7 +50,7 @@
                         <div class="info-block">
                             {#{{ dump(comment.author) }}#}
                             <p>
-                                {{ "comments.comment_author"|trans() }}: <b>{{ comment.author }}</b></br>
+                                {{ "comments.comment_author"|trans() }}: <b><a href="{{ path('account_index_page', {"slug" : comment.author.slug}) }}">{{ comment.author }}</a></b></br>
                                 {{ "comments.comment_created_at"|trans() }}: <b>{{ comment.createdAt|date("d.m.Y H:i:s") }}</b>
                             </p>
                         </div>
