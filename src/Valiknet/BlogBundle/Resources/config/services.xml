@@ -7,6 +7,7 @@
         >
 
     <services>
+
         <service id="doctrine.odm.param_converter" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
             <tag name="request.param_converter" converter="doctrine.odm" />
             <argument type="service" id="doctrine_mongodb"/>
@@ -21,6 +22,12 @@
 
         <service id="valiknet.blogbundle.services.comment_handler" class="Valiknet\BlogBundle\Services\CommentHandler">
             <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="valiknet.blog.event_listener.send_email_on_comment_create" class="Valiknet\BlogBundle\EventListener\SendEmailOnCommentCreate">
+            <tag event="createCommentEvent" method="onCommentCreate" />
+            <argument type="service" id="mailer" />
+            <argument type="service" id="templating" />
         </service>
     </services>
 </container>

@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template as Template;
 use Valiknet\BlogBundle\Document\Comment;
+use Valiknet\BlogBundle\Event\CreateCommentEvent;
 use Valiknet\BlogBundle\Form\Type\AddCommentType;
 
 class CommentController extends BlogAbstractController
@@ -24,7 +25,9 @@ class CommentController extends BlogAbstractController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $comment->setPost($dm->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug));
+            $post = $dm->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug);
+
+            $comment->setPost($post);
 
             $comment->setAuthor($this->getUser());
 
@@ -35,6 +38,11 @@ class CommentController extends BlogAbstractController
                     ->findOneBySlugPost($slug);
 
             $comments = $this->get('valiknet.blogbundle.services.comment_handler')->handleAddComment($post);
+
+            //Send email author
+            $event = new CreateCommentEvent($post->getAuthor(), $this->getUser(), $post);
+
+            $this->get('event_dispatcher')->dispatch(CreateCommentEvent::NAME, $event);
 
             return new JsonResponse([$comments]);
         }
