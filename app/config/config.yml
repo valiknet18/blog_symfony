@@ -82,6 +82,13 @@ knp_paginator:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
+fos_user:
+    db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Valiknet\UserBundle\Document\User
+    registration:
+            form:
+                type: valiknet_user_registration
 
 doctrine_mongodb:
     connections:

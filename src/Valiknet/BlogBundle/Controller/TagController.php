@@ -44,7 +44,7 @@ class TagController extends BlogAbstractController
         $tags = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Tag')->findTopTags();
 
         return [
-            "tags" => $tags
+            "tags" => $tags,
         ];
     }
 }

@@ -1,0 +1,47 @@
+{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+
+{% block title %}
+    Реєстрація
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for element in form_errors(form) %}
+            <li>
+                {{ element }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Реєстрація користувача</h3>
+
+    {{ form_start(form) }}
+        <div>
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            <div id="clear"></div>
+        </div>
+
+        <div>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            <div id="clear"></div>
+        </div>
+
+        <div>
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first) }}
+            <div id="clear"></div>
+        </div>
+
+        <div>
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second) }}
+            <div id="clear"></div>
+        </div>
+
+        <div>
+            <input type="submit" value="Реєстрація користувача" />
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

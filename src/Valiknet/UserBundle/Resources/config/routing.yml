@@ -1,0 +1,11 @@
+account_index_page:
+  path: /{slug}
+  defaults: { _controller: ValiknetUserBundle:Account:indexAccount }
+
+account_posts_page:
+  path: /{slug}/posts
+  defaults: { _controller: ValiknetUserBundle:Account:postsAccount }
+
+account_comments_page:
+  path: /{slug}/comments
+  defaults: { _controller: ValiknetUserBundle:Account:commentsAccount }

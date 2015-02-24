@@ -1,4 +1,4 @@
-{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+{% extends '::main.html.twig' %}
 
 {% block title %}
     {{ "title.list_posts_on_tag"|trans() }} {{ tag.hashTag }}
@@ -7,7 +7,7 @@
 
 {% block content %}
     <h3>
-        Кількість постів з тегом {{ tag.hashTag }}: {{ tag.post|length     }}
+        Кількість постів з тегом {{ tag.hashTag }}: {{ tag.post|length }}
     </h3>
     {% for post in tag.post|reverse %}
         <div class="webber-article">

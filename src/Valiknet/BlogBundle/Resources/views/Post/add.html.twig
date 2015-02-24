@@ -1,4 +1,4 @@
-{% extends 'ValiknetBlogBundle:Layouts:main.html.twig' %}
+{% extends '::main.html.twig' %}
 
 {% block title %}
     {{ "title.create_post"|trans() }}
@@ -21,12 +21,6 @@
             <div>
                 {{ form_label(form.text) }}
                 {{ form_widget(form.text) }}
-                <div id="clear"></div>
-            </div>
-
-            <div>
-                {{ form_label(form.author) }}
-                {{ form_widget(form.author) }}
                 <div id="clear"></div>
             </div>
 
