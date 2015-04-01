@@ -10,11 +10,13 @@ use Valiknet\BlogBundle\Document\Tag;
 use Valiknet\BlogBundle\Form\Type\AddCommentType;
 use Valiknet\BlogBundle\Form\Type\AddPostType;
 use Valiknet\BlogBundle\Form\Type\EditPostType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class PostController extends BlogAbstractController
 {
     /**
      * @Template()
+     *
      * @return array
      */
     public function indexAction(Request $request)
@@ -73,6 +75,8 @@ class PostController extends BlogAbstractController
                 }
             }
 
+            $post->setAuthor($this->getUser());
+
             $dm->persist($post);
             $dm->flush();
 
@@ -95,6 +99,8 @@ class PostController extends BlogAbstractController
         $post = $this->getMongoDbManager()->getRepository('ValiknetBlogBundle:Post')->findOneBySlugPost($slug);
 
         $form = $this->createForm(new AddCommentType());
+
+        $user = $this->getUser();
 
         return array(
             "post" => $post,
@@ -134,6 +140,8 @@ class PostController extends BlogAbstractController
 
              return $this->redirect($this->get('router')->generate('blog_home'));
          }
+
+         $user = $this->getUser();
 
          return array(
              "form" => $form->createView(),
