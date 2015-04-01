@@ -1,0 +1,33 @@
+{% extends '::main.html.twig' %}
+
+{% block title %}
+    Основна інформація про користувача {{ user.firstName }} {{ user.lastName }}
+{% endblock %}
+
+{% block content %}
+    {% include 'ValiknetUserBundle:Account:menu.html.twig' %}
+
+    <div>
+        <table>
+            <tr>
+                <td>
+                    Ім’я Користувача:
+                </td>
+
+                <td>
+                    {{ user.firstName }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Прізвище користувача:
+                </td>
+
+                <td>
+                    {{ user.lastName }}
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

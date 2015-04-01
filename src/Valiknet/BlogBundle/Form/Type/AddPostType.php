@@ -22,7 +22,6 @@ class AddPostType extends AbstractType
                     'data-theme' => 'bbcode' // Skip it if you want to use default theme
                 ]
             ])
-            ->add('author')
             ->add(
                 $builder->create('tag', 'text', [
                         "mapped" => false

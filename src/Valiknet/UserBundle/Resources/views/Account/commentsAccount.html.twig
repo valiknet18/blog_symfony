@@ -1,0 +1,43 @@
+{% extends '::main.html.twig' %}
+
+{% block title %}
+    Комментарі користувача {{ user.firstName }} {{ user.lastName }}
+{% endblock %}
+
+{% block content %}
+    {% include 'ValiknetUserBundle:Account:menu.html.twig' %}
+
+    <div>
+        <ul>
+        {% for comment in user.comments %}
+            <li>
+                <div class="comment">
+                    <div class="info-block">
+                        <p>
+                            <b>{{ "post.post_author"|trans() }}:</b> {{ comment.author }}
+                            <br />
+                            <b>{{ "post.post_created_at"|trans() }}:</b> {{ comment.createdAt|date("d.m.Y H:i:s") }}
+                        </p>
+                    </div>
+                    <div class="text">
+                        <p>
+                            {{ comment.text }}
+                        </p>
+                    </div>
+                    <div class="link_to_article">
+                        <b>{{ "comments.comment_post"|trans() }}: </b><a href="{{ path("view_post", { "slug" : comment.post.slugPost}) }}">{{ comment.post.title }}</a>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            <li>
+                <div>
+                    <h4>
+                        Цей користувач ще не додав ні одного коментаря
+                    </h4>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
