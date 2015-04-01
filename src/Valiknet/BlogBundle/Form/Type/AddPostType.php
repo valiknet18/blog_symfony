@@ -19,7 +19,7 @@ class AddPostType extends AbstractType
             ->add('text', 'textarea', [
                 'attr' => [
                     'class' => 'tinymce',
-                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
+                    'data-theme' => 'bbcode'
                 ]
             ])
             ->add(

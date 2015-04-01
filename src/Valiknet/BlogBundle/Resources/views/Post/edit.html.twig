@@ -8,7 +8,8 @@
     <link href="{{ asset('bundles/valiknetblog/style/post/editpost.css') }}" rel="stylesheet" />
 {% endblock %}
 
-{% block content %}
+{% block content
+{{ tinymce_init({'use_callback_tinymce_init': true, 'theme': {'simple': {'menubar': false}}}) }}
     <div>
         <form role="form" method="POST">
             <fieldset>
