@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "61e19dfec4dddffad64603ee26e3a140",
+    "hash": "ca30b9c36ea1ca7a58c6ed44691e6955",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1723,6 +1723,64 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-01-26 16:25:19"
+        },
+        {
+            "name": "stfalcon/tinymce-bundle",
+            "version": "v0.3.8",
+            "target-dir": "Stfalcon/Bundle/TinymceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stfalcon/TinymceBundle.git",
+                "reference": "773cc577f4f0770c2f6dd25928e0f08576b7f2d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/773cc577f4f0770c2f6dd25928e0f08576b7f2d5",
+                "reference": "773cc577f4f0770c2f6dd25928e0f08576b7f2d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/symfony": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stfalcon\\Bundle\\TinymceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stepan Tanasiychuk",
+                    "email": "ceo@stfalcon.com",
+                    "homepage": "http://blog.stfalcon.com"
+                },
+                {
+                    "name": "Igor Negrutsa",
+                    "email": "progi2007@gmail.com",
+                    "homepage": "http://igor-negrutsa.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/stfalcon/TinymceBundle/contributors"
+                }
+            ],
+            "description": "This Bundle integrates TinyMCE WYSIWYG editor into a Symfony2 project.",
+            "keywords": [
+                "editor",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2014-09-08 12:54:20"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
