@@ -16,7 +16,12 @@ class AddPostType extends AbstractType
 
         $builder
             ->add('title')
-            ->add('text', 'textarea')
+            ->add('text', 'textarea', [
+                'attr' => [
+                    'class' => 'tinymce',
+                    'data-theme' => 'bbcode'
+                ]
+            ])
             ->add(
                 $builder->create('tag', 'text', [
                         "mapped" => false
