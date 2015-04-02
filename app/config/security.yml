@@ -22,7 +22,7 @@ security:
                 failure_path:      /login
 
                 oauth_user_provider:
-                    service: valiknet.user.provider.user_providerп
+                    service: valiknet.user.provider.user_provider
 
     access_control:
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
