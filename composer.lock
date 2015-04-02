@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f38061bb9b0de16ff055c2a6b59addc9",
+    "hash": "0ff92d43fd1b7292fe4c8c09c8659fa2",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -745,12 +745,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb.git",
-                "reference": "3b97082b1526406a3e8ddc294713b89d6f460f59"
+                "reference": "14692c37da4be0b96c6b5fec480fb855b9aaf441"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/3b97082b1526406a3e8ddc294713b89d6f460f59",
-                "reference": "3b97082b1526406a3e8ddc294713b89d6f460f59",
+                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/14692c37da4be0b96c6b5fec480fb855b9aaf441",
+                "reference": "14692c37da4be0b96c6b5fec480fb855b9aaf441",
                 "shasum": ""
             },
             "require": {
@@ -765,11 +765,6 @@
                 "jmikola/geojson": "Support GeoJSON geometry objects in 2dsphere queries"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\MongoDB": "lib/"
@@ -804,7 +799,7 @@
                 "mongodb",
                 "persistence"
             ],
-            "time": "2015-01-30 15:43:45"
+            "time": "2015-01-30 15:43:30"
         },
         {
             "name": "doctrine/mongodb-odm",
@@ -1224,6 +1219,119 @@
             "time": "2015-01-28 09:12:46"
         },
         {
+            "name": "hwi/oauth-bundle",
+            "version": "0.3.7",
+            "target-dir": "HWI/Bundle/OAuthBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hwi/HWIOAuthBundle.git",
+                "reference": "a614cb1a87e474637885fa0a6e55690edb416d87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/a614cb1a87e474637885fa0a6e55690edb416d87",
+                "reference": "a614cb1a87e474637885fa0a6e55690edb416d87",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/buzz": "~0.7",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/options-resolver": "~2.1",
+                "symfony/security-bundle": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.2",
+                "symfony/property-access": "~2.5",
+                "symfony/twig-bundle": "~2.1",
+                "symfony/validator": "~2.1"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "to use Doctrine user provider",
+                "friendsofsymfony/user-bundle": "to connect FOSUB with this bundle",
+                "symfony/property-access": "to use FOSUB integration with this bundle",
+                "symfony/twig-bundle": "to use the Twig hwi_oauth_* functions"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "HWI\\Bundle\\OAuthBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
+                },
+                {
+                    "name": "Joseph Bielawski",
+                    "email": "stloyd@gmail.com"
+                },
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                },
+                {
+                    "name": "Geoffrey Bachelet",
+                    "email": "geoffrey.bachelet@gmail.com"
+                }
+            ],
+            "description": "Support for authenticating users using both OAuth1.0a and OAuth2 in Symfony2.",
+            "homepage": "http://github.com/hwi/HWIOAuthBundle",
+            "keywords": [
+                "37signals",
+                "Authentication",
+                "amazon",
+                "bitbucket",
+                "bitly",
+                "box",
+                "dailymotion",
+                "deviantart",
+                "disqus",
+                "dropbox",
+                "eventbrite",
+                "facebook",
+                "firewall",
+                "flickr",
+                "foursquare",
+                "github",
+                "google",
+                "instagram",
+                "jira",
+                "linkedin",
+                "mail.ru",
+                "oauth",
+                "oauth1",
+                "oauth2",
+                "odnoklassniki",
+                "qq",
+                "salesforce",
+                "security",
+                "sensio connect",
+                "sina weibo",
+                "stack exchange",
+                "stereomood",
+                "trello",
+                "twitch",
+                "twitter",
+                "vkontakte",
+                "windows live",
+                "wordpress",
+                "yahoo",
+                "yandex"
+            ],
+            "time": "2014-11-15 10:36:48"
+        },
+        {
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.0",
             "target-dir": "Incenteev/ParameterHandler",
@@ -1527,6 +1635,54 @@
                 "minification"
             ],
             "time": "2014-12-12 05:04:05"
+        },
+        {
+            "name": "kriswallsmith/buzz",
+            "version": "v0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/Buzz.git",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/487760b05d6269a4c2c374364325326cfa65b12c",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
+            ],
+            "time": "2014-09-15 12:42:36"
         },
         {
             "name": "monolog/monolog",
