@@ -13,7 +13,16 @@ security:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
             logout:       true
-            anonymous:    true
+            anonymous:    ~
+            oauth:
+                resource_owners:
+                    vkontakte:           "/login/check-vkontakte"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: valiknet.user.provider.user_providerп
 
     access_control:
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }

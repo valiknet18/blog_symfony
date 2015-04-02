@@ -18,3 +18,7 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+
+    vkontakte_client_id:    default
+    vkontakte_client_secret:    default
